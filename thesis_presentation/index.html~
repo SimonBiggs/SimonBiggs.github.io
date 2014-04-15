@@ -90,7 +90,7 @@
 				
 				<section>
 				    <img 
-				    	src="figures/06_2giveUncertaintyPlot.png" 
+				    	src="figures/06_2uncertaintyPlot.png" 
 				    	style="width: 650px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: -50px;" 
 				    	class="absolute-element"
 				    >
