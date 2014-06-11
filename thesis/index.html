@@ -39,21 +39,53 @@
 			
 			
 				<section>
-					<h1>Modelling Electron Cut-out Factors</h1>
-					<h3>QUT Masters Thesis Presentation</h3>
+					<h2>Modelling Electron Cut-out Factors</h2>
+					<!--<h3>QUT Masters Thesis Presentation</h3>-->
 					<small>by Simon Biggs</small>
 				</section>
 				
 				
 				<section>
 					<h2>Overview</h2>
-					<ol>
-						<li>General topic background</li>
-						<li>Output factor formalism w.r.t. Monitor Units</li>
-						<li></li>
-					</ol>
+					
+					<div>
+						<div style="float: left; width: 45%; padding: 2.5%;">
+							<ol>
+								<li>Background</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Linac collimation</li>
+									<li>Scatter effects</li>
+									<li>Electron output factor</li>
+									<li>Objective</li>
+								</ol>
+								
+								<li>Method</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Uncertainty</li>
+									<li>Give, gap, and slope</li>
+									<li>Validation</li>
+								</ol>
+							</ol>
+						</div>
+						
+						<div style="float: right; width: 45%; padding: 2.5%;">
+							<ol start="3">
+								<li>Results</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Fits</li>
+									<li>Validation</li>
+								</ol>
+								<li>Discussion</li>
+								<li>Recommendations</li>								
+							</ol>
+						</div>
+						
+					</div>
+					
 				</section>
 				
+				<!-- <font color="#726E6D">
 				<section>
 					<ol>
 						<font color="FF8080">
@@ -69,7 +101,9 @@
 						<li></li>
 					</ol>
 				</section>
-							
+				-->
+
+				
 				<!-- Linac, applicator, and insert -->
 				<section>
 				    <img 
@@ -170,54 +204,99 @@
 				    >
 				</section>
 				
-				<section>
-					<ol>
-						<li>General topic background</li>
-						<font color="FF8080">
-							<li>Output factor formalism w.r.t. Monitor Units</li>
-							<ol style="list-style-type: lower-roman;">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ol>
-						</font>
-						<li></li>
-					</ol>
-				</section>
-				
 				<!-- initialOFEquation.png simplifiedOFEquation.png outputfactorDiagram.png-->
 				
 				<section>
 				    <img 
 				    	src="figures/initialOFEquation.png" 
-				    	style=" max-height: none; max-width: none; position: absolute; z-index: 4; left: -100px; top: 0px;" 
+				    	style=" max-height: none; max-width: none; position: absolute; z-index: 4; left: -150px; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/simplifiedOFEquation.png" 
-				    	style="max-height: none; max-width: none; position: absolute; z-index: 4; left: -70px; top: 120px;" 
-				    	class="absolute-element"
-				    >
-				    
-				    <img 
-				    	src="figures/outputfactorDiagram.png"
-				    	style="width: 600px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: -100px; top: 250px;"
+				    	style="max-height: none; max-width: none; position: absolute; z-index: 4; left: -120px; top: 150px;" 
 				    	class="absolute-element"
 				    >
 					
+					
 					<img 
-				    	src="figures/outputfactor2MUDiagram.png"
-				    	style="width: 600px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 550px; top: 150px;"
+				    	src="figures/outputfactorSplit.png" 
+				    	style="width: 800px; max-height: none; max-width: none; position: absolute; z-index: 4; left: -250px; top: 350px;" 
 				    	class="absolute-element"
 				    >
+					
+					
+				    <img 
+				    	src="figures/factor_diagram.png"
+				    	style="width: 500px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 600px; top: -100px;"
+				    	class="absolute-element"
+				    >
+					
 				</section>
 				
 				
+				<section>
+				
+					<h2>Objective</h2>
+					<p>
+						
+						To predict electron cut-out factors that have been measured in a water tank with a known uncertainty.					
+					
+					</p>
+				
+				
+				</section>
+				
+				
+				<section>
+					<h2>Overview</h2>
+					
+					<div>
+						<div style="float: left; width: 45%; padding: 2.5%;">
+							<ol>
+								<font color="#726E6D">
+								<li>Background</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Linac collimation</li>
+									<li>Scatter effects</li>
+									<li>Electron output factor</li>
+									<li>Objective</li>
+								</ol>
+								</font>
+								
+								<li>Method</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Uncertainty</li>
+									<li>Give, gap, and slope</li>
+									<li>Validation</li>
+								</ol>
+							</ol>
+						</div>
+						
+						<div style="float: right; width: 45%; padding: 2.5%;">
+							<ol start="3">
+								<li>Results</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Fits</li>
+									<li>Validation</li>
+								</ol>
+								<li>Discussion</li>
+								<li>Recommendations</li>								
+							</ol>
+						</div>
+						
+					</div>
+					
+				</section>
+				
+
 				
 				
 				
+				
+				<!-- Splines used -->
 				
 				<section>
 				    <img 
@@ -234,6 +313,29 @@
 				    
 				    <img 
 				    	src="figures/03_3exampleSpline.png"
+				    	style="width: 500px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 500px; top: 400px;"
+				    	class="absolute-element"
+				    >
+				</section>
+				
+				<!-- 2d splines -->
+				
+				<section>
+					<!--<h2>2d spline demo</h2>-->
+				    <img 
+				    	src="figures/21_1splineExtrapolation.png" 
+				    	style="width: 500px;max-height: none; max-width: none; position: absolute; z-index: 4; left: -100px; top: 100px;" 
+				    	class="absolute-element"
+				    >
+				    
+				    <img 
+				    	src="figures/21_2splineExtrapolation.png" 
+				    	style="width: 500px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 500px; top: -50px;" 
+				    	class="absolute-element"
+				    >
+				    
+				    <img 
+				    	src="figures/21_3splineExtrapolation.png"
 				    	style="width: 500px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 500px; top: 400px;"
 				    	class="absolute-element"
 				    >
@@ -264,9 +366,15 @@
 				<section>
 				    <img 
 				    	src="figures/06_2giveUncertaintyPlot.png" 
-				    	style="width: 650px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: -50px;" 
+				    	style="width: 900px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
 				    	class="absolute-element"
 				    >
+					
+					<!-- <img 
+				    	src="figures/11binningForUncertainty.png" 
+				    	style="width: 550px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 520px; top: -50px;" 
+				    	class="absolute-element"
+				    > -->
 				</section>
 				
 				
@@ -330,7 +438,147 @@
 				    	class="absolute-element"
 				    >
 				</section>
+
 				
+				<section>
+					<h2>Overview</h2>
+					
+					<div>
+						<div style="float: left; width: 45%; padding: 2.5%;">
+							<ol>
+								<font color="#726E6D">
+								<li>Background</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Linac collimation</li>
+									<li>Scatter effects</li>
+									<li>Electron output factor</li>
+									<li>Objective</li>
+								</ol>
+								
+								
+								<li>Method</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Uncertainty</li>
+									<li>Give, gap, and slope</li>
+									<li>Validation</li>
+								</ol>
+								
+								</font>
+							</ol>
+						</div>
+						
+						<div style="float: right; width: 45%; padding: 2.5%;">
+							<ol start="3">
+								<li>Results</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Fits</li>
+									<li>Validation</li>
+								</ol>
+								<li>Discussion</li>
+								<li>Recommendations</li>								
+							</ol>
+						</div>
+						
+					</div>
+					
+				</section>
+				
+				
+				
+				
+				<section>
+					<h2>Overview</h2>
+					
+					<div>
+						<div style="float: left; width: 45%; padding: 2.5%;">
+							<ol>
+								<font color="#726E6D">
+								<li>Background</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Linac collimation</li>
+									<li>Scatter effects</li>
+									<li>Electron output factor</li>
+									<li>Objective</li>
+								</ol>
+								
+								
+								<li>Method</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Uncertainty</li>
+									<li>Give, gap, and slope</li>
+									<li>Validation</li>
+								</ol>
+								
+								</font>
+							</ol>
+						</div>
+						
+						<div style="float: right; width: 45%; padding: 2.5%;">
+							<ol start="3">
+								<font color="#726E6D">
+								<li>Results</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Fits</li>
+									<li>Validation</li>
+								</ol>
+								</font>
+								<li>Discussion</li>
+								<li>Recommendations</li>								
+							</ol>
+						</div>
+						
+					</div>
+					
+				</section>				
+				
+				
+				<section>
+					<h2>Overview</h2>
+					
+					<div>
+						<div style="float: left; width: 45%; padding: 2.5%;">
+							<ol>
+								<font color="#726E6D">
+								<li>Background</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Linac collimation</li>
+									<li>Scatter effects</li>
+									<li>Electron output factor</li>
+									<li>Objective</li>
+								</ol>
+								
+								
+								<li>Method</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Uncertainty</li>
+									<li>Give, gap, and slope</li>
+									<li>Validation</li>
+								</ol>
+								
+								</font>
+							</ol>
+						</div>
+						
+						<div style="float: right; width: 45%; padding: 2.5%;">
+							<ol start="3">
+								<font color="#726E6D">
+								<li>Results</li>
+								<ol style="list-style-type: lower-roman;">
+									<li>Fits</li>
+									<li>Validation</li>
+								</ol>
+								<li>Discussion</li>
+								</font>
+								<li>Recommendations</li>								
+							</ol>
+						</div>
+						
+					</div>
+					
+				</section>	
 				
 				
 				
