@@ -32,6 +32,14 @@
   <defs
      id="defs3043">
     <linearGradient
+       id="linearGradient4560"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4562" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4689"
        osb:paint="solid">
       <stop
@@ -149,6 +157,15 @@
        id="linearGradient4660"
        xlink:href="#linearGradient4531-6"
        inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4560"
+       id="linearGradient4564"
+       x1="139.66028"
+       y1="948.39722"
+       x2="196.84824"
+       y2="948.39722"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -159,14 +176,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1858"
+     inkscape:window-width="1920"
      inkscape:window-height="1058"
      id="namedview3041"
      showgrid="false"
-     inkscape:zoom="0.58416258"
-     inkscape:cx="-126.05219"
-     inkscape:cy="754.90951"
-     inkscape:window-x="54"
+     inkscape:zoom="1.1683252"
+     inkscape:cx="336.95248"
+     inkscape:cy="316.00613"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg3039"
@@ -1788,7 +1805,7 @@
          y="826.1405" /></flowRegion><flowPara
        id="flowPara3992" /></flowRoot>  <path
      style="fill:#000000"
-     d="m 182.02183,820.49072 c -0.47243,95.32804 -7.54142,493.45398 4.02978,496.04508 10.95769,2.4536 521.83631,9.7491 552.16139,7.621 l 2.82859,-504.29604 13.16583,0.66046 -1.92035,518.90238 c -28.60299,-6.9168 -434.53573,-7.2189 -585.00351,-7.1863 0,0 1.22128,-378.9356 1.69517,-512.43948"
+     d="m 182.02183,820.49072 c -0.47243,95.32804 -4.11116,491.75578 1.462,497.75698 7.86303,8.4668 523.54816,4.6135 553.87324,2.4854 l 3.68452,-500.87234 13.16583,0.66046 -2.77628,514.62278 c -5.49299,4.2102 -576.61946,0.4844 -584.14758,-2.9067 0,0 1.22128,-378.9356 1.69517,-512.43948"
      id="path3797-1"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cscccccc" />
@@ -1820,7 +1837,7 @@
      transform="translate(162.62595,-53.481296)" />
   <path
      sodipodi:type="arc"
-     style="fill:none;stroke:#000000;stroke-width:3.9276154;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     style="fill:url(#linearGradient4564);fill-opacity:1;stroke:#000000;stroke-width:3.9276154;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
      id="path4472"
      sodipodi:cx="168.25426"
      sodipodi:cy="948.39722"
@@ -1830,7 +1847,7 @@
      sodipodi:start="0"
      sodipodi:end="6.2792054"
      sodipodi:open="true"
-     transform="matrix(0.50921484,0,0,-0.50921484,370.48549,1388.748)" />
+     transform="matrix(0.13504249,0,0,-0.13504249,431.57107,1028.3954)" />
   <path
      style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
      d="m 478.42529,833.78755 30.26155,0 -14.52554,0 0,66.60585 -15.38148,0 29.44865,0"
@@ -1858,12 +1875,12 @@
      x="344.9382"
      y="760.91827" />
   <rect
-     style="fill:none;stroke:#0000d5;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 1;stroke-dashoffset:0"
+     style="fill:none;stroke:#0000d5;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1,1;stroke-dashoffset:0"
      id="rect4484-7"
-     width="300.14636"
-     height="369.47598"
-     x="300.5719"
-     y="378.03342" />
+     width="300.28546"
+     height="274.60724"
+     x="300.50238"
+     y="472.97168" />
   <rect
      style="fill:url(#linearGradient4535);fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
      id="rect4529"
@@ -1956,4 +1973,15 @@
      height="1350.6514"
      x="0"
      y="0" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="423.68344"
+     y="936.38318"
+     id="text4566"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4568"
+       x="423.68344"
+       y="936.38318">P</tspan></text>
 </svg>
