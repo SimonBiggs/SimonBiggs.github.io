@@ -44,48 +44,48 @@
 					<small>by Simon Biggs</small>
 				</section>
 	
+	
 		<!-- Linac, applicator, and insert -->
 				<section>
 				    <img 
 				    	src="figures/linac.jpg" 
-				    	style="width: 500px;max-height: none; max-width: none; position: absolute; z-index: 4; left: -100px; top: -50px;" 
+				    	style="width: 48%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/applicator.jpg" 
-				    	style="width: 500px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 500px; top: -50px;" 
+				    	style="width: 48%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/insert.jpg"
-				    	style="width: 500px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: -100px; top: 350px;"
+				    	style="width: 48%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 350px;"
 				    	class="absolute-element"
 				    >
 					
 					<img 
 				    	src="figures/cerrobend.jpg"
-				    	style="width: 500px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 500px; top: 350px;"
+				    	style="width: 48%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 350px;"
 				    	class="absolute-element"
 				    >
 				</section>
 
 				
 							
-				
-				
-				
-				<!-- Splines used -->
-				
+				<!-- Linac, applicator, and insert -->
 				<section>
 				    <img 
-				    	src="figures/03_1exampleSpline.png" 
-				    	style="width: 900px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+				    	src="figures/6-4shapes.png" 
+				    	style="width: 100%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
 				    	class="absolute-element"
-				    >
+				    >		
+
 				</section>
 				
+				
+			
 				<!-- 2d splines -->
 				
 				<section>
@@ -105,16 +105,14 @@
 				    >
 				 </section>
 
-
-				 <section>
-					<img 
-				    	src="figures/21_4splineExtrapolation.png"
+				<section>
+				    <img 
+				    	src="figures/animation.gif" 
 				    	style="width: 900px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
-				    	class="absolute-element"
+				    	class="animated-gif absolute-element"
 				    >
-					
-				</section>
-				
+				 </section>
+
 				 
 				<section>
 				   
@@ -144,6 +142,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="plugin/jquery/jquery-2.1.1.min.js"></script>
 
 		<script>
 
@@ -172,6 +171,43 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+
+			$(function () {
+			    // on page load  replace all src URLs
+				
+			    $('.animated-gif').each(function (i, e) {
+				disableGif(e)
+			    });
+
+			
+			});
+			Reveal.addEventListener('slidechanged', initAnimatedGifs);
+			Reveal.addEventListener('ready', initAnimatedGifs);
+
+			function initAnimatedGifs(event) {
+			    $('.animated-gif', event.currentSlide).each(function (i, e) {
+				enableGif(e)
+			    });
+
+			    if (event.previousSlide)
+				$('.animated-gif', event.previousSlide).each(function (i, e) {
+				    disableGif(e)
+
+				});
+			}
+
+			function enableGif(e) {
+			    var src = $(e).attr("src")
+			    $(e).attr('src', 'figures/001.png');
+			    $(e).attr('src', 'figures/animation.gif');
+			}
+
+			function disableGif(e) {
+			    var src = $(e).attr("src")
+			    $(e).attr('src', 'figures/001.png');
+			    $(e).attr('src', 'figures/animation.gif');
+
+			}
 
 		</script>
 

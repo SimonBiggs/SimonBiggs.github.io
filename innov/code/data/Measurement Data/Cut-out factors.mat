@@ -1,0 +1,2137 @@
+# Created by Octave 3.6.4, Tue Aug 13 15:56:54 2013 EST <meshach@MeshachBlue>
+# name: app
+# type: matrix
+# rows: 1
+# columns: 261
+ 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 25 25 25 25 25 25
+
+
+# name: eng
+# type: matrix
+# rows: 1
+# columns: 261
+ 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 12 12 12 12 12 12 12 12 12 12 12 16 16 16 16 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 12 12 12 12 12 12 12 12 12 12 12 12 12 12 16 16 16 16 16 16 16 6 6 6 6 6 6 6 6 6 6 6 6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 16 16 16 16 16 16 16 16 16 16 16 16 16 6 6 6 6 9 9 9 9 9 9 9 9 9 9 12 12 12 12 12 12 12 12 12 16 16 16 16 9 9 12 16 16 16
+
+
+# name: eqfs
+# type: matrix
+# rows: 1
+# columns: 261
+ 3.43358030111581 4.09309938846812 3.7674800354049 3.60055397399728 3.51648275547159 3.4206477493204 3.52277905909084 3.86582440599028 4.60518796931102 3.93013783212515 4.46841795300866 4.67444280235253 4.0306993681149 4.78918449097993 4.53365378260169 3.89473684210526 4.19866751056403 4.70515718707937 4.8340894750337 4.41917253256491 4.64829519280413 4 4.6339706743274 4.4584881230626 5.5390829965991 4.21052631578947 4.42105263157895 4.47337460228964 5.39107706412711 4.96190473658639 4.94288710815743 5.02073263903656 4.86834992835671 5.29464266945654 5.05153496871656 5.28783687688691 5.8888598523068 3.43358030111581 3.1578947368421 3.48324044374196 3.79823548477236 3.8861926193631 4.15756161223821 3.67065174192899 3.82440044728104 4.6339706743274 4.49067979109506 5.09195226208329 3.94736842105263 4 4.94176614497074 4.28293010738083 4.20921032065941 4.360487405728 4.9192932402307 4.55954753064496 5.07014508580728 5.62148628329208 5.05153496871656 5.07724269183585 5.40851898049058 5.8655291434758 3.79823548477236 4.45600220810878 3.97777760582972 3.99861471857318 4.19866751056403 4 4.694548025469 4.80073863199637 5.08868714327235 4.97751175475237 6.10526315789474 3.68946993017303 4 4 4.89445386844744 5.60964740819968 4.24720863196464 4.79149754810149 4.8340894750337 5.12232634130376 5.1910854761844 5.61951486949016 5.95458342051829 5.66663950892412 6.43742520059817 5.09195226208329 4.94736842105263 6.20874193812995 7.21954871557147 6.10707777025696 5.79425639769385 5.47267197118146 6.2894186300167 6.78314678688365 7.43131056619907 7.49367230760324 7.75525913953426 6.57368210357726 6.79742496461598 7.06126729736776 7.43652735207582 7.20687575664692 7.07067605210386 8.09910907859846 7.97537762111902 7.12570159834792 7.34960002303628 8.006230260971121 7.7379161445694 9.417376524776859 7.52465936869959 8.583950752789519 8.23680006715353 8.446343600730829 9.41502306315701 9.41502306315701 8.85963175263192 8.941793929092761 8.94736842105263 9.52268031823044 10 4.57016702022998 5.31552891492741 5.42896714030637 5.80381000088009 5.59184209907092 6.28853769736583 5.71143577526338 5.858440888145 8.01902170724548 6.0469080489874 7.09062820279341 7.60885910252682 6.15587011251092 7.06126729736776 7.57967832732408 8.471559066629389 7.36766913456721 8.583950752789519 8.98135958219012 8.40804917080804 9.169230733478541 9.22480096850806 9.303738860624989 4.9819619226102 6.99505167403627 7.35939296545202 6.33155925971476 7.60885910252682 7.54157452130441 7.24712188549832 7.67230512479645 7.824246709115 8.036619788053221 8.71843336456786 8.025927514335899 9.48537290616321 9.33910255672872 5.19748500868569 6.22389284172399 8.51851494997271 7.73523076668372 7.7752359211029 9.116056881941461 8.8636954456315 7.80652472325859 8.26231976976438 9.0703620734811 8.47286691056873 9.161523781857481 9.986139979479089 10.313641022245 10.2034701608864 11.4524187286722 9.986139979479089 10.4258362226647 10.9392682583298 11.039089448178 14.0989773896869 7.3201425897742 6.98236797969558 9.267941348654791 7.70149462056436 8.07513196379397 9.30403659455984 9.885774216314861 9.32277466336191 10.151211327361 10.2262494241691 9.87455949436511 9.508707192114709 10.4206538998678 10.4258362226647 11.9771250116923 12.9126620843753 14.0989773896869 6.7236713358616 9.320397314180489 8.14345071045955 9.218793282446869 8.743814592545339 9.45260813500785 8.72097481145599 9.002308106621181 8.762802268744171 10.6923743764467 10.1402901716146 9.508707192114709 11.6028461500256 11.4005394244735 11.4912950312767 12.1052631578947 14.7308258396092 7.55258573248509 7.80652472325859 9.33524581381938 8.781748890363881 9.42913502170892 9.002308106621181 9.87455949436511 10.6466802597813 10.6310578298548 11.3445167786834 11.4005394244735 10.9468623364803 13.1114971433746 13.856406460551 16.7100082804079 15.2169900671454 16.6774849469314 10.9686028876735 11.0400931386332 15.3301614608429 13.0496601031929 13.7314972461308 14.4377544466792 15.2169900671454 15.3344975269629 15.6520334009511 17.9355571568412 10.5431444425675 12.3768168592683 10.8502779621517 12.3521729782787 11.1648439134718 13.0203335545821 13.8436060823357 16.8025852119873 16.1052631578947 10.6336631620419 11.4587058195143 14.5856910111063 15.2704156972843 19.3672768540748 20.3952631511037 21.5108038306439 15.2540807854626 17.1343073257902 21.5108038306439
+
+
+# name: ins
+# type: matrix
+# rows: 1
+# columns: 261
+ 0.952144665461121 0.973714285714285 0.983985533453888 0.954198915009041 0.937764918625678 0.938792043399638 0.952144665461121 0.969605786618444 0.972687160940325 0.974741410488246 0.978849909584086 0.987066907775768 0.982958408679927 0.992202531645569 0.981931283905967 0.965497287522604 0.980904159132007 0.992202531645569 0.99631103074141 1.00144665461121 0.981931283905967 0.977822784810126 0.987066907775768 0.975768535262206 0.999392405063291 0.983985533453888 0.9880940325497281 0.987066907775768 0.99631103074141 1.00247377938517 0.999392405063291 1.00041952983725 1.00658227848101 1.00452802893309 0.998365280289331 0.999392405063291 1.00247377938517 0.938085361552028 0.914785185185185 0.926941798941799 0.950241975308642 0.927954850088184 0.95429417989418 0.939098412698413 0.959359435626102 0.9654377425044089 0.9725291005291 0.976581305114638 0.95429417989418 0.9654377425044089 0.9867118165784829 0.969489947089947 0.968476895943563 0.970502998236332 0.982659611992945 0.981646560846561 0.979620458553792 0.999881481481482 0.994816225749559 1.00190758377425 0.987724867724868 1.00089453262787 0.987187891440501 0.989229645093945 0.992292275574112 1.01168893528184 0.99127139874739 0.988208768267223 0.99535490605428 0.989229645093945 1.00250104384134 1.00148016701461 1.01066805845511 1.00353556070129 1.00858352629838 0.997478001984783 1.01968905061197 0.986 0.981 1 0.998 0.985 0.995 0.993 0.996 1.006 1.004 1.005 0.999 1.01 1.011 1.009 1.003 1.006 1.008 1.008 1.007 1.019 1.016 1.011 1.011 1.011 1.012 1.011 1.011 1.009 1.014 1.012 1.007 1.011 1.007 1.009 1.014 1.009 1.01 1.013 1.005 1.008 1.01 1.004 1.006 1.008 1.007 0.953 0.973 0.978 0.993 0.987 0.993 0.994 0.993 1.006 1.001 1.002 1.004 1.004 1.008 1.007 1.007 1.009 1.008 1.008 1.01 1.01 1.008 1.007 0.995 0.997 0.996 0.996 1.002 1.005 1.002 1.004 1.003 1.006 1.005 1.006 1.007 1.004 0.996 1.009 1.002 1.004 1.004 1.002 1.002 1.01242595204513 1.00141043723554 1.00942172073343 1.01643159379408 1.02444287729196 1.01342736248237 1.00641748942172 1.0114245416079 1.00741889985896 1.0114245416079 1.01042313117066 1.00741889985896 1.00441466854725 1.00341325811001 0.9958544436669 1.00891812456263 1.00891812456263 1.00891812456263 1.00590342897131 1.00690832750175 1.01394261721484 1.01494751574528 1.01193282015395 1.01193282015395 1.01494751574528 1.01595241427572 1.01092792162351 1.00891812456263 1.00992302309307 1.00489853044087 1.00188383484955 1.00293866299104 1.01102687801516 1.01001585113715 1.00799379738112 1.01304893177119 1.01405995864921 1.01102687801516 1.01304893177119 1.01810406616127 1.01203790489318 1.01608201240524 1.01810406616127 1.01405995864921 1.01203790489318 1.01203790489318 1.01001585113715 1.00597174362509 1.0098976744186 1.00685581395349 1.00584186046512 1.01800930232558 1.01091162790698 1.00888372093023 1.01293953488372 1.01192558139535 1.01091162790698 1.00786976744186 1.0098976744186 1.01192558139535 1.00685581395349 1.00492307692307 1.00591608391608 1.00988811188811 1.00393006993007 1.01316642958748 1.01010241820768 1.00805974395448 1.01010241820768 1.01112375533428 1.00908108108108 1.00908108108108 1.00601706970128 1.00908108108108 1.00703840682788 1.01030217849613 1.01339494026704 1.01751862262825 1.01648770203795 1.01751862262825 1.01339494026704 1.01236401967674 1.00617849613493 1.00308573436402 1.01629945799458 1.01629945799458 1.01423170731707 1.01113008130081 1.00572218181818 1.00572218181818 1.0069725433526 1.01021413575927 1.01128201539538 1.00594261721484
+
+
+# name: lng
+# type: matrix
+# rows: 1
+# columns: 261
+ 3.8 5.4 4.2 3.9 3.6 3.3 3.5 4.15 5.8 4.1 5.3 5.8 4.25 6 5.3 3.7 4.3 5.4 5.7 4.7 5.2 3.8 5.1 4.6 7.1 4 4.2 4.3 6.1 5.05 4.9 5 4.65 5.5 4.9 5.15 5.85 3.8 3 3.65 4.2 4.7 5.2 3.8 4 5.7 5.2 6.5 3.75 3.8 5.8 4.3 4.1 4.4 5.6 4.75 5.8 6.2 4.9 4.95 5.5 5.75 4.2 5.6 4.2 3.9 4.3 3.8 5.1 5.2 5.7 5.2 5.8 3.9 3.8 3.8 4.7 8 4.4 5.6 5.7 6.4 6.4 7.5 8 6.9 8.800000000000001 5.2 4.7 7.1 9.6 6.8 6 5.3 7 7.55 8.9 9.050000000000001 9.199999999999999 6.5 6.95 7.5 8.050000000000001 7.5 7.05 9.25 8.9 7.05 7.5 8.9 8.25 11.6 7.3 9.5 7.85 8.15 10 10 8.800000000000001 8.800000000000001 8.5 9.300000000000001 9.5 6.5 7.5 7.6 7.6 6.8 8.300000000000001 6.4 5.9 10.95 6 8.25 9.5 6 7.5 8.5 10.2 7.1 9.5 10.4 9.050000000000001 10.05 9.6 9.300000000000001 6.4 9.199999999999999 9.4 6.7 9.5 8.699999999999999 7.9 8.5 8.5 8.699999999999999 9.800000000000001 7.7 10.15 9.1 5.3 7.6 11.1 9 8.800000000000001 10 8.699999999999999 11 12.2 13.5 10.45 10.1 12 12 11.6 13.3 10 10.9 12 11.7 13.8 12.4 8.800000000000001 15.2 10.1 10.7 12.5 14 10.6 12.4 12.1 11 9.6 10.95 10.9 13.7 13.2 13.8 10.2 14 10.5 13 11.5 12.6 10.4 10.6 9.9 13.4 11.6 9.6 13.5 11.5 11.35 11.5 14.4 9.9 10 14.3 12 11.8 10.6 11 12.4 12 11.5 11.5 10.5 14.5 15.2 21 16.2 16.3 17.8 20 21 14.1 15.4 15.05 16.2 16.2 16.5 19.1 17.6 17.5 12.5 16.2 12.5 17 18.4 18.2 15.3 15.7 15.8 16 17.25 21.7 21.7 24 21 20.7 24
+
+
+# name: shape
+# type: cell
+# rows: 1
+# columns: 261
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 12
+irreg circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+std square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 12
+irreg circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 12
+irreg circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 20
+shielded back circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 12
+irreg circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+std square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+std square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 16
+irreg rectangle 
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+std square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+std square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 7
+circle 
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 11
+semi-circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 12
+irreg circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 8
+triangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 27
+irreg rectangle (trapezium)
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 26
+square with corner missing
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+boomerang
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 14
+very irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 14
+very irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 19
+irreg oval - offset
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 16
+approx triangle 
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 29
+irreg rectangle (missing cnr)
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+irreg
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 11
+semi-circle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+square
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 14
+irregular oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 15
+irreg rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 10
+irreg oval
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+irregular
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 9
+rectangle
+
+
+
+
+
+# name: wdth
+# type: matrix
+# rows: 1
+# columns: 261
+ 2.8 2.8 3.05 3 3.1 3.2 3.2 3.25 3.3 3.4 3.4 3.4 3.45 3.45 3.5 3.7 3.7 3.7 3.7 3.75 3.75 3.8 3.8 3.9 3.9 4 4.2 4.2 4.3 4.4 4.5 4.55 4.6 4.6 4.7 4.9 5.35 2.8 3 3 3.1 2.9 3 3.2 3.3 3.4 3.5 3.6 3.75 3.8 3.8 3.85 3.9 3.9 3.9 3.95 4 4.6 4.7 4.7 4.8 5.4 3.1 3.2 3.4 3.7 3.7 3.8 3.9 4 4.1 4.3 5.8 3.15 3.8 3.8 4.6 3.55 3.7 3.7 3.7 3.7 3.8 3.8 4 4.2 4.25 4.5 4.7 4.9 4.9 4.95 5.05 5.1 5.1 5.5 5.6 5.6 5.9 6 6 6 6.2 6.25 6.4 6.4 6.45 6.5 6.5 6.5 6.55 6.9 7 7 7.8 7.9 8 8 8.050000000000001 8.199999999999999 8.5 8.800000000000001 9.5 2.9 3.4 3.5 4 4.15 4.3 4.6 5.25 5.3 5.5 5.5 5.5 5.7 6 6.1 6.35 6.9 7 7 7.05 7.55 8 8.4 3.5 4.8 5.2 5.4 5.5 5.9 6 6.25 6.5 6.7 7 7.55 8 8.65 4.6 4.6 5.9 6 6.2 7.5 8.15 5 5.05 5.5 6.2 7.5 7.5 8 8.1 8.9 9 9 9 9.4 13 3.9 5 5.1 5.3 5.5 6.25 6.3 7.4 7.5 7.8 8 8.5 8.949999999999999 9 9.449999999999999 11.4 13 4 5.6 5.7 5.9 6 6.4 6.6 6.9 7 7.7 8 8.5 9 10.2 10.5 11.5 13.6 5.2 5.5 5.5 5.8 6.8 6.9 8 8.25 8.5 10.1 10.2 10.3 10.7 11.4 12 12.9 15.4 6.1 5.5 10.1 10.9 11.05 12.5 12.9 13.1 13.4 15.2 5.7 7.9 8.5 8.5 9 9 9.4 14 15.3 6.5 7.5 12 12.2 15.6 17.3 17.4 10 12.8 17.4
+
+

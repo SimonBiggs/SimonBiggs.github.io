@@ -1,0 +1,279 @@
+%octave
+
+addpath('functions')
+app = 10; eng = 6;
+load_data
+
+x = wd; y = rt; z = in;
+
+
+
+resolution = 50;
+
+xVec = linspace(min(x),max(x),resolution);
+yVec = linspace(min(y),max(y),resolution);
+
+[xMesh,yMesh] = meshgrid(xVec,yVec);
+zMesh = NaN(size(xMesh));
+
+
+p = 0.7;
+sigma = 0.1;
+
+show = 20;
+
+for i = 1:resolution
+
+	mu = yVec(i);
+	weighting = normpdf(y,mu,sigma);
+	
+	fit = smoothing_spline(x,z,p,xVec,weighting);
+	zMesh(i,:) = fit;	
+	
+	if i == show
+			
+		fitSave = fit;
+		muSave = mu;
+		weightingSave = weighting;
+	
+	end
+	
+end
+
+
+figure(1); clf; hold on
+
+mesh(xMesh,yMesh,zMesh)
+plot3(x,y,z,'b.','markersize',10)
+plot3(xVec,muSave*ones(size(xVec)),fitSave,'linewidth',3,'color','r')
+
+
+weighting = normpdf(y,0.67,sigma);
+fit = smoothing_spline(x,z,p,4,weighting);
+
+plot3(4,0.67,fit,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+plot3(4,0.67,0.98,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+
+
+plot3([4,4],[0.67,0.67],[0.98,fit],'--','linewidth',1,'color',[0.4,0.7,0.4])
+plot3([4,4],[0.67,1],[fit,fit],'--','linewidth',1,'color',[0.4,0.7,0.4])
+
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+zlabel('Cut-out Factor')
+title('Fit with green star at width = 4 cm and aspect ratio = 0.67')
+
+fitRnd = round(fit*1000)/1000;
+
+view(-20,25); grid
+set(gca,'ZTick',[0.98:0.01:1.02,fitRnd])
+set(gca,'XTick',4:10)
+set(gca,'YTick',[0.4:0.1:0.9,0.67])
+
+print_figure(1,'example3dSpline')
+
+
+
+
+figure(2); clf; hold on
+
+mesh(xMesh,yMesh,zMesh)
+plot3(x,y,z,'b.','markersize',10)
+
+for i = 1:length(x)
+	plot3([x(i),x(i)],[y(i),y(i)],[z(i),0.98],'-k')
+end
+plot3(x,y,0.98*ones(size(z)),'k.','markersize',10)
+
+plot3(4.3,0.9,0.998,'r*','markersize',15,'linewidth',2)
+plot3([4.3,4.3],[0.9,0.9],[0.998,0.98],'-r')
+plot3(4.3,0.9,0.98,'r*','markersize',15,'linewidth',2)
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+zlabel('Cut-out Factor')
+title('Representation of the measured data''s domain with a red star at width 4.3 and aspect ratio 0.9')
+
+view(-20,25); grid
+set(gca,'ZTick',0.98:0.01:1.02)
+set(gca,'XTick',4:10)
+set(gca,'YTick',0.4:0.1:0.9)
+
+print_figure(2,'domain3dSpline')
+
+
+
+figure(3); clf; hold on
+
+plot(x,y,'k.','markersize',10)
+plot(4.3,0.9,'r*','markersize',15,'linewidth',2)
+
+
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+title('Domain of the measured data with a red star at width 4.3 and aspect ratio 0.9')
+
+limitsX = [min(x)-range(x)*0.2,max(x)+range(x)*0.2];
+limitsY = [min(y)-range(y)*0.2,max(y)+range(y)*0.2];
+
+set(gca,'XTick',3:10)
+set(gca,'YTick',0.4:0.1:1)
+
+xlim(limitsX)
+ylim(limitsY)
+
+print_figure(3,'domainBirdsEye')
+
+
+
+figure(4); clf; hold on
+
+plot(x,y,'k.','markersize',10)
+plot([min(x),min(x),max(x),max(x),min(x)],[min(y),max(y),max(y),min(y),min(y)])
+plot(4.3,0.9,'r*','markersize',15,'linewidth',2)
+
+
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+title('Rectangle boundary')
+
+set(gca,'XTick',3:10)
+set(gca,'YTick',0.4:0.1:1)
+
+xlim(limitsX)
+ylim(limitsY)
+
+
+
+print_figure(4,'rectangleBounds')
+
+
+
+
+figure(5); clf; hold on
+
+kvals = convhull(x,y);
+
+plot(x(kvals),y(kvals))
+plot(x,y,'k.','markersize',10)
+plot(4.3,0.9,'r*','markersize',15,'linewidth',2)
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+title('Rubber band boundary')
+
+set(gca,'XTick',3:10)
+set(gca,'YTick',0.4:0.1:1)
+
+xlim(limitsX)
+ylim(limitsY)
+
+print_figure(5,'hullBounds')
+
+
+
+
+figure(6); clf; hold on
+
+
+
+
+resolution = 1000;
+
+wdVec = linspace(min(wd),max(wd),resolution);
+rtVec = linspace(min(rt),max(rt),resolution);
+
+[wdMesh, rtMesh] = meshgrid(wdVec, rtVec);
+
+
+filename = ["data/Model Data/Gap boundary draw/app",num2str(app),"_eng",num2str(eng),"_resolution",num2str(resolution)];
+
+if 1
+	load(filename, "ref");
+else
+	
+	gapMesh = NaN(size(wdMesh));
+
+	tic
+	for i = 1:resolution
+		for j = 1:resolution
+		
+			gapMesh(i,j) = angle_gap(app,wdMesh(i,j),rtMesh(i,j),wd,rt);
+				
+		end
+	
+		if toc > 10
+			percentage = floor(i / resolution * 10000)/100;
+			disp([num2str(percentage), '%']); fflush (1);
+			tic
+		end	
+	
+	end
+
+
+	bounds = (gapMesh < 150);
+
+	boundsLeft = circshift(bounds,[0,1]);
+	boundsUp = circshift(bounds,[1,0]);
+	boundsRight = circshift(bounds,[0,-1]);
+	boundsDown = circshift(bounds,[-1,0]);
+
+	ref = bounds != boundsLeft | bounds != boundsRight | bounds != boundsUp | bounds != boundsDown;
+	ref(:,1) = false; ref(1,:) = false; ref(:,end) = false; ref(end,:) = false;
+	
+	ref = sparse(ref);
+	save(filename, "ref");
+	
+end
+
+plot(wdMesh(ref),rtMesh(ref),'b.','markersize',1)
+plot(x,y,'k.','markersize',10)
+plot(4.3,0.9,'r*','markersize',15,'linewidth',2)
+
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+title('Angle gap boundary')
+
+
+
+
+set(gca,'XTick',3:10)
+set(gca,'YTick',0.4:0.1:1)
+
+xlim(limitsX)
+ylim(limitsY)
+
+print_figure(6,'gapBounds')
+
+
+
+
+figure(7); clf; hold on
+
+mesh(xMesh,yMesh,zMesh)
+plot3(x,y,z,'b.','markersize',10)
+
+plot3(4.3,0.9,0.998,'r*','markersize',15,'linewidth',2)
+
+xlabel('Width (cm)')
+ylabel('Aspect Ratio')
+zlabel('Cut-out Factor')
+title('Animation of surface fit with a red star at width 4.3 and aspect ratio 0.9')
+
+grid
+set(gca,'ZTick',0.98:0.01:1.02)
+set(gca,'XTick',3:10)
+set(gca,'YTick',0.4:0.1:1)
+
+
+margin = 0.1;
+xlim([min(x)-range(x)*margin,max(x)+range(x)*margin])
+ylim([min(y)-range(y)*margin,max(y)+range(y)*margin])
+
+view([340,25])
+
+print_figure(7,'otherShape')

@@ -1,0 +1,116 @@
+%Octave
+
+clear all
+addpath('functions')
+app = 10; eng = 6;
+load_data
+
+
+x = wd;
+y = in;
+
+margin = 0.1;
+xMin = min(x)-range(x)*margin; xMax = max(x)+range(x)*margin;
+
+xi = linspace(xMin,xMax,1000);
+w = ones(size(x));
+p = 0.7;
+
+fit = smoothing_spline(x,y,p,xi,w);
+
+soltn = smoothing_spline(x,y,p,4,w);
+
+
+rightVals = find(x>5.5);
+leftVals = find(x<=5.5);
+
+
+fitRightVals = smoothing_spline(x(rightVals),y(rightVals),p,xi,w);
+soltn2 = smoothing_spline(x(rightVals),y(rightVals),p,4,w);
+
+
+
+figure(11); clf;
+plot(x,y,'b.','markersize',8)
+xlim([xMin,xMax])
+ylim([0.98,1.02])
+
+title('Measured cut-out factors')
+xlabel('Width (cm)')
+ylabel('Cut-out factor')
+
+figure(12); clf; hold on
+plot(x,y,'b.','markersize',8,xi,fit,'-k','linewidth',4)
+plot(4,0.98,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+%plot(xMin,soltn,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+plot(4,soltn,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+
+xlim([xMin,xMax])
+ylim([0.98,1.02])
+
+title('A spline fit using the widths of cut-outs')
+xlabel('Width (cm)')
+ylabel('Cut-out factor')
+
+
+solRnd = round(soltn*1000)/1000;
+set(gca,'YTick',[0.98:0.01:1.02,solRnd])
+
+grid
+
+
+figure(13); clf; hold on
+plot(x(leftVals),y(leftVals),'r.','markersize',8,x(rightVals),y(rightVals),'b.','markersize',8,xi,fitRightVals,'-k','linewidth',4)
+plot(4,0.98,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+%plot(xMin,soltn,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+plot(4,soltn2,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+
+
+
+
+
+xlim([xMin,xMax])
+ylim([0.98,1.02])
+
+title('A spline fit using only part of the data')
+xlabel('Width (cm)')
+ylabel('Cut-out factor')
+
+
+solRnd2 = round(soltn2*1000)/1000;
+set(gca,'YTick',[0.98:0.01:1.02,solRnd2])
+
+grid
+
+
+
+
+
+figure(14); clf; hold on
+plot(x(leftVals),y(leftVals),'r.','markersize',8,x(rightVals),y(rightVals),'b.','markersize',8,xi,fitRightVals,'-k','linewidth',4)
+plot(4,0.98,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+%plot(xMin,soltn,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+plot(4,soltn2,'*','markersize',15,'linewidth',2,'color',[0.4,0.7,0.4])
+plot(x(rightVals),0.98,'k.','markersize',8)
+
+plot(min(x(rightVals))*ones(1,2),[0.98,1.02],'k--')
+plot(max(x(rightVals))*ones(1,2),[0.98,1.02],'k--')
+
+xlim([xMin,xMax])
+ylim([0.98,1.02])
+
+title('The boundary as defined by the domain')
+xlabel('Width (cm)')
+ylabel('Cut-out factor')
+
+
+solRnd2 = round(soltn2*1000)/1000;
+set(gca,'YTick',[0.98:0.01:1.02,solRnd2])
+
+grid
+
+
+print_figure(11,"21_1splineExtrapolation")
+print_figure(12,"21_2splineExtrapolation")
+print_figure(13,"21_3splineExtrapolation")
+print_figure(14,"21_3splineExtrapolation")
