@@ -20,25 +20,6 @@
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 		
-<style>
-		
-.reveal .slides {
-  /*height: 100% !important;*/
-  /*top: 0 !important;*/
-  /*margin-top: 0 !important;*/
-}
-
-.reveal .slides>section {
-  /*min-height: 100% !important;*/
-  /*top: auto !important;*/
-}
-
-.reveal .slides>section>section {
-  /*min-height: 100% !important;*/
-}
-		
-</style>
-
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -80,7 +61,7 @@
 								
 								<li>Method</li>
 								<ol style="list-style-type: lower-roman;">
-									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Smoothing spline</li>
 									<li>Uncertainty</li>
 									<li>Give, gap, and slope</li>
 									<li>Fit flexibility</li>
@@ -135,21 +116,30 @@
 				<section>
 				    <img 
 				    	src="figures/linac.jpg" 
-				    	style="width: 43%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 0px;" 
+				    	style="width: 43%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 5%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
-						<div class="absolute-element" style="width: 50%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 50%; top: 100px;" ><h2>Electron beam collimation</h2></div>
+						<div 
+							class="absolute-element" 
+							style="width: 50%; max-height: none; max-width: none; 
+								position: absolute; z-index: 4; left: 50%; top: 100px;"
+						>
+							<h2>Electron beam collimation</h2>
+						</div>
 				    
 				    <img 
 				    	src="figures/insert.jpg"
-				    	style="width: 43%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 300px;"
+				    	style="width: 43%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 5%; top: 300px;"
 				    	class="absolute-element"
 				    >
 					
 					<img 
 				    	src="figures/applicator.jpg"
-				    	style="width: 46%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 300px;"
+				    	style="width: 46%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 300px;"
 				    	class="absolute-element"
 				    >
 				</section>
@@ -157,23 +147,32 @@
 				
 				<!-- Inside the linac head -->
 				<section>
-					<div class="absolute-element" style="width: 50%;max-height: none; max-width: none; position: absolute; z-index: 5; left: 0%; top: 100px;" ><h2>Electron beam collimation</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 40%;max-height: none; max-width: none; text-align:right; 
+							position: absolute; z-index: 4; right: 50%; top: 0px;" 
+					>
+						<h2>Collimation</h2>
+					</div>
 					
 				    <img 
 				    	src="figures/linac.jpg" 
-				    	style="width: 43%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 7%; top: 20px;" 
+				    	style="width:41%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; right:50.5%; top: 53px;" 
 				    	class="absolute-element"
 				    >
 					
 				    <img 
 				    	src="figures/applicator.jpg" 
-				    	style="width: 43%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 7%; top: 320px;" 
+				    	style="width:41%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; right: 50.5%; top: 332px;" 
 				    	class="absolute-element"
 				    >					
 				    
 				    <img 
 				    	src="figures/collimator_system.png" 
-				    	style="width: 39%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 0;" 
+				    	style="height: 600px; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 50.5%; top: 0;" 
 				    	class="absolute-element"
 				    >
 				</section>
@@ -183,15 +182,23 @@
 				<section>
 					<img 
 						src="figures/collimator_system.png" 
-						style="width: 39%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 6%; top: 0px;" 
+						style="width: 39%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 6%; top: 0px;" 
 						class="absolute-element"
 					>
 						
-					<div class="absolute-element" style="width: 40%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 50%; top: 20px;" ><h2>Scatter effects</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 40%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 50%; top: 20px;" 
+						>
+						<h2>Scatter effects</h2>
+					</div>
 					
 					<img 
 				    	src="figures/scatter.png" 
-				    	style="width: 46%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 47%; top:100px;" 
+				    	style="width: 46%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 47%; top:100px;" 
 				    	class="absolute-element"
 				    >
 				 </section>	
@@ -201,14 +208,16 @@
 				<section>
 				    <img 
 				    	src="figures/scatter.png" 
-				    	style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top:0px;" 
+				    	style="width: 49%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 0px; top:0px;" 
 				    	class="absolute-element"
 				    >
 	
 				    
 				    <img 
 				    	src="figures/sidescatterequil.png" 
-				    	style="width: 49%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;" 
+				    	style="width: 49%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				</section>	
@@ -218,14 +227,16 @@
 				<section>
 				    <img 
 				    	src="figures/sidescatterequil.png" 
-				    	style="width: 40%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top:0px;" 
+				    	style="width: 40%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 0px; top:0px;" 
 				    	class="absolute-element"
 				    >
 	
 				    
 				    <img 
 				    	src="figures/18lateralScatter.png" 
-				    	style="width: 58%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 42%; top: 0px;" 
+				    	style="width: 58%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 42%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				</section>
@@ -233,49 +244,51 @@
 				
 				<!-- initialOFEquation.png simplifiedOFEquation.png outputfactorDiagram.png-->
 				
-				<section>
-					
-					<div class="absolute-element" style="width: 50%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 120px;" ><h2>The electron output factor</h2></div>
+				<section>	
+					<div 
+						class="absolute-element" 
+						style="width: 50%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 5%; top: 120px;" 
+					>
+						<h2>The electron output factor</h2>
+					</div>
 				
 					<img 
 						src="figures/initialOFEquation.png" 
-						style="width: 58%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 341px;" 
+						style="width: 58%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0px; top: 341px;" 
 						class="absolute-element"
 					>
 					
 					<img 
 						src="figures/simplifiedOFEquation.png" 
-						style="width: 58%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 440px;" 
+						style="width: 58%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0px; top: 440px;" 
 						class="absolute-element"
 					>
-				
 				
 				<img 
 						src="figures/outputfactorSplit.png" 
-						style="width: 58%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 560px;" 
+						style="width: 58%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0px; top: 560px;" 
 						class="absolute-element"
 					>
-				
 				
 					<img 
 						src="figures/factor_diagram.png"
-						style="width: 40%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 60%; top: 0px;"
+						style="width: 40%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 60%; top: 0px;"
 						class="absolute-element"
-					>
-					
+					>	
 				</section>
 				
 				
 				<section>
-				
 					<h2>Objective</h2>
 					<p>
-						
-						To predict electron cut-out factors that have been measured in a water tank with a known uncertainty.					
-					
+						To predict electron cut-out factors that have been measured 
+						in a water tank with a known uncertainty.	
 					</p>
-				
-				
 				</section>
 				
 				
@@ -297,7 +310,7 @@
 								
 								<li>Method</li>
 								<ol style="list-style-type: lower-roman;">
-									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Smoothing spline</li>
 									<li>Uncertainty</li>
 									<li>Give, gap, and slope</li>
 									<li>Fit flexibility</li>
@@ -329,36 +342,56 @@
 				</section>
 				
 
-				
+				<section>
+					<h2>Advantages of the method used</h2>
+					<ul>	
+						<li>Only needs cut-out factors that have already been measured</li>
+						<li>Takes the input of cut-out shape length and width</li>
+						<li>Increased accuracy compared to basic interpolation</li>
+						<li>Gives the uncertainty in the cut-out prediciton</li>
+						<li>Reduces the frequency that factors need to be measured</li>
+						<li>Can be used to increase the accuracy of a pencil beam model</li>
+					</ul>
+				</section>
 				
 				
 				
 				<!-- Splines used -->
 				
 				<section>
-					<div class="absolute-element" style="width: 50%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 2%; top: 10px;" ><h2>Smoothing Spline</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 50%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 2%; top: 10px;" 
+					>
+						<h2>Smoothing Spline</h2>
+					</div>
 				
 					<img 
 						src="figures/03_1exampleSpline.png" 
-						style="width: 45%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 4%; top: 66px;" 
+						style="width: 45%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 4%; top: 66px;" 
 						class="absolute-element"
 					>
 					
 					<img 
 						src="figures/03_2exampleSpline.png" 
-						style="width: 45%; max-height: none; max-width: none; position: absolute; z-index: 4; left:51%; top: 0px;" 
+						style="width: 45%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left:51%; top: 0px;" 
 						class="absolute-element"
 					>
 					
 					<img 
 						src="figures/03_3exampleSpline.png"
-						style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 290px;"
+						style="width: 45%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 51%; top: 290px;"
 						class="absolute-element"
 					>
 				
 					<img 
 						src="figures/code_pointPrediction.png"
-						style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 4%; top: 356px;"
+						style="width: 45%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 4%; top: 356px;"
 						class="absolute-element"
 					>
 				</section>
@@ -368,50 +401,29 @@
 					<h2>Determining the Uncertainty</h2>
 					
 					<ol>
-					
-						<li>The prediction of measured points</li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					
+						
+						<li>Defined a lower bound uncertainty by:</li>
+						<ul>
+							<li>Predicting measured points after their removal</li>
+							<li>Compared to the region parameters <i>give</i>, <i>gap</i>, 
+							and <i>slope</i></li>
+						</ul>
+						<li>Fit flexibility calculated by:</li>
+						<ul>
+							<li>Added Guassian noise to all measured cut-out factors</li>
+							<li>Created fit with new noisy data</li>
+							<li>Repeated 10 000 times creating a set of fits</li>
+							<li>Took the standard deviation of the set of fits</li>
+							<li>Compared to the region parameters <i>give</i>, <i>gap</i>, 
+							and <i>slope</i></li>
+						</ul>
+						<li>Uncertainty determined by:</li>
+						<ul>
+							<li>Scaled flexibility to be above the lower bound uncertainty</li>
+							<li>Used maximum uncertainty predicted by the parameters</li>
+						</ul>
+											
 					</ol>
-					
-					
-					
-<!-- For the purpose of predicting the uncertainty in the t given by a particular cut-out prediction,
-a multi-step process was employed. This is described as follows:
-1. First the t was remodelled with each individual point removed and predicted, resulting
-in a given error between the t and each point. This error was then compared to three
-separate parameters labelled as give, gap and slope. Each of these parameters quantied
-qualities of the t over varying regions (widths and aspect ratios). Give quantied the
-susceptibility of the region to outliers. Gap quantied how close to the edge of the t a
-point was. Slope was the magnitude of the numerically calculated gradient at each point.
-2. In order to calculate lower bounds of uncertainty for each parameter, bins of absolute
-error in prediction were created by stepping one data point at a time, in groups of 21
-data points, from the minimum of a given parameter to the maximum. The distribution
-of the standard deviations of these bins against parameter values formed the lower bound
-uncertainties.
-3. To calculate the 
-exibility of a t each of the data points was adjusted by noise (random
-normal number) and the t was recalculated. From this adjusted (noisy) t a point at
-random was predicted and compared to the original t. The adjusted t for each of the
-point was used to calculate its give, gap and slope. This retting process was repeated
-10 000 times giving a distribution of dierences. The distribution was then compared
-against give, gap and slope. Following the binning process with 1000 data point bins, the
-standard deviations were calculated producing 
-exibility distributions in terms of each
-parameter.
-4. These 
-exibility distributions were made to be on the order of measurement uncertainty
-by scaling them up to always be above the minimum bounds.
-5. When a point was predicted, its uncertainty was predicted by taking the maximum of the
-predicted uncertainties using give, gap, slope and its 
-exibility at that point.
-
-
--->
-				
 				
 				</section>
 				
@@ -419,27 +431,39 @@ exibility at that point.
 				
 				<section>
 					<!--<h2>2d spline demo</h2>-->
+					<div 
+						class="absolute-element" 
+						style="width: 100%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0%; top: 0px;" 
+					>
+						<h2>Need for Region Parameters </h2>
+					</div>
+					
 				    <img 
 				    	src="figures/21_1splineExtrapolation.png" 
-				    	style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+				    	style="height: 260px; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; right: 50.5%; top: 62px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/21_2splineExtrapolation.png" 
-				    	style="width: 49%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;" 
+				    	style="height: 260px; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 50.5%; top: 62px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/21_3splineExtrapolation.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 360px;"
+				    	style="height: 260px;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 50.5%; top: 340px;"
 				    	class="absolute-element"
 				    >
 					
 					<img 
 				    	src="figures/21_4splineExtrapolation.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 360px;"
+				    	style="height: 260px;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; right: 50.5%; top: 340px;"
 				    	class="absolute-element"
 				    >
 					
@@ -449,32 +473,43 @@ exibility at that point.
 				
 					<h2>Three parameters</h2>
 					<ul>
-						<li><i>Give</i> &ndash; to determine outlier influence and number of points in a particular region</li>
+						<li><i>Give</i> &ndash; to determine outlier influence 
+							and number of points in a particular region</li>
 						<li><i>Gap</i> &ndash; to determine the boundary definition</li>
-						<li><i>Slope</i> &ndash; to weight regions of higher gradient accordingly</li>					
+						<li><i>Slope</i> &ndash; to weight regions of higher gradient 
+							accordingly</li>					
 					</ul>
 				
 				</section>
 				
 				
 				<section>
-					<div class="absolute-element" style="width: 30%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 58%; top: 150px;" ><h2>Give</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 30%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 58%; top: 150px;" 
+					>
+						<h2>Give</h2>
+					</div>
 				
 					<img 
 						src="figures/04_3giveExample.png" 
-						style="width: 51.5%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 0px;" 
+						style="width: 51.5%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 5%; top: 0px;" 
 						class="absolute-element"
 					>
 					
 					<img 
 						src="figures/04_1giveExample.png" 
-						style="width: 45%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 330px;" 
+						style="width: 45%; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 5%; top: 330px;" 
 						class="absolute-element"
 					>
 											
 					<img 
 						src="figures/04_2giveExample.png"
-						style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 330px;"
+						style="width: 45%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 52%; top: 330px;"
 						class="absolute-element"
 					>
 				</section>
@@ -482,17 +517,25 @@ exibility at that point.
 				
 				<section>
 					<img 
-				    	src="figures/code_fitGive.png"
-				    	style="height:600px;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 0px;"
-				    	class="absolute-element"
+				    src="figures/code_fitGive.png"
+				    style="height:600px;  max-height: none; max-width: none; 
+				    	position: absolute; z-index: 4; left: 0%; top: 0px;"
+				    class="absolute-element"
 				  >
 						
-					<div class="absolute-element" style="width: 39%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 56%; top: 90px;" ><h2>Give calculation</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 39%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 56%; top: 90px;" 
+					>
+						<h2>Give calculation</h2>
+					</div>
 					
 					<img 
-				    	src="figures/04_2giveExample.png"
-				    	style="width: 47%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 53%; top: 317px;"
-				    	class="absolute-element"
+				    src="figures/04_2giveExample.png"
+				    style="width: 47%;  max-height: none; max-width: none; 
+				    	position: absolute; z-index: 4; left: 53%; top: 317px;"
+				    class="absolute-element"
 				  >
 					
 					
@@ -502,35 +545,46 @@ exibility at that point.
 				<section>
 				    <img 
 				    	src="figures/06_2giveUncertaintyPlot.png" 
-				    	style="width: 100%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+				    	style="width: 100%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 0px; top: 0px;" 
 				    	class="absolute-element"
 				    >
 					
 					<!-- <img 
 				    	src="figures/11binningForUncertainty.png" 
-				    	style="width: 550px;max-height: none; max-width: none; position: absolute; z-index: 4; left: 520px; top: -50px;" 
+				    	style="width: 550px;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 520px; top: -50px;" 
 				    	class="absolute-element"
 				    > 
 				</section>-->
 				
 				<section>
-				    <img 
-				    	src="figures/05_1gapExample.png" 
-				    	style="height:260px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 7%; top: 0px;" 
-				    	class="absolute-element"
-				    >
+					<img 
+						src="figures/05_1gapExample.png" 
+						style="height:260px; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 7%; top: 0px;" 
+				    class="absolute-element"
+				   >
 					
-					<div class="absolute-element" style="width: 45%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 7.5%; top: 287px;" ><h2>Gap</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 45%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 7.5%; top: 287px;" 
+					>
+						<h2>Gap</h2>
+					</div>
 					
 					<img 
 				    	src="figures/05_2gapExample.png" 
-				    	style="height:260px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 7%; top: 340px;" 
+				    	style="height:260px; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 7%; top: 340px;" 
 				    	class="absolute-element"
 				    >  
 					
 					<img 
 				    	src="figures/code_angleGap.png" 
-				    	style="height: 600px; max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 0px;" 
+				    	style="height: 600px; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 52%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				 </section>
@@ -540,60 +594,86 @@ exibility at that point.
 				<section>
 				    <img 
 				    	src="figures/07_1gapUncertaintyPlot.png" 
-				    	style="width: 51.5%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 0px;" 
+				    	style="width: 51.5%;max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 5%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/05_2gapExample.png" 
-				    	style="width: 45%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 330px;" 
+				    	style="width: 45%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 5%; top: 330px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/05_3gapExample.png"
-				    	style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 330px;"
+				    	style="width: 45%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 52%; top: 330px;"
 				    	class="absolute-element"
 				    >
 						
-						<div class="absolute-element" style="width: 20%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 65%; top: 120px;" ><h2>Gap cut-off</h2></div>
+						<div 
+							class="absolute-element" 
+							style="width: 20%;max-height: none; max-width: none; 
+								position: absolute; z-index: 4; left: 65%; top: 120px;" 
+						>
+							<h2>Gap cut-off</h2>
+						</div>
 												
 				</section>
 
 				<section>
 					<img 
 				    	src="figures/08slopePlot.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;"
+				    	style="width: 49%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 0px; top: 0px;"
 				    	class="absolute-element"
 				    >
 					
 					<img 
 				    	src="figures/code_fitSlope.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;"
+				    	style="width: 49%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 0px;"
 				    	class="absolute-element"
 				    >
-					<div class="absolute-element" style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 380px;" ><h2>Slope</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 49%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0%; top: 380px;" 
+					>
+						<h2>Slope</h2>
+					</div>
 					
 				</section>
 				
 				<section>
 					<img 
 						src="figures/20flexibilityScaling.png" 
-						style="width: 51.5%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 0px;" 
+						style="width: 51.5%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 5%; top: 0px;" 
 						class="absolute-element"
 					>
 				
-					<div class="absolute-element" style="width: 30%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 61.5%; top: 100px;" ><h2>Fit flexibility</h2></div>
+					<div 
+						class="absolute-element" 
+						style="width: 30%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 61.5%; top: 100px;" 
+					>
+						<h2>Fit flexibility</h2>
+					</div>
 				
 					<img 
 						src="figures/19_1flexibilityDemo.png"
-						style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 5%; top: 330px;"
+						style="width: 45%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 5%; top: 330px;"
 						class="absolute-element"
 					>
 					
 					<img 
 						src="figures/19_2flexibilityDemo.png"
-						style="width: 45%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 52%; top: 330px;"
+						style="width: 45%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 52%; top: 330px;"
 						class="absolute-element"
 					>
 				</section>
@@ -623,7 +703,7 @@ exibility at that point.
 								
 								<li>Method</li>
 								<ol style="list-style-type: lower-roman;">
-									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Smoothing spline</li> 
 									<li>Uncertainty</li>
 									<li>Give, gap, and slope</li>
 									<li>Fit flexibility</li>
@@ -657,70 +737,126 @@ exibility at that point.
 				</section>
 				
 				<section>
+					<div 
+						class="absolute-element" 
+						style="width: 47%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 50.5%; top: 30px;" 
+					>
+						<h2>Validated fits</h2>
+					</div>
+					
 					<img 
 						src="figures/table_fitpossible.png" 
-						style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+						style="width: 47%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 50.5%; top: 100px;" 
 						class="absolute-element"
 					>
-				    
+					
 					<img 
-					  src="figures/"
-				    style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
-				    class="absolute-element"
-				  >
+			    	src="figures/16fitOverview_app6_eng6.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; right: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/16fitOverview_app10_eng6.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 0px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/16fitOverview_app15_eng9.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
 				</section>
 				
 				<section>
+					<div 
+						class="absolute-element" 
+						style="width: 90%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0%; top: 50px;" 
+					>
+						<h2>Applicator/Energy combinations without enough measured data</h2>
+					</div>
+					
 					<img 
 						src="figures/table_toofew.png" 
-						style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+						style="height: 400px; max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 0%; top: 200px;" 
 						class="absolute-element"
-					>
-				    
-					<img 
-					  src="figures/"
-				    style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
-				    class="absolute-element"
-				  >
+					>	
 				</section>
 				
 				<section>
+					<div 
+						class="absolute-element" 
+						style="width: 47%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 50.5%; top: 20px;" 
+					>
+						<h2>Too few points within boundary</h2>
+					</div>
+					
 					<img 
 						src="figures/table_toofew2.png" 
-						style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+						style="width: 47%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 50.5%; top: 149px;" 
 						class="absolute-element"
 					>
-				    
+					
 					<img 
-					  src="figures/"
-				    style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
-				    class="absolute-element"
-				  >
+			    	src="figures/16fitOverview_app10_eng12.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; right: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/16fitOverview_app15_eng12.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 0px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/16fitOverview_app15_eng16.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
 				</section>
 				
+				<!-- 
 				
 				<section>
-				    <img 
-				    	src="figures/16fitOverview_app6_eng6.png" 
-				    	style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
-				    	class="absolute-element"
-				    >
+			    <img 
+			    	src="figures/16fitOverview_app6_eng6.png" 
+			    	style="width: 49%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 0px; top: 0px;" 
+			    	class="absolute-element"
+			    >
 				    
 					<img 
 				    	src="figures/16fitOverview_app6_eng9.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
+				    	style="width: 49%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 0%; top: 316px;"
 				    	class="absolute-element"
 				    >
 					
 					<img 
 				    	src="figures/17validation66.png" 
-				    	style="width: 49%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;" 
+				    	style="width: 49%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				    
 				    <img 
 				    	src="figures/17validation69.png"
-				    	style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 316px;"
+				    	style="width: 49%;  max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 316px;"
 				    	class="absolute-element"
 				    >
 					
@@ -729,25 +865,29 @@ exibility at that point.
 				<section>
 					<img 
 						src="figures/16fitOverview_app10_eng6.png" 
-						style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+						style="width: 49%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 0px; top: 0px;" 
 						class="absolute-element"
 					>
 				    
 					<img 
 					  src="figures/16fitOverview_app10_eng9.png"
-				    style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
+				    style="width: 49%;  max-height: none; max-width: none; 
+				    	position: absolute; z-index: 4; left: 0%; top: 316px;"
 				    class="absolute-element"
 				  >
 					
 					<img 
 				    src="figures/17validation106.png" 
-				    style="width: 49%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;" 
+				    style="width: 49%; max-height: none; max-width: none; 
+				    	position: absolute; z-index: 4; left: 51%; top: 0px;" 
 				    class="absolute-element"
 				  >
 				    
 					<img 
 						src="figures/17validation109.png"
-						style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 316px;"
+						style="width: 49%;  max-height: none; max-width: none; 
+							position: absolute; z-index: 4; left: 51%; top: 316px;"
 						class="absolute-element"
 					>					
 				</section>
@@ -755,32 +895,78 @@ exibility at that point.
 				<section>
 				    <img 
 				    	src="figures/16fitOverview_app15_eng9.png" 
-				    	style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+				    	style="width: 49%;max-height: none; max-width: none;
+				    		position: absolute; z-index: 4; left: 0px; top: 0px;" 
 				    	class="absolute-element"
 				    >
 				
 					<img 
 				    	src="figures/17validation159.png" 
-				    	style="width: 49%; max-height: none; max-width: none; position: absolute; z-index: 4; left: 51%; top: 0px;" 
+				    	style="width: 49%; max-height: none; max-width: none; 
+				    		position: absolute; z-index: 4; left: 51%; top: 0px;" 
 				    	class="absolute-element"
 				    >
 	
 				</section>
 				
+				-->
 				
 				<section>
+					<div 
+						class="absolute-element" 
+						style="width: 30%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 70%; top: 360px;" 
+					>
+						<h2>Potential Outliers</h2>
+					</div>
+					
 					<img 
-						src="figures/15outlierExample.png" 
-						style="width: 49%;max-height: none; max-width: none; position: absolute; z-index: 4; left: 0px; top: 0px;" 
+						src="figures/table_outliers.png" 
+						style="width: 75%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 10%; top: 0px;" 
 						class="absolute-element"
 					>
-				    
+					
 					<img 
-					  src="figures/table_outliers.png"
-				    style="width: 49%;  max-height: none; max-width: none; position: absolute; z-index: 4; left: 0%; top: 316px;"
-				    class="absolute-element"
-				  >
+						src="figures/15outlierExample.png" 
+						style="height: 330px; max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; right: 10%; top: 270px;"  
+						class="absolute-element"
+					>
+
 				</section>
+				
+				<section>
+					<div 
+						class="absolute-element" 
+						style="width: 47%;max-height: none; max-width: none; 
+							position: absolute; z-index: 4; right: 50.5%; top: 120px;" 
+					>
+						<h2>Validation</h2>
+					</div>
+					
+					<img 
+			    	src="figures/17validation66.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; right: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/17validation106.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 0px;" 
+			    	class="absolute-element"
+			    >
+			    
+			    <img 
+			    	src="figures/17validation159.png" 
+			    	style="width: 47%;max-height: none; max-width: none; 
+			    		position: absolute; z-index: 4; left: 50.5%; top: 302px;" 
+			    	class="absolute-element"
+			    >
+				</section>
+				
 				
 				<section>
 				    <h2>Model Demonstration</h2>
@@ -805,7 +991,7 @@ exibility at that point.
 								
 								<li>Method</li>
 								<ol style="list-style-type: lower-roman;">
-									<li>Smoothing spline</li> <!-- In here need demonstration of 2d spline not being able to extrapolate -->
+									<li>Smoothing spline</li>
 									<li>Uncertainty</li>
 									<li>Give, gap, and slope</li>
 									<li>Fit flexibility</li>
