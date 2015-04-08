@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>CTG Redirect</title>
+    
+    <script>
+      function redirect() {
+          
+          var page_num = location.hash.split('page=')[1]   
+          //alert(location)
+          
+          window.location='http://www.acpsem.org.au/documents/item/48.pdf#page=' + page_num;
+      }
+    </script>
+  </head>
+
+  <body onload="redirect()">
+
+  </body>
+</html>
