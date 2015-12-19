@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Newsletter</title>
+    
+    <script>
+      function redirect() {
+          
+          window.location='http://familynewsbiggs.blogspot.com.au/';
+      }
+    </script>
+  </head>
+
+  <body onload="redirect()">
+
+  </body>
+</html>
