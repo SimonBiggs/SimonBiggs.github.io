@@ -1,0 +1,28 @@
+Auto Scheduling Management Command
+==================================
+
+As of version 0.2.6 there is now a `Django management
+command <https://docs.djangoproject.com/en/dev/howto/custom-management-commands/>`__
+available to enable or disable `auto
+scheduling <https://bitbucket.org/tohccmedphys/qatrackplus/wiki/admin/auto-schedule.html>`__
+or to update all due dates.
+
+The following commands must be run from a command prompt at the root
+directory of your QATrack+ install.
+
+To enable auto\_scheduling for all test lists on all units:
+
+``python manage.py enable-all``
+
+To disable auto\_scheduling for all test lists on all units:
+
+``python manage.py disable-all``
+
+To to update the due dates for all test lists on all units (according to
+the last performed date and assigned frequency):
+
+``python manage.py schedule-all``
+
+To to set the due date to null for all test lists on all units:
+
+``python manage.py unschedule-all``

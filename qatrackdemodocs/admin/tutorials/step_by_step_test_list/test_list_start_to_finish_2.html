@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A step-by-step introduction to QATrack+ administration (continued) &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">A step-by-step introduction to QATrack+ administration (continued)</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>A step-by-step introduction to QATrack+ administration (continued)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/admin/tutorials/step_by_step_test_list/test_list_start_to_finish_2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-step-by-step-introduction-to-qatrack-administration-continued">
+<h1>A step-by-step introduction to QATrack+ administration (continued)<a class="headerlink" href="#a-step-by-step-introduction-to-qatrack-administration-continued" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="test_list_start_to_finish.html">(Previous Page)</a></p>
+<p>Return to the main admin page and click on the <strong>Units</strong> link under the
+<strong>Units</strong> section.</p>
+<div class="figure" id="id1">
+<img alt="Units section on main admin page" src="../../../_images/units_section.png" />
+<p class="caption"><span class="caption-text">Units section on main admin page</span></p>
+</div>
+<p>From here click on the <strong>Add unit</strong> button in the top right hand corner.</p>
+<div class="figure" id="id2">
+<img alt="Adding a new unit" src="../../../_images/add_unit.png" />
+<p class="caption"><span class="caption-text">Adding a new unit</span></p>
+</div>
+<p>Enter <code class="docutils literal"><span class="pre">1</span></code> for the <strong>Number</strong> and <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Unit</span></code> for the <strong>Name</strong> field.
+We will leave the <strong>Serial Number</strong>, <strong>Location</strong> and <strong>Install date</strong>
+blank for now. You will notice that the <strong>Type</strong> dropdown is empty since
+we haven&#8217;t defined any unit types yet.</p>
+<p>Clicking on the green cross beside <strong>Type</strong> will bring up a dialogue box
+where we can create a new type of unit. Fill in <code class="docutils literal"><span class="pre">Synergy</span> <span class="pre">S</span></code>,
+<code class="docutils literal"><span class="pre">Elekta</span></code>, and <code class="docutils literal"><span class="pre">Synergy</span> <span class="pre">S</span></code> for the <strong>Name</strong> (i.e. the display name
+for this unit type), <strong>Vendor</strong> and <strong>Model</strong> fields respectively and
+then click <strong>Save</strong>.</p>
+<div class="figure" id="id3">
+<img alt="Defining a new unit type" src="../../../_images/add_unit_type.png" />
+<p class="caption"><span class="caption-text">Defining a new unit type</span></p>
+</div>
+<p>Since there are no modalities yet defined, we will need to add some
+before we can save our unit.</p>
+<p>Click the little green cross beside the <strong>Modalities</strong> input and in the
+dialogue box that pops up, choose the <code class="docutils literal"><span class="pre">Photon</span></code> modality type, and
+enter <code class="docutils literal"><span class="pre">6</span></code> in the <strong>Energy</strong> input before clicking <strong>Save</strong>. Repeat
+these steps to add a 15MV modality as well.</p>
+<p>You are now finished configuring your first unit and it should look
+similar to the image below:</p>
+<div class="figure" id="id4">
+<img alt="completed unit" src="../../../_images/completed_unit.png" />
+<p class="caption"><span class="caption-text">completed unit</span></p>
+</div>
+<p>Clicking <strong>Save</strong> will take you back to the units listing page where you
+should see your <code class="docutils literal"><span class="pre">Test</span> <span class="pre">Unit</span></code> listed.</p>
+<div class="figure" id="id5">
+<img alt="Units listing" src="../../../_images/unit_listing.png" />
+<p class="caption"><span class="caption-text">Units listing</span></p>
+</div>
+<p>If you need to edit this unit in future, navigate to this page and click
+on the name of the unit you want to edit.</p>
+<p>In the <a class="reference external" href="test_list_start_to_finish_3.html">next step of the tutorial</a> we
+will create a new user group and a couple fo test statuses.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

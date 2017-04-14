@@ -1,0 +1,16 @@
+QATrack+ Users Guide
+====================
+
+*For documentation on configuring tests, users and other administrative
+tasks, please see the `Administrators Guide <../admin/guide.html>`__.*
+
+-  `Performing a Test List <performing_a_test_list.html>`__
+-  `Choosing a specific day from a cycle to
+   perform <choose_cycle_day.html>`__
+-  `Viewing historical data for a test list <view_history.html>`__
+-  `Editing previously entered data <edit_previous_data.html>`__
+-  `Changing the status/Reviewing QA Data <review_qa_data.html>`__
+-  `Deleting a QA session <deleting_qa_data.html>`__
+-  `Monitoring your QA program <qa_overview.html>`__
+-  `Trending & Charting your QA data <charts.html>`__
+-  `Creating paper based forms as backup <paper_backup_forms.html>`__

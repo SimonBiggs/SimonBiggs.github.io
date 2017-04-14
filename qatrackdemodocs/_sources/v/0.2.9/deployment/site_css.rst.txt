@@ -1,0 +1,6 @@
+Site specific CSS
+=================
+
+If you want to override some of the default colours or look of the
+default QATrack+ installation you can add your own css rules to
+``qatrack/qa/statics/css/site.css``.

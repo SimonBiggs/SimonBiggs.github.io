@@ -1,0 +1,16 @@
+QATrack+ time zone settings
+===========================
+
+By default QATrack+ is configured to use North American Eastern Standard
+Time so you will need to adjust this to reflect your local time zone.
+
+In your *local\_settings.py* file add a line like the following:
+
+::
+
+    TIME_ZONE = 'America/Toronto'
+
+where 'America/Toronto' is replaced with your local timezone (e.g.
+``TIME_ZONE = 'Australia/Sydney'``. If you are unsure, you can find a
+list of `valid timezones on
+Wikipedia <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__.

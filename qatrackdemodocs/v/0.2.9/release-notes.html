@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>v0.2.9 Release Notes &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">v0.2.9 Release Notes</a><ul>
+<li><a class="reference internal" href="#deprecation-notices">Deprecation Notices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#upgrade-instructions">Upgrade Instructions</a><ul>
+<li><a class="reference internal" href="#linux-apache-instructions">Linux/Apache Instructions</a></li>
+<li><a class="reference internal" href="#windows-iis">Windows / IIS</a></li>
+<li><a class="reference internal" href="#general">General</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>v0.2.9 Release Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/v/0.2.9/release-notes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="v0-2-9-release-notes">
+<h1>v0.2.9 Release Notes<a class="headerlink" href="#v0-2-9-release-notes" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Multiple choices tests now store their results <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/162/adding-new-multiple-choice-options-can">as the test value
+rather than the
+index</a>
+of the choice. It is important that you update any composite tests
+that rely on multiple choice test results after this upgrade (see
+Upgrade Instructions below)</li>
+<li>Unit modalities <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/110/change-unit-modality-to-free-text-field">are now free text
+fields</a>
+instead of forcing you to select particle/energy.</li>
+<li>If you attempt to access a QATrack+ page but are logged out, <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/154/redirect-after-login">you
+will be redirected to that page after logging
+in</a></li>
+<li>You can now add <code class="docutils literal"><span class="pre">REVIEW_DIFF_COL</span> <span class="pre">=</span> <span class="pre">True</span></code> to your
+<a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/wiki/v/0.2.9/deployment/settings.html">local_settings.py</a>
+file to <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/155/add-deviation-from-reference-to-testlist">enable an extra column showing the difference from
+reference</a>
+when reviewing tests list</li>
+<li>Users sessions will be <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/165/refresh-session-after-any-activity-rather">renewed anytime they are
+active</a>
+on the QATrack+ site rather than just when they perform QA (prevents
+being logged out automatically)</li>
+<li>Changing a Test&#8217;s type is now limited to <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/168/changes-between-test-types-needs-to-be">only allow changes to
+similar test
+types</a>
+(e.g. numerical -&gt; composite is allowed but numerical -&gt; string is
+not)</li>
+<li>By default <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/170/add-filter-to-not-display-by-default">inactive test lists are no longer
+shown</a>
+in the default review list</li>
+<li>Bulk deletion of UnitTestInfo objects in the admin <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/171/disable-bulk-delete-of-unittestinfo">has been
+disabled</a>
+to prevent possible data loss</li>
+<li>Only active UnitTestInfo objects will be <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/172/make-unittestinfo-list-in-admin-only-show">shown in the
+admin</a>
+by default</li>
+<li>You can now <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/175/view-comments">view test list
+comments</a>
+in a pop over by hovering your mouse over the comment icon</li>
+<li>You can now filter Test objects in the admin by whether or not <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/177/test-search">they
+belong to any active
+TestList&#8217;s</a>
+or not</li>
+<li>If a comment is included when performing a test list than <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/179/auto-review-exception-for-tests-with">manual
+review will be
+required</a>
+regardless of auto-review settings</li>
+<li>Inactive tests can now be <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/183/filter-out-inactive-tests-in-the-chart">filtered on the charts
+page</a></li>
+<li>Several charting tweaks, including improved handling of None
+tolerance values in relative charts and the ability to filter for
+inactive TestLists</li>
+<li>There are many new filters available in the admin section</li>
+<li>Permissions for reviewing and viewing the program overview <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/194/separate-permisssions-for-review-and">have been
+split</a></li>
+<li>Individual tests can now be configured to <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/195/skipping-without-comment-for-some-but-not">always allow skipping
+without a
+comment</a>
+(regardless of the users permissions)</li>
+<li>You can now <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/198/allow-customization-of-testlist-cycle-drop">set a custom
+label</a>
+for the &#8220;Choose Day&#8221; drop down label when performing a test list from
+a cycle.</li>
+<li>You can now <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/wiki/v/0.2.9/deployment/settings.html">customize the names for Tolerance
+labels</a>
+(Not Done, OK, Tolerance, Action, and No Tol Set).</li>
+<li>You can now sort test lists by due date</li>
+<li>You can now <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/200/tolerance-action-level-naming">customize the test status
+display</a>
+(default remains Act/Tol/OK)</li>
+<li>Test value input fields should now be more <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/210/change-text-input-type-to-number-for">mobile device
+friendly</a></li>
+<li>pydicom is now available in the <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/219/add-pydicom-to-default-calculation-context">default calculation
+context</a>
+(along with numpy &amp; scipy)</li>
+<li>You can now filter test lists to review <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/227/visible-to">by which groups the test
+lists are visible
+to</a></li>
+</ul>
+<p>A more complete list of bugs fixed and features added can be found <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues?milestone=0.2.9">in
+the issues
+tracker</a>!</p>
+<div class="section" id="deprecation-notices">
+<h2>Deprecation Notices<a class="headerlink" href="#deprecation-notices" title="Permalink to this headline">¶</a></h2>
+<p>As QATrack+, Python &amp; Django and the web continue to evolve,
+occassionally we need to deprecate some of the versions of Python &amp; web
+browsers we support. The next major release of QATrack+ will no longer
+officially support the following items:</p>
+<ul class="simple">
+<li>Python 2.6 (Python 2.7 &amp; 3.4+ only): In order to provide support for
+Python 3 we will be dropping support for Python 2.6</li>
+<li>IE7-IE10 (IE 11+ Only): IE7-IE10 are no longer supported by Microsoft
+and we will no longer be testing these platforms.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="upgrade-instructions">
+<h1>Upgrade Instructions<a class="headerlink" href="#upgrade-instructions" title="Permalink to this headline">¶</a></h1>
+<p>If you are uncomfortable with doing the upgrade yourself, or would like
+assistance for any reason, please email <a class="reference external" href="mailto:randle&#46;taylor&#37;&#52;&#48;gmail&#46;com">randle<span>&#46;</span>taylor<span>&#64;</span>gmail<span>&#46;</span>com</a> and I
+will be more than happy to set up a time to be on call to help you
+troubleshoot or to do a remote support session and walk through the
+upgrade process with you. It is much easier for me to schedule time to
+help you before you start your upgrade, then it is to drop everything
+without warning and help you if get stuck on one of these steps!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Note</span><span class="p">:</span> <span class="n">this</span> <span class="n">release</span> <span class="n">introduces</span> <span class="n">some</span> <span class="n">database</span> <span class="n">schema</span> <span class="n">changes</span><span class="o">.</span> <span class="n">The</span> <span class="n">database</span> <span class="n">migrations</span> <span class="n">have</span>
+<span class="n">been</span> <span class="n">tested</span> <span class="n">on</span> <span class="n">SQLServer</span><span class="p">,</span> <span class="n">PostgreSQL</span><span class="p">,</span> <span class="n">MySQL</span> <span class="o">&amp;</span> <span class="n">SQLite</span> <span class="n">but</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">important</span> <span class="n">that</span> <span class="n">you</span><span class="p">:</span>
+
+<span class="n">BACK</span> <span class="n">UP</span> <span class="n">YOUR</span> <span class="n">DATABASE</span> <span class="n">BEFORE</span> <span class="n">ATTEMPTING</span> <span class="n">THIS</span> <span class="n">UPGRADE</span>
+</pre></div>
+</div>
+<p><strong>If any of the following steps results in an error, stop and figure out
+why before carrying on to the next step!</strong></p>
+<div class="section" id="linux-apache-instructions">
+<h2>Linux/Apache Instructions<a class="headerlink" href="#linux-apache-instructions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Back up your database</li>
+<li><code class="docutils literal"><span class="pre">source</span> <span class="pre">~/venvs/qatrack/bin/activate</span></code></li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">~/web/qatrackplus</span></code></li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">--cached</span> <span class="pre">qatrack/wsgi.py</span></code></li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
+<li><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code></li>
+<li><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements/base.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">syncdb</span></code></li>
+<li><code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code></li>
+<li><code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">collectstatic</span></code></li>
+<li>Open your qatrack/local_settings.py file and add the line:
+<code class="docutils literal"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span> <span class="pre">['your_servername_or_ip_here']</span></code> e.g.
+<code class="docutils literal"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span> <span class="pre">['52.123.4.9']</span></code> or
+<code class="docutils literal"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span> <span class="pre">['YOURHOSTNAME']</span></code></li>
+<li><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">restart</span></code></li>
+</ol>
+</div>
+<div class="section" id="windows-iis">
+<h2>Windows / IIS<a class="headerlink" href="#windows-iis" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Back up your database</li>
+<li>Open a git bash shell</li>
+<li>export WINPTY=$(which winpty)</li>
+<li><code class="docutils literal"><span class="pre">source</span> <span class="pre">/c/deploy/venvs/qatrack/Scripts/activate</span></code></li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">/c/deploy/qatrackplus</span></code></li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">--cached</span> <span class="pre">qatrack/wsgi.py</span></code></li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code></li>
+<li><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code></li>
+<li><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements/base.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements/win.txt</span></code> # Windows only!</li>
+<li><code class="docutils literal"><span class="pre">$WINPTY</span> <span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">syncdb</span></code></li>
+<li><code class="docutils literal"><span class="pre">$WINPTY</span> <span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code></li>
+<li><code class="docutils literal"><span class="pre">$WINPTY</span> <span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">collectstatic</span></code></li>
+<li>Open your qatrack/local_settings.py file and add the line:
+<code class="docutils literal"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span> <span class="pre">['127.0.0.1',</span> <span class="pre">'localhost']</span></code></li>
+<li>Restart the QATrack+ app (i.e. the CherryPy service)</li>
+</ol>
+<p>If when you load a page in QATrack+ you see an error you may need to
+enable <code class="docutils literal"><span class="pre">use_legacy_date_fields</span></code> for the SQL Server driver. Open your
+local_settings.py file and add the <code class="docutils literal"><span class="pre">OPTIONS</span></code> section shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;sqlserver_ado&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;*******&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;********&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;******&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="c1"># Add this options section!</span>
+        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;use_legacy_date_fields&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">This last step only applies to those of you who have composite tests
+that rely on the current value of a multiple choice test. Since this
+update <a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/issues/162/adding-new-multiple-choice-options-can">changes the way multiple choice values are
+stored</a>
+you need to update the calculation procedures for these tests. For
+example if your calculation procedure currently looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Dosemeter&quot;</span><span class="p">)</span>
+<span class="n">choices</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">choices</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">choice_idx</span> <span class="o">=</span> <span class="n">choices</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dosemeter</span><span class="p">)</span>
+
+<span class="n">previous_results</span> <span class="o">=</span> <span class="n">TestInstance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">unit_test_info__test__slug</span><span class="o">=</span><span class="s2">&quot;your_test_macro_name&quot;</span><span class="p">,</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">choice_idx</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">latest</span><span class="p">(</span><span class="s2">&quot;work_completed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>you will need to modify it slightly like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">previous_results</span> <span class="o">=</span> <span class="n">TestInstance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">unit_test_info__test__slug</span><span class="o">=</span><span class="s2">&quot;your_test_macro_name&quot;</span><span class="p">,</span>
+    <span class="n">string_value</span> <span class="o">=</span> <span class="n">dosemeter</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">latest</span><span class="p">(</span><span class="s2">&quot;work_completed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ with IIS, CherryPy &amp; SQL Server &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+ with IIS, CherryPy &amp; SQL Server</a><ul>
+<li><a class="reference internal" href="#installing-git">1. Installing git</a></li>
+<li><a class="reference internal" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">2. Checkout the latest release of QATrack+ source code from bitbucket</a></li>
+<li><a class="reference internal" href="#setting-up-our-python-environment">3. Setting up our Python environment</a></li>
+<li><a class="reference internal" href="#checking-everything-is-functional-so-far">4. Checking everything is functional so far</a></li>
+<li><a class="reference internal" href="#creating-a-database-with-sql-server">5. Creating a database with SQL Server</a><ul>
+<li><a class="reference internal" href="#configuring-qatrack-to-use-your-new-database">Configuring QATrack+ to use your new database</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-cherrypy-to-serve-qatrack">6. Configuring CherryPy to Serve QATrack+</a><ul>
+<li><a class="reference internal" href="#installing-cherrypy-as-a-windows-service">Installing CherryPy as a Windows Service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setting-up-iis">7. Setting up IIS</a></li>
+<li><a class="reference internal" href="#wrap-up">8. Wrap Up</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+ with IIS, CherryPy &amp; SQL Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/v/0.2.8/deployment/windows/iis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack-with-iis-cherrypy-sql-server">
+<h1>Deploying QATrack+ with IIS, CherryPy &amp; SQL Server<a class="headerlink" href="#deploying-qatrack-with-iis-cherrypy-sql-server" title="Permalink to this headline">¶</a></h1>
+<p>This guide is going to walk you through installing QATrack+ on a Windows
+Server server with IIS serving static assets (images, javascript and
+stylesheets) and acting as a reverse proxy for a CherryPy web server
+which serves our Django application (QATrack+). SQL Server 2008 will be
+used as the database.</p>
+<p>The steps we will be undertaking are:</p>
+<ol class="arabic simple">
+<li>Installing and configuring git</li>
+<li>Checkout the latest release of the QATrack+ source code from
+bitbucket.</li>
+<li>Setting up our Python environment (including virtualenv)</li>
+<li>Making sure everything is working up to this point</li>
+<li>Setting up a database with SQL Server</li>
+<li>Configuring CherryPy to serve our QATrack+ site.</li>
+<li>Configuring IIS</li>
+<li>Wrap up</li>
+</ol>
+<p>I will be using Windows Server 2008R2, IIS &amp; SQLServer for this guide
+but steps should be similar on other versions of Windows.</p>
+<div class="section" id="installing-git">
+<h2>1. Installing git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h2>
+<p>Go to <a class="reference external" href="http://git-scm.com">http://git-scm.com</a> and download the latest version of git
+(msysgit) for Windows (Git-1.8.1.2-preview20130201 at the time of
+writing). Run the installer. I just leave all the settings on their
+defaults but you are free to modify them if you like.</p>
+<p>Step 1 done ;)</p>
+</div>
+<div class="section" id="checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">
+<h2>2. Checkout the latest release of QATrack+ source code from bitbucket<a class="headerlink" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket" title="Permalink to this headline">¶</a></h2>
+<p>From the Start Menu look for the Git folder under All Programs and
+select Git Bash. This will open up a console window which we will be
+using fairly heavily for the rest of the process. (Note: this is a
+fairly full featured bash shell and is a lot more powerful than the
+default windows command prompt).</p>
+<p>To create a home for QATrack+ and check out the source code, use the
+following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+
+<span class="n">mkdir</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tohccmedphys</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-our-python-environment">
+<h2>3. Setting up our Python environment<a class="headerlink" href="#setting-up-our-python-environment" title="Permalink to this headline">¶</a></h2>
+<p><em>Note all Python packages should be 32 bit versions even on 64 bit
+machines</em></p>
+<p>Go to <a class="reference external" href="http://www.python.org/download/">http://www.python.org/download/</a> and download the <em>32 bit</em> Python
+2.7.X Windows Installer for Python (current version is 2.7.3 at the time
+of writing &#8211; QATrack+ does not currently support Python3). Go through
+the installer using the default options (Install for all users).</p>
+<p>Next go to <a class="reference external" href="http://pypi.python.org/pypi/setuptools#files">http://pypi.python.org/pypi/setuptools#files</a> and download and
+run the MS Windows Installer (setuptools-0.6c11.win32-py2.7.exe at the
+time of writing)</p>
+<p>We now need to download Scipy, matplotlib and pywin32. Go to
+<a class="reference external" href="http://sourceforge.net/projects/scipy/files/scipy/0.11.0/">http://sourceforge.net/projects/scipy/files/scipy/0.11.0/</a> and download
+the win32 superpack (eg scipy-0.11.0-win32-superpack-python27.exe. Save
+it in C:<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\deploy`</span></a>&nbsp;or somewhere else you can remember.
+Likewise, visit <a class="reference external" href="http://matplotlib.org/downloads.html">http://matplotlib.org/downloads.html</a> and download the
+latest 32 bit version of matplotlib for Windows
+(matplotlib-1.2.0.win32-py2.7.exe at the time of writing). Finally visit
+<a class="reference external" href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/">http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/</a> and
+download pywin32-218.win32-py2.7.exe.</p>
+<p>You will also want to add Python to your PATH environment variable. The
+process is slightly different depending on if you are on XP or something
+newer but the gist of it is: * Right click on My Computer * Select
+Advanced (or Advanced System Settings) * Select Environment Variables
+* Select Path under the System variables section and then click edit *
+<strong>Append</strong>
+;C:<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\Python`27;C::raw-latex:`</span></a>Python`27:raw-latex:<a href="#id5"><span class="problematic" id="id6">`</span></a>Scripts <a href="#id7"><span class="problematic" id="id8">`</span></a>to
+the end of the path. Don&#8217;t overwrite the existing value! * Click
+Ok/Ok/Ok</p>
+<p>Close the git bash command prompt you had open before and then open a
+new one (this will give you access to the updated PATH variable).</p>
+<p>In your new git bash window the command <code class="docutils literal"><span class="pre">which</span> <span class="pre">python</span></code> should return
+<code class="docutils literal"><span class="pre">/c/Python27/python</span></code>. If it doesn&#8217;t then your PATH variable has not
+been set correctly.</p>
+<p>We&#8217;re now ready to install all the libraries QATrack+ depends on. To
+install them, run the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">easy_install</span> <span class="n">pip</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span><span class="o">==</span><span class="mf">1.9</span>
+<span class="n">mkdir</span> <span class="n">venvs</span>
+<span class="n">virtualenv</span> <span class="n">venvs</span><span class="o">/</span><span class="n">qatrack</span>
+<span class="n">source</span> <span class="n">venvs</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">easy_install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.7</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">scipy</span><span class="o">-</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">win32</span><span class="o">-</span><span class="n">superpack</span><span class="o">-</span><span class="n">python2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="mf">0.</span><span class="n">win32</span><span class="o">-</span><span class="n">py2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">pywin32</span><span class="o">-</span><span class="mf">218.</span><span class="n">win32</span><span class="o">-</span><span class="n">py2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">cd</span> <span class="n">qatrackplus</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">optional</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">win</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Last but not least, for this guide, we are going to be using the
+CherryPy package to act as our WSGI server and django-mssql as our
+database driver so install them too:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">cherrypy</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">mssql</span><span class="o">==</span><span class="mf">1.1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-everything-is-functional-so-far">
+<h2>4. Checking everything is functional so far<a class="headerlink" href="#checking-everything-is-functional-so-far" title="Permalink to this headline">¶</a></h2>
+<p>Getting everything installed was a pain, so lets take a minute and check
+everything is now functioning as it should. Create a directory called
+&#8216;db&#8217; in the main qatrackplus directory and then setup a temporary
+database for testing (answer &#8216;yes&#8217; and create a super user when
+prompted).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span>
+<span class="n">mkdir</span> <span class="n">db</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">fixtures</span><span class="o">/</span><span class="n">defaults</span><span class="o">/*/*</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+<p>You should now be able to run the built in test server and access your
+QATrack+ site for the first time! At the command prompt type the
+following to start the server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+<p>You should then be able to open a browser window and visit
+<a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> where you will be redirected to a login page (you
+can login using the superuser you created earlier).</p>
+<p>In the terminal hit <code class="docutils literal"><span class="pre">Ctrl+C</span></code> to kill the server.</p>
+</div>
+<div class="section" id="creating-a-database-with-sql-server">
+<h2>5. Creating a database with SQL Server<a class="headerlink" href="#creating-a-database-with-sql-server" title="Permalink to this headline">¶</a></h2>
+<p>From the start menu find and open SQL Server Management Studio. Enter
+&#8216;localhost&#8217; for the server name and click Connect.</p>
+<p>In the Object Explorer frame, right click the Databases folder and
+select &#8220;New Database...&#8221;.</p>
+<p>Enter &#8216;qatrackdb&#8217; as the database name and click OK.</p>
+<p>Back in the Object Explorer frame, right click on the main Security
+folder and click New Login... Set the login name to &#8216;qatrack&#8217;, select
+SQL Server Authentication. Enter &#8216;qatrackpass&#8217; (or whatever you like)
+for the password fields and uncheck Enforce Password Policy. Click OK.</p>
+<p>Back in the Object Explorer frame, expand the qatrackdb database, right
+click on Security and select New-&gt;User.</p>
+<p>Enter &#8216;qatrack&#8217; as the User name and Login name and then below in the
+Database Role Membership select &#8216;db_datawriter&#8217;, &#8216;db_datareader&#8217; and
+&#8216;db_owner&#8217;. Click OK.</p>
+<div class="section" id="configuring-qatrack-to-use-your-new-database">
+<h3>Configuring QATrack+ to use your new database<a class="headerlink" href="#configuring-qatrack-to-use-your-new-database" title="Permalink to this headline">¶</a></h3>
+<p>Create a file called local_settings.py in
+/c/deploy/qatrackplus/qatrack/ and add the following contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;sqlserver_ado&#39;</span><span class="p">,</span> <span class="c1"># Add &#39;postgresql_psycopg2&#39;, &#39;mysql&#39;, &#39;sqlite3&#39; or &#39;oracle&#39;.</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackdb&#39;</span><span class="p">,</span>                      <span class="c1"># Or path to database file if using sqlite3.</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                  <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for localhost. Not used with sqlite3.</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for default. Not used with sqlite3.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once again, we will configure our new MS SQL database from the command
+prompt (answer &#8216;yes&#8217; and create a super user when prompted):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">fixtures</span><span class="o">/</span><span class="n">defaults</span><span class="o">/*/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-cherrypy-to-serve-qatrack">
+<h2>6. Configuring CherryPy to Serve QATrack+<a class="headerlink" href="#configuring-cherrypy-to-serve-qatrack" title="Permalink to this headline">¶</a></h2>
+<p>Django&#8217;s built in web server that we used earlier is not meant to be
+used in production. Instead we will be using CherryPy to serve QATrack+
+(you could also use waitress or rocket if you prefer).</p>
+<p>Create a file called cherrypy_deploy.py in /c/deploy/qatrackplus/ with
+the following content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="kn">from</span> <span class="nn">qatrack</span> <span class="k">import</span> <span class="n">wsgi</span>
+<span class="kn">from</span> <span class="nn">cherrypy</span> <span class="k">import</span> <span class="n">wsgiserver</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">wsgiserver</span><span class="o">.</span><span class="n">CherryPyWSGIServer</span><span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8080</span><span class="p">),</span> <span class="n">wsgi</span><span class="o">.</span><span class="n">application</span>
+<span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and then to test that our CherryPy server is working run the following
+from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">python</span> <span class="n">cherrypy_deploy</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>that command won&#8217;t appear to do anything but you should be able to visit
+<a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in your browser and see the login screen. (Don&#8217;t
+worry if it looks different than before...CherryPy is not setup to serve
+the style sheets and images)</p>
+<p>Back in the terminal window hit <code class="docutils literal"><span class="pre">Ctrl+C</span></code> to kill the server.</p>
+<div class="section" id="installing-cherrypy-as-a-windows-service">
+<h3>Installing CherryPy as a Windows Service<a class="headerlink" href="#installing-cherrypy-as-a-windows-service" title="Permalink to this headline">¶</a></h3>
+<p>In order to have CherryPy start when you reboot your server, or restart
+after a crash, you may wish to install your CherryPy server as a Windows
+service.</p>
+<p>Create a file called QATrackCherryPyService.py and add the following
+contents to it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Basic CherryPy Windows service for QATrack+...cobbled together</span>
+<span class="sd">from various places online.</span>
+
+<span class="sd">Requires Mark Hammond&#39;s pywin32 package.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">cherrypy</span>
+<span class="kn">import</span> <span class="nn">win32serviceutil</span>
+<span class="kn">import</span> <span class="nn">win32service</span>
+<span class="kn">import</span> <span class="nn">win32event</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">qatrack</span> <span class="k">import</span> <span class="n">wsgi</span>
+
+<span class="n">DEPLOY_DIRECTORY</span> <span class="o">=</span> <span class="s2">&quot;C:/deploy/qatrackplus/&quot;</span>
+<span class="n">ERROR_LOG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEPLOY_DIRECTORY</span><span class="p">,</span><span class="s2">&quot;logs&quot;</span><span class="p">,</span><span class="s2">&quot;cherry_py_err.log&quot;</span><span class="p">)</span>
+<span class="n">STD_ERR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEPLOY_DIRECTORY</span><span class="p">,</span><span class="s2">&quot;logs&quot;</span><span class="p">,</span><span class="s2">&quot;std_err.log&quot;</span><span class="p">)</span>
+<span class="n">STD_OUT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEPLOY_DIRECTORY</span><span class="p">,</span><span class="s2">&quot;logs&quot;</span><span class="p">,</span><span class="s2">&quot;std_out.log&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">STD_OUT</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">STD_ERR</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">QATrackService</span><span class="p">(</span><span class="n">win32serviceutil</span><span class="o">.</span><span class="n">ServiceFramework</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;NT Service.&quot;&quot;&quot;</span>
+
+    <span class="n">_svc_name_</span> <span class="o">=</span> <span class="s2">&quot;QATrackCherryPyService&quot;</span>
+
+    <span class="n">_svc_display_name_</span> <span class="o">=</span> <span class="s2">&quot;QATrack CherryPy Service&quot;</span>
+
+    <span class="k">def</span> <span class="nf">SvcDoRun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DEPLOY_DIRECTORY</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;qatrack.settings&#39;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">DEPLOY_DIRECTORY</span><span class="p">)</span>
+
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">graft</span><span class="p">(</span><span class="n">wsgi</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;global&#39;</span><span class="p">:{</span>
+                <span class="s1">&#39;log.error_file&#39;</span><span class="p">:</span><span class="n">ERROR_LOG</span><span class="p">,</span>
+                <span class="s1">&#39;log.screen&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;tools.log_tracebacks.on&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;engine.autoreload.on&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;engine.SIGHUP&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;engine.SIGTERM&#39;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">block</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">SvcStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ReportServiceStatus</span><span class="p">(</span><span class="n">win32service</span><span class="o">.</span><span class="n">SERVICE_STOP_PENDING</span><span class="p">)</span>
+
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ReportServiceStatus</span><span class="p">(</span><span class="n">win32service</span><span class="o">.</span><span class="n">SERVICE_STOPPED</span><span class="p">)</span>
+        <span class="c1"># very important for use with py2exe</span>
+        <span class="c1"># otherwise the Service Controller never knows that it is stopped !</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">win32serviceutil</span><span class="o">.</span><span class="n">HandleCommandLine</span><span class="p">(</span><span class="n">QATrackService</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">mkdir</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">logs</span>
+<span class="n">python</span> <span class="n">QATrackCherryPyService</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+<span class="n">python</span> <span class="n">QATrackCherryPyService</span><span class="o">.</span><span class="n">py</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>Your QATrack+ installation is now installed as a Windows Service. I
+would recommend configuring your service to auto start. Instructions on
+how to do that can be found on the <a class="reference external" href="http://en.wikipedia.org/wiki/Windows_service#Managing_services">Windows Service Wikipedia
+page</a>.
+You may also wish to configure the service to email you in the event of
+a crash (see the Recovery tab of the QATrackCherryPyService
+configuration dialogue).</p>
+</div>
+</div>
+<div class="section" id="setting-up-iis">
+<h2>7. Setting up IIS<a class="headerlink" href="#setting-up-iis" title="Permalink to this headline">¶</a></h2>
+<p>We are going to use IIS for two purposes: first, it is going to serve
+all of our static media (css, js and images) and second it is going to
+act as a reverse proxy to forward the QATrack+ specific requests to
+CherryPy.</p>
+<p>Before starting please make sure you have the <a class="reference external" href="http://www.iis.net/downloads/microsoft/url-rewrite">URL
+Rewrite</a> and
+<a class="reference external" href="http://www.iis.net/downloads/microsoft/application-request-routing">Application Request
+Routing</a>
+IIS modules installed. Application Request Routing needs to have the
+reverse proxy setting enabled: for instructions see the section titled
+Enabling Reverse Proxy Functionality on <a class="reference external" href="http://www.iis.net/learn/extensions/url-rewrite-module/reverse-proxy-with-url-rewrite-v2-and-application-request-routing">this
+page</a>.</p>
+<p>Once you have the URL Rewrite extension installed, open the IIS Manager,
+select the default Web Site and click Stop on the right hand side.</p>
+<div class="figure" id="id15">
+<img alt="Stop default web site" src="../../../../_images/stop_default2.png" />
+<p class="caption"><span class="caption-text">Stop default web site</span></p>
+</div>
+<p>Now right click on Sites and click Add Web Site</p>
+<div class="figure" id="id16">
+<img alt="Add a new web site" src="../../../../_images/add_web_site2.png" />
+<p class="caption"><span class="caption-text">Add a new web site</span></p>
+</div>
+<p>Enter QATrack Static for the Site Name and
+C:<a href="#id9"><span class="problematic" id="id10">:raw-latex:`\deploy`</span></a><a href="#id11"><span class="problematic" id="id12">:raw-latex:`\qatrackplus`</span></a><a href="#id13"><span class="problematic" id="id14">:raw-latex:`\qatrack`</span></a>&nbsp;for
+the Physical Path then click OK and answer Yes to the warning.</p>
+<p>To test that setup worked correctly open a browser on your server and
+enter the address <a class="reference external" href="http://localhost/static/img/tux.png">http://localhost/static/img/tux.png</a> You should see a
+picture of the Linux penguin.</p>
+<p>Next, select the top level server in the Connections pane and then
+double click URL Rewrite</p>
+<div class="figure" id="id17">
+<img alt="URL Rewrite" src="../../../../_images/url_rewrite2.png" />
+<p class="caption"><span class="caption-text">URL Rewrite</span></p>
+</div>
+<p>In the top right click Add Rule and select Blank Rule.</p>
+<p>Give it a name of QATrack Static and enter ^(static|media)/.* for the
+Pattern field, and select None for the Action type. Make sure
+<code class="docutils literal"><span class="pre">Stop</span> <span class="pre">processing</span> <span class="pre">of</span> <span class="pre">subsequent</span> <span class="pre">rules</span></code> is checked.</p>
+<div class="figure" id="id18">
+<img alt="static rule" src="../../../../_images/static_rule2.png" />
+<p class="caption"><span class="caption-text">static rule</span></p>
+</div>
+<p>When finished click Back To Rules and then add another blank rule. Give
+it a name of QATrack Reverse Proxy, enter (.*) for the Pattern and
+<a class="reference external" href="http://localhost:8080">http://localhost:8080</a>/{R:1} for the Rewrite URL. Make sure both Append
+query string and Stop processing of subsequent rules are checked.</p>
+<div class="figure" id="id19">
+<img alt="URL Rewrite Reverse Proxy" src="../../../../_images/reverse_proxy2.png" />
+<p class="caption"><span class="caption-text">URL Rewrite Reverse Proxy</span></p>
+</div>
+<p>Your URL rewrites should look like the following (order is important!)</p>
+<div class="figure" id="id20">
+<img alt="URL Rewrites" src="../../../../_images/url_rules2.png" />
+<p class="caption"><span class="caption-text">URL Rewrites</span></p>
+</div>
+<p>You should now be able to visit <a class="reference external" href="http://localhost/">http://localhost/</a> in a browser on your
+server and see the QATrack+ login page. Congratulations, you now have a
+functional QATrack+ setup on your Windows Server!</p>
+<p><em>there are many different ways to configure IIS. The method I&#8217;ve used
+above is simple and works well when QATrack+ is the only web service
+running on a server.</em></p>
+</div>
+<div class="section" id="wrap-up">
+<h2>8. Wrap Up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>This guide shows only one of many possible method of deploying QATrack+
+on Windows. It is very similar to what we use at The Ottawa Hospital
+Cancer Centre and it has proven to be a very solid setup. If you&#8217;re
+stuck with a Windows stack it will likely work for you too. Hit me up on
+the <a class="reference external" href="https://groups.google.com/forum/?fromgroups=#!forum/qatrack">QATrack+ Google
+Group</a>
+if you want to discuss some other alternatives for deploying on Windows.</p>
+<p>References:</p>
+<p>[1] <a class="reference external" href="http://www.computerhope.com/issues/ch000549.htm">http://www.computerhope.com/issues/ch000549.htm</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+QATrack+ Administrators Guide
+=============================
+
+*The admin guide is intended for use by anyone who will be responsible
+for configuring tests and test lists, modifying references & tolerances
+or managing users and user permissions.*
+
+To access the admin site, log into QATrack+ and then choose the
+**Admin** option from the dropdown at the top right hand corner of the
+page (where your username is displayed).
+
+A walk through tutorial (with screenshots) on going from a blank
+QATrack+ install to a fully configured, performable test list is
+available on the `tutorials page <tutorials/tutorials.html>`__. Reading
+through this tutorial is a great way to familiarize yourself with
+QATrack+ configuration.
+
+Initial Configuration
+---------------------
+
+Before you start defining tests and test lists for the first time it is
+a good idea to begin by doing some initial configuration.
+
+1. `Change the name of your website <change_site_name.html>`__
+2. `Create at least one Unit <units.html>`__
+3. `Define some user groups <auth.html>`__
+4. `Create a couple of test statuses <statuses.html>`__
+5. `Create some test categories <categories.html>`__
+6. `Set up some test frequencies <frequencies.html>`__
+
+Admin Operations
+----------------
+
+A step-by-step tutorial to walk you through the process of `configuring
+a new test list and assigning it to a
+unit <tutorials/step_by_step_test_list/test_list_start_to_finish.html>`__
+is available on our `tutorial page <tutorials/tutorials.html>`__.
+
+-  `Test Configuration <tests.html>`__
+
+   -  `Calculated tests (composite test type) <calculated.html>`__
+
+-  `Test List Configuration <test_lists.html>`__
+-  `Test List Cycles <test_list_cycles.html>`__
+-  `Assigning a test list or test list cycle to a
+   unit <assign_to_unit.html>`__
+-  `Setting references and tolerances for a
+   test <setting_refs_and_tols.html>`__
+-  `Configuring test statuses <statuses.html>`__
+-  `Configuring test frequencies <frequencies.html>`__
+-  `Configuring test tolerances <tolerances.html>`__
+-  `Creating a new Unit <units.html>`__
+-  `Managing Users, Groups and permissions <auth.html>`__
+-  `Managing contact numbers <contacts.html>`__
+-  `Configuring Auto Review rules <auto_review.html>`__
+-  `Setting up email notifications <email.html>`__
+-  `Auto Schedule management command <auto-schedule.html>`__
+
+Admin Tutorials
+---------------
+
+For a list of tutorials avaialable please visit our `tutorial
+page <tutorials/tutorials.html>`__.

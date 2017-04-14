@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A step-by-step introduction to QATrack+ administration (continued) &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../../../index.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">A step-by-step introduction to QATrack+ administration (continued)</a><ul>
+<li><a class="reference internal" href="#assigning-the-test-list">Assigning the test list</a></li>
+<li><a class="reference internal" href="#checking-our-work">Checking our work</a></li>
+<li><a class="reference internal" href="#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>A step-by-step introduction to QATrack+ administration (continued)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/v/0.2.8/admin/tutorials/step_by_step_test_list/test_list_start_to_finish_6.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-step-by-step-introduction-to-qatrack-administration-continued">
+<h1>A step-by-step introduction to QATrack+ administration (continued)<a class="headerlink" href="#a-step-by-step-introduction-to-qatrack-administration-continued" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="test_list_start_to_finish_5.html">(Previous Page)</a></p>
+<p>In this part of the tutorial we will assign our test list to a unit and
+ensure that it is functioning correctly on the main site.</p>
+<div class="section" id="assigning-the-test-list">
+<h2>Assigning the test list<a class="headerlink" href="#assigning-the-test-list" title="Permalink to this headline">¶</a></h2>
+<p>To assign the test list to a unit, visit the <strong>Assing Test Lists to
+Units</strong> link under the <strong>QA</strong> section from the main admin page and then
+click on <strong>Add unit test collection</strong> in the top right hand corner.</p>
+<p>Select the <em>Test Unit</em> from the <strong>Unit:</strong> dropdown, and then create a
+new <a class="reference external" href="../frequencies">frequency</a> by clicking on the green cross next
+to the <strong>Frequency</strong> dropdown. Give the frequency the name <em>Monthly</em>,
+slug <em>monthly</em> and enter <em>28</em>, <em>28</em>, <em>35</em> for <strong>Nominal interval</strong>,
+<strong>Due Interval</strong> and for <strong>Overdue interval</strong>, respectively.</p>
+<div class="figure" id="id1">
+<img alt="creating a new frequency" src="../../../../../_images/new_frequency2.png" />
+<p class="caption"><span class="caption-text">creating a new frequency</span></p>
+</div>
+<p>Select the <em>Physics</em> option from the <strong>Assigned to:</strong> dropdown and <em>test
+list</em> from the <strong>Content Type</strong> dropdown. After selecting <em>test list</em>
+you will be able to select <em>Machine Output</em> from the <em>Object id</em>
+dropdown.</p>
+<div class="figure" id="id2">
+<img alt="Assigning to a unit" src="../../../../../_images/assign_to_unit5.png" />
+<p class="caption"><span class="caption-text">Assigning to a unit</span></p>
+</div>
+<p>When you&#8217;re finished click <strong>Save</strong>.</p>
+</div>
+<div class="section" id="checking-our-work">
+<h2>Checking our work<a class="headerlink" href="#checking-our-work" title="Permalink to this headline">¶</a></h2>
+<p>Visit the main site (you can click the <em>QATrack+ administration</em> header
+at the top of the admin page) and select the <em>Choose Unit</em> link from the
+<em>Perform QA</em> dropdown at the top of the page. On the next page choose
+the <em>Monthly</em> option from the <em>Test Unit</em> drop down.</p>
+<div class="figure" id="id3">
+<img alt="Choosing Monthly" src="../../../../../_images/choose_monthly2.png" />
+<p class="caption"><span class="caption-text">Choosing Monthly</span></p>
+</div>
+<p>On the next page click <strong>Perform Monthly QA</strong> beside the <em>Machine
+Output</em> test list.</p>
+<div class="figure" id="id4">
+<img alt="Monthly test listings" src="../../../../../_images/test_list_listing2.png" />
+<p class="caption"><span class="caption-text">Monthly test listings</span></p>
+</div>
+<p>You should now see the test list you defined:</p>
+<div class="figure" id="id5">
+<img alt="Final test list" src="../../../../../_images/final_test_list2.png" />
+<p class="caption"><span class="caption-text">Final test list</span></p>
+</div>
+<p>Fill in sample values of :</p>
+<ul class="simple">
+<li>Temperature = 24</li>
+<li>Pressure = 760</li>
+<li>Ion Chamber Reading = 2.56</li>
+</ul>
+<p>And you should see the <em>Temperature-Pressure Correction</em> and <em>Dose</em>
+values calculated as 1.007 and 1.017 respectively.</p>
+<div class="figure" id="id6">
+<img alt="Calculated results" src="../../../../../_images/calculated_results2.png" />
+<p class="caption"><span class="caption-text">Calculated results</span></p>
+</div>
+<p>Notice that the <strong>Status</strong> for the tests all show <em>No Tol Set</em>. This is
+because we haven&#8217;t set reference values and tolerance/action levels for
+these tests. That procedure is <a class="reference external" href="../../setting_refs_and_tols.html">covered
+elsewhere</a>.</p>
+</div>
+<div class="section" id="wrapping-up">
+<h2>Wrapping Up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+<p>We have now gone through the basics of taking QATrack+ from a blank
+installation all the way to performing our first test list! Check out
+the <a class="reference external" href="../../guide.html">admin guide</a> (for configuration) and <a class="reference external" href="../../../users/guide.html">users
+guide</a>(for end user instructions) for more
+information.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+If you spent a lot of time configuring the standalone demo version of
+QATrack+ and would like to migrate your test configuration to a
+permanent QATrack+ installation you can take the following steps (after
+you've completed the initial setup of your permanent server).
+
+-  Open a Windows command prompt and navigate to the location of your
+   standalone QATrack+ installation e.g.: \`\`\`
+
+!.html
+====
+
+cd
+"C::raw-latex:`\Users`:raw-latex:`\rataylor`:raw-latex:`\Desktop`:raw-latex:`\qatrackplus`-portable-0.2.7"
+
+::
+
+    * Type the following command:
+
+!.html
+====
+
+"Portable Python 2.7.3.1:raw-latex:`\App`:raw-latex:`\python`.exe"
+qatrackplus:raw-latex:`\manage`.py dumpdata --natural --indent=4 -e
+contenttypes -e auth.Permission > data.json
+
+::
+
+
+    The data.json file will now contain the contents of your demo database and is ready to be loaded into your production database using the following steps (make sure you activate your QATrack+ virtualenv first).
+
+    * Copy the data.json file to the root directory of your permanent QATrack+ installation.
+    * Enter the commands (if you did any initial test/unit configuration on your permanent database prior to this, the first command will *IRRETRIEVABLY DELETE IT*! If you're starting with a fresh production installation this isn't a concern...):
+
+!bash
+=====
+
+python manage.py reset qa units # answer yes, yes <- This DELETES
+existing test/unit config in db python manage.py loaddata data.json
+
+\`\`\` and you're done!
+
+If you run into any trouble with this process, please post to the
+`Google
+Group <https://groups.google.com/forum/?fromgroups#!forum/qatrack>`__

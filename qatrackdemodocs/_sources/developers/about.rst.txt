@@ -1,0 +1,56 @@
+Contributing to the QATrack+ Development
+========================================
+
+We would certainly welcome contributions of code or
+cleanups/refactorings of existing code from anyone who is interested in
+helping out.
+
+This page will get filled out with more details as time goes on, but if
+you're interested in hacking on the QATrack+ code please `fork the
+QATrack+ repository on
+bitbucket <https://bitbucket.org/tohccmedphys/qatrackplus>`__.
+
+Please feel free to `edit this page <../edit/developers/about/>`__ and
+add any details you think will be helpful to other people!
+
+Getting ahold of the source code
+--------------------------------
+
+The general sequence to contribute/patch source code to QATrack+ is as
+follows:
+
+-  `Install git <#install_git>`__
+-  Create a `Bitbucket
+   account <https://bitbucket.org/account/signup/>`__
+-  `Fork the QATrack+
+   respository <https://confluence.atlassian.com/display/BITBUCKET/Fork+a+Repo%2C+Compare+Code%2C+and+Create+a+Pull+Request>`__
+   found `here <https://bitbucket.org/tohccmedphys/qatrackplus/>`__
+-  `Clone your newly forked
+   repository <https://confluence.atlassian.com/display/BITBUCKET/Clone+Your+Git+Repo+and+Add+Source+Files>`__
+   to your local computer.
+-  Add a new feature, clean up some code, add tests etc
+-  Push your changes back to your repository
+-  `Create a pull request for the main TOHCC
+   repository <https://confluence.atlassian.com/display/BITBUCKET/Fork+a+Repo%2C+Compare+Code%2C+and+Create+a+Pull+Request>`__
+
+Installing git
+~~~~~~~~~~~~~~
+
+QATrack+ uses `git <http://git-scm.com/>`__ for revision control
+purposes. If you're new to git, Bitbucket has a tutorials for
+installing/configuring git on
+`Windows <https://confluence.atlassian.com/display/BITBUCKET/Set+up+Git+and+Mercurial>`__,
+and `Mac
+OSX <https://confluence.atlassian.com/pages/viewpage.action?pageId=269981802>`__
+(ignore the Mercurial/HG sections)...if you're on a Linux system, git
+should be available via your package manager (e.g. apt-get install git,
+yum install git-core etc.).
+
+Resources for developers
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  `Database schema diagrams <schema.html>`__
+-  `Python Tutorial <http://learnpythonthehardway.org/>`__
+-  `Django
+   Tutorial <https://docs.djangoproject.com/en/dev/intro/tutorial01/>`__
+-  An introduction to the QATrack+ code (not available yet)

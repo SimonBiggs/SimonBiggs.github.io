@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ with IIS, SSO/Windows Authentication, &amp; SQL Server &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+ with IIS, SSO/Windows Authentication, &amp; SQL Server</a><ul>
+<li><a class="reference internal" href="#installing-git">1. Installing git</a></li>
+<li><a class="reference internal" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">2. Checkout the latest release of QATrack+ source code from bitbucket</a></li>
+<li><a class="reference internal" href="#setting-up-our-python-environment">3. Setting up our Python environment</a></li>
+<li><a class="reference internal" href="#configuring-iis-to-serve-qatrack">4. Configuring IIS to Serve QATrack+</a></li>
+<li><a class="reference internal" href="#creating-a-database-with-sql-server">5. Creating a database with SQL Server</a><ul>
+<li><a class="reference internal" href="#configuring-qatrack-to-use-your-new-database">Configuring QATrack+ to use your new database</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wrap-up">6. Wrap Up</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+ with IIS, SSO/Windows Authentication, &amp; SQL Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deployment/windows/iisFastCGI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack-with-iis-sso-windows-authentication-sql-server">
+<h1>Deploying QATrack+ with IIS, SSO/Windows Authentication, &amp; SQL Server<a class="headerlink" href="#deploying-qatrack-with-iis-sso-windows-authentication-sql-server" title="Permalink to this headline">¶</a></h1>
+<p>This guide is going to walk you through installing QATrack+ on a Windows
+2008 R2 server with IIS serving our Django application (QATrack+). SQL
+Server 2008 will be used as the database. Windows Integrated
+Authentication is used for single-sign on.</p>
+<p>The steps we will be undertaking are:</p>
+<ol class="arabic simple">
+<li>Installing and configuring git</li>
+<li>Checkout the latest release of the QATrack+ source code from
+bitbucket.</li>
+<li>Setting up our Python environment (including virtualenv)</li>
+<li>Configuring IIS to serve our QATrack+ site.</li>
+<li>Setting up a database with SQL Server</li>
+<li>Wrap Up</li>
+</ol>
+<p>The first four steps are common to the Windows/IIS/CherryPy install and
+will not be repeated here. While the use of only one web server (IIS) to
+host all aspects of QATrack is likely more robust, it has not yet been
+tested in a multi-user environment. Once testing and tweaking is
+completed, then I imagine that this wiki will be combined with the
+Win/IIS/CherryPy page into one Windows installation method.</p>
+<div class="section" id="installing-git">
+<h2>1. Installing git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="iis.html">See the Windows/IIS/CherryPy wiki</a></p>
+</div>
+<div class="section" id="checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">
+<h2>2. Checkout the latest release of QATrack+ source code from bitbucket<a class="headerlink" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="iis.html">See the Windows/IIS/CherryPy wiki</a></p>
+</div>
+<div class="section" id="setting-up-our-python-environment">
+<h2>3. Setting up our Python environment<a class="headerlink" href="#setting-up-our-python-environment" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="iis.html">See the Windows/IIS/CherryPy wiki</a> &#8211; Note that in the last
+steps of section 3, the &#8220;pip install cherrypy&#8221; is not necessary, but
+there&#8217;s no harm done if you install it either.</p>
+</div>
+<div class="section" id="configuring-iis-to-serve-qatrack">
+<h2>4. Configuring IIS to Serve QATrack+<a class="headerlink" href="#configuring-iis-to-serve-qatrack" title="Permalink to this headline">¶</a></h2>
+<p><em>The following is an modification of the how-to from CodeSmartInc:
+http://codesmartinc.com/2013/04/12/running-django-in-iis7iis8/</em></p>
+<p>Ensure that &#8216;CGI&#8217; and &#8216;URL Authorization&#8217; are installed within the IIS
+options.</p>
+<p>Download and install the MS Web Platform Installer (WPI) from:
+<a class="reference external" href="http://www.microsoft.com/web/downloads/platform.aspx">http://www.microsoft.com/web/downloads/platform.aspx</a></p>
+<p>Launch WPI and search for FastCGI. Add/Install &#8220;WFastCGI 2.0 Gateway for
+IIS and Python 2.7&#8221;. Confirm that wfastcgi.py is in
+C:<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\Python`27:raw-latex:`</span></a>Scripts`.</p>
+<p>Within the IIS Manager, go to your web server, and ensure that IIS has
+icons for both CGI and FastCGI.</p>
+<p>Stop/Delete/Remove the default site.</p>
+<p>Create a new site in IIS by right-clicking on Sites and selecting &#8220;Add
+Web Site&#8221;. QATrack would be a good name but anything works. Select
+&#8220;C:<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\deploy`</span></a><a href="#id5"><span class="problematic" id="id6">:raw-latex:`\qatrackplus`</span></a>&#8221; as the path. Confirm
+80 as the port. Host Name can be left blank. Leave the &#8220;Start Site
+Immediately&#8221; checked.</p>
+<p>Select the root server. Double click on Handler Mappings. In the upper
+right-hand side, click &#8216;Add Module Mapping&#8217;:</p>
+<ul class="simple">
+<li>Request path: *</li>
+<li>Module: FastCgiModule</li>
+<li>Executable:
+C:<a href="#id7"><span class="problematic" id="id8">:raw-latex:`\deploy`</span></a><a href="#id9"><span class="problematic" id="id10">:raw-latex:`\venvs`</span></a><a href="#id11"><span class="problematic" id="id12">:raw-latex:`\qatrack`</span></a><a href="#id13"><span class="problematic" id="id14">:raw-latex:`\Scripts`</span></a><a href="#id15"><span class="problematic" id="id16">:raw-latex:`\python`</span></a>.exe|c:<a href="#id17"><span class="problematic" id="id18">:raw-latex:`\Python`27:raw-latex:`</span></a>Scripts`:raw-latex:<cite>wfastcgi</cite>.py</li>
+<li>Name: QATrackHandler</li>
+</ul>
+<p>When you select OK, you will be asked if you want to add an entry to the
+FastCGI collection in IIS. Answer YES.</p>
+<p>Select the root server. Double-click on FastCGI Settings. There should
+be two entries. Remove the entry with the Full Path to
+&#8216;C:<a href="#id19"><span class="problematic" id="id20">:raw-latex:`\Python`27:raw-latex:`</span></a>python`.exe. Double-click on the
+remaining entry, with the full path to your VENV Python.exe with an
+argument to your wfastcgi.py. Click on Collection in Environment
+Variables property box and click the ... button. Add the following three
+environment variables:</p>
+<ul class="simple">
+<li>DJANGO_SETTINGS_MODULE: qatrack.settings</li>
+<li>PYTHONPATH: C:<a href="#id21"><span class="problematic" id="id22">:raw-latex:`\deploy`</span></a><a href="#id23"><span class="problematic" id="id24">:raw-latex:`\qatrackplus`</span></a></li>
+<li>WSGI_HANDLER: django.core.handlers.wsgi.WSGIHandler()</li>
+</ul>
+<p>Click OK/OK.</p>
+<p>Right-click on your site within IIS and select &#8220;Add Application&#8221;.</p>
+<ul class="simple">
+<li>Alias: Static</li>
+<li>Path:
+C:<a href="#id25"><span class="problematic" id="id26">:raw-latex:`\deploy`</span></a><a href="#id27"><span class="problematic" id="id28">:raw-latex:`\qatrackplus`</span></a><a href="#id29"><span class="problematic" id="id30">:raw-latex:`\qatrack`</span></a><a href="#id31"><span class="problematic" id="id32">:raw-latex:`\static`</span></a></li>
+</ul>
+<p>Click OK.</p>
+<p>Navigate to this static application&#8217;s Handler Mappings module and remove
+the QATrackHandler handler that was created automatically through
+inheritance.</p>
+<p>Create a local group of users (within Server Manager) to include all
+local and Active Directory users that you would like to be able to
+access your QATrack site.</p>
+<p>Within IIS Manager, For the root server, * double-click
+&#8216;Authentication&#8217; and disable all EXCEPT enable Anonymous Authentication.
+* double-click &#8216;Authorization Rules&#8217; and ensure that &#8216;All Users&#8217; are
+allowed access.</p>
+<p>For the QATrack site: * double-click &#8216;Authentication&#8217; and disable all
+EXCEPT enable Windows Authentication. * double-click &#8216;Authorization
+Rules&#8217; and create a rule to allow the QATrackUsers group access. Remove
+any other rules that might exist.</p>
+<p>For the static application * double-click &#8216;Authentication&#8217; and disable
+all EXCEPT enable Anonymous Authentication. * double-click
+&#8216;Authorization Rules&#8217; and ensure that &#8216;All Users&#8217; are allowed access.</p>
+<p>Note that the above Authentication/Authorization rules inherit from
+higher levels, so you may want to double-check that all inheritances are
+removed and that you have only the desired configuration. Also note that
+this is optional, but given that unknown users are automatically created
+within the QATrack database, I favour the idea of closing the gate here.</p>
+<p>Install python-ldap from: <a class="reference external" href="https://pypi.python.org/pypi/python-ldap/">https://pypi.python.org/pypi/python-ldap/</a>.
+Copy the &#8216;ldap&#8217; folder from
+C:<a href="#id33"><span class="problematic" id="id34">:raw-latex:`\Python`27:raw-latex:`</span></a>Lib`:raw-latex:<cite>site</cite>-packages&nbsp;into
+C:<a href="#id35"><span class="problematic" id="id36">:raw-latex:`\deploy`</span></a><a href="#id37"><span class="problematic" id="id38">:raw-latex:`\venvs`</span></a><a href="#id39"><span class="problematic" id="id40">:raw-latex:`\qatrack`</span></a><a href="#id41"><span class="problematic" id="id42">:raw-latex:`\Lib`</span></a><a href="#id43"><span class="problematic" id="id44">:raw-latex:`\site`</span></a>-packages</p>
+</div>
+<div class="section" id="creating-a-database-with-sql-server">
+<h2>5. Creating a database with SQL Server<a class="headerlink" href="#creating-a-database-with-sql-server" title="Permalink to this headline">¶</a></h2>
+<p>From the start menu find and open SQL Server Management Studio. Enter
+&#8216;localhost:raw-latex:<cite>INSTANCE</cite>&#8216; for the server name, where INSTANCE is
+the SQL server instance name that was chosen during the SQL Server
+install, and click Connect.local</p>
+<p>In the Object Explorer frame, right click the Databases folder and
+select &#8220;New Database...&#8221;.</p>
+<p>Enter &#8216;QATrackDB&#8217; as the database name and click OK.</p>
+<p>Back in the Object Explorer frame, right click on the main Security
+folder and click New Login...</p>
+<ul class="simple">
+<li>Set the login name to &#8216;IIS APPPOOL:raw-latex:<cite>QATrack</cite>&#8216;, select
+Windows Authentication. Click OK.</li>
+</ul>
+<p>Back in the Object Explorer frame, expand the qatrackdb database, right
+click on Security and select New-&gt;User.</p>
+<p>Enter &#8216;IIS APPPOOL:raw-latex:<cite>QATrack</cite>&#8216; as the User name and Login name
+and then below in the Database Role Membership select &#8216;db_datawriter&#8217;
+and &#8216;db_datareader&#8217;. Click OK.</p>
+<div class="section" id="configuring-qatrack-to-use-your-new-database">
+<h3>Configuring QATrack+ to use your new database<a class="headerlink" href="#configuring-qatrack-to-use-your-new-database" title="Permalink to this headline">¶</a></h3>
+<p>Create a file called local_settings.py in
+/c/deploy/qatrackplus/qatrack/ and add the following contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;sqlserver_ado&#39;</span><span class="p">,</span>       <span class="c1"># Add &#39;postgresql_psycopg2&#39;, &#39;mysql&#39;, &#39;sqlite3&#39; or &#39;oracle&#39;.</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;QATrackDB&#39;</span><span class="p">,</span>             <span class="c1"># Or path to database file if using sqlite3.</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                  <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost</span><span class="se">\\</span><span class="s1">QATRACK&#39;</span><span class="p">,</span>    <span class="c1"># Set to empty string for localhost.  &#39;host\\Instance&#39;</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for default. Not used with sqlite3.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">#------------------------------------------------------------------------------</span>
+<span class="c1"># Middleware</span>
+<span class="n">MIDDLEWARE_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.csrf.CsrfViewMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth.middleware.RemoteUserMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;qatrack.middleware.login_required.LoginRequiredMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;qatrack.middleware.maintain_filters.FilterPersistMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#-----------------------------------------------------------------------------</span>
+<span class="c1"># Authentication backend settings</span>
+
+<span class="n">AUTHENTICATION_BACKENDS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;qatrack.accounts.backends.WindowsIntegratedAuthenticationBackend&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># active directory settings (not required if only using ModelBackend</span>
+<span class="n">AD_DNS_NAME</span> <span class="o">=</span> <span class="s2">&quot;mydomain.ca&quot;</span>
+<span class="n">CLEAN_USERNAME_STRING</span> <span class="o">=</span> <span class="s1">&#39;MYDomainName</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="c1"># see https://groups.google.com/forum/#!topic/qatrack/EvteC2vUflQ</span>
+
+<span class="c1"># If using non-SSL use these</span>
+<span class="n">AD_LDAP_PORT</span> <span class="o">=</span> <span class="mi">389</span>
+<span class="n">AD_LDAP_URL</span> <span class="o">=</span> <span class="s1">&#39;ldap://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">AD_DNS_NAME</span><span class="p">,</span> <span class="n">AD_LDAP_PORT</span><span class="p">)</span>
+
+<span class="n">AD_SEARCH_DN</span> <span class="o">=</span> <span class="s2">&quot;DC=MYDOMAIN,DC=ca&quot;</span>
+<span class="n">AD_NT4_DOMAIN</span> <span class="o">=</span> <span class="s2">&quot;mydomain.ca&quot;</span>  <span class="c1"># Network domain that AD server is part of</span>
+
+<span class="n">AD_SEARCH_FIELDS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="s1">&#39;givenName&#39;</span><span class="p">,</span> <span class="s1">&#39;sn&#39;</span><span class="p">,</span> <span class="s1">&#39;sAMAccountName&#39;</span><span class="p">,</span> <span class="s1">&#39;memberOf&#39;</span><span class="p">]</span>
+<span class="n">AD_MEMBERSHIP_REQ</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>We will configure our new MS SQL database from the Git Bash command
+prompt. Answer &#8216;yes&#8217; and create a super user when prompted &#8211; this will
+be the first/only superuser within QATrack+:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">venvs</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">fixtures</span><span class="o">/</span><span class="n">defaults</span><span class="o">/*/*</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="wrap-up">
+<h2>6. Wrap Up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations! You should now be able to navigate to <a class="reference external" href="http://localhost">http://localhost</a>
+and see your newly created instance of QATrack+.</p>
+<p>This guide shows only one of many possible method of deploying QATrack+
+on Windows. If you&#8217;re stuck with a Windows stack it will likely work for
+you too. Post any questions on the QATrack+ Google Group if you want to
+discuss some other alternatives for deploying on Windows.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+Deploying QATrack+ with IIS, SSO/Windows Authentication, & SQL Server
+=====================================================================
+
+This guide is going to walk you through installing QATrack+ on a Windows
+2008 R2 server with IIS serving our Django application (QATrack+). SQL
+Server 2008 will be used as the database. Windows Integrated
+Authentication is used for single-sign on.
+
+The steps we will be undertaking are:
+
+1. Installing and configuring git
+2. Checkout the latest release of the QATrack+ source code from
+   bitbucket.
+3. Setting up our Python environment (including virtualenv)
+4. Configuring IIS to serve our QATrack+ site.
+5. Setting up a database with SQL Server
+6. Wrap Up
+
+The first four steps are common to the Windows/IIS/CherryPy install and
+will not be repeated here. While the use of only one web server (IIS) to
+host all aspects of QATrack is likely more robust, it has not yet been
+tested in a multi-user environment. Once testing and tweaking is
+completed, then I imagine that this wiki will be combined with the
+Win/IIS/CherryPy page into one Windows installation method.
+
+1. Installing git
+-----------------
+
+`See the Windows/IIS/CherryPy wiki <iis.html>`__
+
+2. Checkout the latest release of QATrack+ source code from bitbucket
+---------------------------------------------------------------------
+
+`See the Windows/IIS/CherryPy wiki <iis.html>`__
+
+3. Setting up our Python environment
+------------------------------------
+
+`See the Windows/IIS/CherryPy wiki <iis.html>`__ -- Note that in the last
+steps of section 3, the "pip install cherrypy" is not necessary, but
+there's no harm done if you install it either.
+
+4. Configuring IIS to Serve QATrack+
+------------------------------------
+
+*The following is an modification of the how-to from CodeSmartInc:
+http://codesmartinc.com/2013/04/12/running-django-in-iis7iis8/*
+
+Ensure that 'CGI' and 'URL Authorization' are installed within the IIS
+options.
+
+Download and install the MS Web Platform Installer (WPI) from:
+http://www.microsoft.com/web/downloads/platform.aspx
+
+Launch WPI and search for FastCGI. Add/Install "WFastCGI 2.0 Gateway for
+IIS and Python 2.7". Confirm that wfastcgi.py is in
+C::raw-latex:`\Python`27:raw-latex:`\Scripts`.
+
+Within the IIS Manager, go to your web server, and ensure that IIS has
+icons for both CGI and FastCGI.
+
+Stop/Delete/Remove the default site.
+
+Create a new site in IIS by right-clicking on Sites and selecting "Add
+Web Site". QATrack would be a good name but anything works. Select
+"C::raw-latex:`\deploy`:raw-latex:`\qatrackplus`" as the path. Confirm
+80 as the port. Host Name can be left blank. Leave the "Start Site
+Immediately" checked.
+
+Select the root server. Double click on Handler Mappings. In the upper
+right-hand side, click 'Add Module Mapping':
+
+-  Request path: \*
+-  Module: FastCgiModule
+-  Executable:
+   C::raw-latex:`\deploy`:raw-latex:`\venvs`:raw-latex:`\qatrack`:raw-latex:`\Scripts`:raw-latex:`\python`.exe\|c::raw-latex:`\Python`27:raw-latex:`\Scripts`:raw-latex:`\wfastcgi`.py
+-  Name: QATrackHandler
+
+When you select OK, you will be asked if you want to add an entry to the
+FastCGI collection in IIS. Answer YES.
+
+Select the root server. Double-click on FastCGI Settings. There should
+be two entries. Remove the entry with the Full Path to
+'C::raw-latex:`\Python`27:raw-latex:`\python`.exe. Double-click on the
+remaining entry, with the full path to your VENV Python.exe with an
+argument to your wfastcgi.py. Click on Collection in Environment
+Variables property box and click the ... button. Add the following three
+environment variables:
+
+-  DJANGO\_SETTINGS\_MODULE: qatrack.settings
+-  PYTHONPATH: C::raw-latex:`\deploy`:raw-latex:`\qatrackplus`
+-  WSGI\_HANDLER: django.core.handlers.wsgi.WSGIHandler()
+
+Click OK/OK.
+
+Right-click on your site within IIS and select "Add Application".
+
+-  Alias: Static
+-  Path:
+   C::raw-latex:`\deploy`:raw-latex:`\qatrackplus`:raw-latex:`\qatrack`:raw-latex:`\static`
+
+Click OK.
+
+Navigate to this static application's Handler Mappings module and remove
+the QATrackHandler handler that was created automatically through
+inheritance.
+
+Create a local group of users (within Server Manager) to include all
+local and Active Directory users that you would like to be able to
+access your QATrack site.
+
+Within IIS Manager, For the root server, \* double-click
+'Authentication' and disable all EXCEPT enable Anonymous Authentication.
+\* double-click 'Authorization Rules' and ensure that 'All Users' are
+allowed access.
+
+For the QATrack site: \* double-click 'Authentication' and disable all
+EXCEPT enable Windows Authentication. \* double-click 'Authorization
+Rules' and create a rule to allow the QATrackUsers group access. Remove
+any other rules that might exist.
+
+For the static application \* double-click 'Authentication' and disable
+all EXCEPT enable Anonymous Authentication. \* double-click
+'Authorization Rules' and ensure that 'All Users' are allowed access.
+
+Note that the above Authentication/Authorization rules inherit from
+higher levels, so you may want to double-check that all inheritances are
+removed and that you have only the desired configuration. Also note that
+this is optional, but given that unknown users are automatically created
+within the QATrack database, I favour the idea of closing the gate here.
+
+Install python-ldap from:
+https://pypi.python.org/pypi/python-ldap/2.4.10. Copy the 'ldap' folder
+from
+C::raw-latex:`\Python`27:raw-latex:`\Lib`:raw-latex:`\site`-packages into
+C::raw-latex:`\deploy`:raw-latex:`\venvs`:raw-latex:`\qatrack`:raw-latex:`\Lib`:raw-latex:`\site`-packages 
+
+5. Creating a database with SQL Server
+--------------------------------------
+
+From the start menu find and open SQL Server Management Studio. Enter
+'localhost:raw-latex:`\INSTANCE`' for the server name, where INSTANCE is
+the SQL server instance name that was chosen during the SQL Server
+install, and click Connect.local
+
+In the Object Explorer frame, right click the Databases folder and
+select "New Database...".
+
+Enter 'QATrackDB' as the database name and click OK.
+
+Back in the Object Explorer frame, right click on the main Security
+folder and click New Login...
+
+-  Set the login name to 'IIS APPPOOL:raw-latex:`\QATrack`', select
+   Windows Authentication. Click OK.
+
+Back in the Object Explorer frame, expand the qatrackdb database, right
+click on Security and select New->User.
+
+Enter 'IIS APPPOOL:raw-latex:`\QATrack`' as the User name and Login name
+and then below in the Database Role Membership select 'db\_datawriter'
+and 'db\_datareader'. Click OK.
+
+Configuring QATrack+ to use your new database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create a file called local\_settings.py in
+/c/deploy/qatrackplus/qatrack/ and add the following contents:
+
+::
+
+    #!python
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sqlserver_ado',       # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'QATrackDB',             # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': 'localhost\\QATRACK',    # Set to empty string for localhost.  'host\\Instance'
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+
+
+
+    #------------------------------------------------------------------------------
+    # Middleware
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.RemoteUserMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'qatrack.middleware.login_required.LoginRequiredMiddleware',
+        'qatrack.middleware.maintain_filters.FilterPersistMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+
+    #-----------------------------------------------------------------------------
+    # Authentication backend settings
+
+    AUTHENTICATION_BACKENDS = (
+        'qatrack.accounts.backends.WindowsIntegratedAuthenticationBackend',
+    )
+
+    # active directory settings (not required if only using ModelBackend
+    AD_DNS_NAME = "mydomain.ca"
+    CLEAN_USERNAME_STRING = 'MYDomainName\\' # see https://groups.google.com/forum/#!topic/qatrack/EvteC2vUflQ
+
+    # If using non-SSL use these
+    AD_LDAP_PORT = 389
+    AD_LDAP_URL = 'ldap://%s:%s' % (AD_DNS_NAME, AD_LDAP_PORT)
+
+    AD_SEARCH_DN = "DC=MYDOMAIN,DC=ca"  
+    AD_NT4_DOMAIN = "mydomain.ca"  # Network domain that AD server is part of
+
+    AD_SEARCH_FIELDS = ['mail', 'givenName', 'sn', 'sAMAccountName', 'memberOf']
+    AD_MEMBERSHIP_REQ = [] 
+
+
+
+    ALLOWED_HOSTS = ['your_server_ip_here']  # See local settings docs
+
+For details of what the ``ALLOWED_HOSTS`` setting should be, please see
+`the local\_settings.py page <../settings.html>`__.
+
+We will configure our new MS SQL database from the Git Bash command
+prompt. Answer 'yes' and create a super user when prompted -- this will
+be the first/only superuser within QATrack+:
+
+::
+
+    #!bash
+    source /c/deploy/venvs/qatrack/Scripts/activate
+    cd /c/deploy/qatrackplus/
+    python manage.py syncdb
+    python manage.py migrate
+    python manage.py loaddata fixtures/defaults/*/*
+    python manage.py collectstatic
+
+6. Wrap Up
+----------
+
+Congratulations! You should now be able to navigate to http://localhost
+and see your newly created instance of QATrack+.
+
+This guide shows only one of many possible method of deploying QATrack+
+on Windows. If you're stuck with a Windows stack it will likely work for
+you too. Post any questions on the QATrack+ Google Group if you want to
+discuss some other alternatives for deploying on Windows.

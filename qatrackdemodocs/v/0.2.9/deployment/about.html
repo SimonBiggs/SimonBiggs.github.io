@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+</a><ul>
+<li><a class="reference internal" href="#a-note-about-security">A note about security</a></li>
+<li><a class="reference internal" href="#deployment-options">Deployment Options</a></li>
+<li><a class="reference internal" href="#officialy-supported">Officialy Supported</a></li>
+<li><a class="reference internal" href="#alternatives">Alternatives</a><ul>
+<li><a class="reference internal" href="#configuring-qatrack-for-your-needs">Configuring QATrack+ for your needs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.9/deployment/about.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack">
+<h1>Deploying QATrack+<a class="headerlink" href="#deploying-qatrack" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-note-about-security">
+<h2>A note about security<a class="headerlink" href="#a-note-about-security" title="Permalink to this headline">¶</a></h2>
+<p>Before deploying QATrack+ in the clinic, please take the time to read
+about security &amp; QATrack+ on the <a class="reference external" href="security.html">security notes page</a>.
+We recommend using https for your site whenever possible.</p>
+</div>
+<div class="section" id="deployment-options">
+<h2>Deployment Options<a class="headerlink" href="#deployment-options" title="Permalink to this headline">¶</a></h2>
+<p>Django applications like QATrack+ are <a class="reference external" href="https://docs.djangoproject.com/en/dev/howto/deployment/">typically deployed on a Linux
+server using PostgreSQL or MySQL as the
+database</a>.
+If your department has Linux support/experience this is the recommended
+way to deploy QATrack+.</p>
+<p>That said deploying to a Windows Server instance using SQL Server is
+entirely feasible and many clinics choose this as their platform.</p>
+<p>Deployment on a Mac server is also relatively straightforward.</p>
+<p>Below you can find a number of guides for a variety of platforms. As of
+version 0.2.9, only the first two here are tested officially by the
+developers before release.</p>
+</div>
+<div class="section" id="officialy-supported">
+<h2>Officialy Supported<a class="headerlink" href="#officialy-supported" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="linux/lapp.html">Linux/Apache/PostgreSQL(or MySQL)</a> (recommended)</li>
+<li><a class="reference external" href="windows/iis.html">Windows Server/IIS/CherryPy/SQL Server</a> (TOHCC&#8217;s
+current setup serving 2 campuses &amp; 100+ users)</li>
+</ul>
+</div>
+<div class="section" id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="windows/iisFastCGI.html">Windows Server/IIS/SQL Server</a> (Full MS
+implementation with SSO/Integrated Authentication)</li>
+<li><a class="reference external" href="windows/wapp.html">Windows Desktop/Apache/PostgreSQL</a> (Run QATrack+
+from a Windows desktop)</li>
+<li><a class="reference external" href="osx/osxinstall.html">OS X Server(ML)/Apache/PostgreSQL</a></li>
+</ul>
+<div class="section" id="configuring-qatrack-for-your-needs">
+<h3>Configuring QATrack+ for your needs<a class="headerlink" href="#configuring-qatrack-for-your-needs" title="Permalink to this headline">¶</a></h3>
+<p>There are lots of settings in QATrack+ that can be tweaked to meet the
+specific needs of your clinic. Some of the most common ones are
+described below (in progress!). Generally the qatrack/settings.py file
+should be left alone and any customizations for your clinic should be
+placed in a qatrack/local_settings.py file.</p>
+<ul class="simple">
+<li><a class="reference external" href="active_directory.html">Using Active Directory for User
+Authentication</a></li>
+<li><a class="reference external" href="email_settings.html">QATrack+ email settings</a></li>
+<li><a class="reference external" href="settings.html">QATrack+ local settings</a></li>
+<li><a class="reference external" href="site_css.html">QATrack+ custom css rules</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

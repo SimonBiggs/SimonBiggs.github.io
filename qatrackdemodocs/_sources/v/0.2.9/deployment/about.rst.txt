@@ -1,0 +1,58 @@
+Deploying QATrack+
+==================
+
+A note about security
+~~~~~~~~~~~~~~~~~~~~~
+
+Before deploying QATrack+ in the clinic, please take the time to read
+about security & QATrack+ on the `security notes page <security.html>`__.
+We recommend using https for your site whenever possible.
+
+Deployment Options
+~~~~~~~~~~~~~~~~~~
+
+Django applications like QATrack+ are `typically deployed on a Linux
+server using PostgreSQL or MySQL as the
+database <https://docs.djangoproject.com/en/dev/howto/deployment/>`__.
+If your department has Linux support/experience this is the recommended
+way to deploy QATrack+.
+
+That said deploying to a Windows Server instance using SQL Server is
+entirely feasible and many clinics choose this as their platform.
+
+Deployment on a Mac server is also relatively straightforward.
+
+Below you can find a number of guides for a variety of platforms. As of
+version 0.2.9, only the first two here are tested officially by the
+developers before release.
+
+Officialy Supported
+~~~~~~~~~~~~~~~~~~~
+
+-  `Linux/Apache/PostgreSQL(or MySQL) <linux/lapp.html>`__ (recommended)
+-  `Windows Server/IIS/CherryPy/SQL Server <windows/iis.html>`__ (TOHCC's
+   current setup serving 2 campuses & 100+ users)
+
+Alternatives
+~~~~~~~~~~~~
+
+-  `Windows Server/IIS/SQL Server <windows/iisFastCGI.html>`__ (Full MS
+   implementation with SSO/Integrated Authentication)
+-  `Windows Desktop/Apache/PostgreSQL <windows/wapp.html>`__ (Run QATrack+
+   from a Windows desktop)
+-  `OS X Server(ML)/Apache/PostgreSQL <osx/osxinstall.html>`__
+
+Configuring QATrack+ for your needs
+-----------------------------------
+
+There are lots of settings in QATrack+ that can be tweaked to meet the
+specific needs of your clinic. Some of the most common ones are
+described below (in progress!). Generally the qatrack/settings.py file
+should be left alone and any customizations for your clinic should be
+placed in a qatrack/local\_settings.py file.
+
+-  `Using Active Directory for User
+   Authentication <active_directory.html>`__
+-  `QATrack+ email settings <email_settings.html>`__
+-  `QATrack+ local settings <settings.html>`__
+-  `QATrack+ custom css rules <site_css.html>`__

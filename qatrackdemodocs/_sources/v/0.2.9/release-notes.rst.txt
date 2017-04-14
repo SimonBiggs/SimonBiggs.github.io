@@ -1,0 +1,209 @@
+v0.2.9 Release Notes
+--------------------
+
+-  Multiple choices tests now store their results `as the test value
+   rather than the
+   index <https://bitbucket.org/tohccmedphys/qatrackplus/issues/162/adding-new-multiple-choice-options-can>`__
+   of the choice. It is important that you update any composite tests
+   that rely on multiple choice test results after this upgrade (see
+   Upgrade Instructions below)
+-  Unit modalities `are now free text
+   fields <https://bitbucket.org/tohccmedphys/qatrackplus/issues/110/change-unit-modality-to-free-text-field>`__
+   instead of forcing you to select particle/energy.
+-  If you attempt to access a QATrack+ page but are logged out, `you
+   will be redirected to that page after logging
+   in <https://bitbucket.org/tohccmedphys/qatrackplus/issues/154/redirect-after-login>`__
+-  You can now add ``REVIEW_DIFF_COL = True`` to your
+   `local\_settings.py <https://bitbucket.org/tohccmedphys/qatrackplus/wiki/v/0.2.9/deployment/settings.html>`__
+   file to `enable an extra column showing the difference from
+   reference <https://bitbucket.org/tohccmedphys/qatrackplus/issues/155/add-deviation-from-reference-to-testlist>`__
+   when reviewing tests list
+-  Users sessions will be `renewed anytime they are
+   active <https://bitbucket.org/tohccmedphys/qatrackplus/issues/165/refresh-session-after-any-activity-rather>`__
+   on the QATrack+ site rather than just when they perform QA (prevents
+   being logged out automatically)
+-  Changing a Test's type is now limited to `only allow changes to
+   similar test
+   types <https://bitbucket.org/tohccmedphys/qatrackplus/issues/168/changes-between-test-types-needs-to-be>`__
+   (e.g. numerical -> composite is allowed but numerical -> string is
+   not)
+-  By default `inactive test lists are no longer
+   shown <https://bitbucket.org/tohccmedphys/qatrackplus/issues/170/add-filter-to-not-display-by-default>`__
+   in the default review list
+-  Bulk deletion of UnitTestInfo objects in the admin `has been
+   disabled <https://bitbucket.org/tohccmedphys/qatrackplus/issues/171/disable-bulk-delete-of-unittestinfo>`__
+   to prevent possible data loss
+-  Only active UnitTestInfo objects will be `shown in the
+   admin <https://bitbucket.org/tohccmedphys/qatrackplus/issues/172/make-unittestinfo-list-in-admin-only-show>`__
+   by default
+-  You can now `view test list
+   comments <https://bitbucket.org/tohccmedphys/qatrackplus/issues/175/view-comments>`__
+   in a pop over by hovering your mouse over the comment icon
+-  You can now filter Test objects in the admin by whether or not `they
+   belong to any active
+   TestList's <https://bitbucket.org/tohccmedphys/qatrackplus/issues/177/test-search>`__
+   or not
+-  If a comment is included when performing a test list than `manual
+   review will be
+   required <https://bitbucket.org/tohccmedphys/qatrackplus/issues/179/auto-review-exception-for-tests-with>`__
+   regardless of auto-review settings
+-  Inactive tests can now be `filtered on the charts
+   page <https://bitbucket.org/tohccmedphys/qatrackplus/issues/183/filter-out-inactive-tests-in-the-chart>`__
+-  Several charting tweaks, including improved handling of None
+   tolerance values in relative charts and the ability to filter for
+   inactive TestLists
+-  There are many new filters available in the admin section
+-  Permissions for reviewing and viewing the program overview `have been
+   split <https://bitbucket.org/tohccmedphys/qatrackplus/issues/194/separate-permisssions-for-review-and>`__
+-  Individual tests can now be configured to `always allow skipping
+   without a
+   comment <https://bitbucket.org/tohccmedphys/qatrackplus/issues/195/skipping-without-comment-for-some-but-not>`__
+   (regardless of the users permissions)
+-  You can now `set a custom
+   label <https://bitbucket.org/tohccmedphys/qatrackplus/issues/198/allow-customization-of-testlist-cycle-drop>`__
+   for the "Choose Day" drop down label when performing a test list from
+   a cycle.
+-  You can now `customize the names for Tolerance
+   labels <https://bitbucket.org/tohccmedphys/qatrackplus/wiki/v/0.2.9/deployment/settings.html>`__
+   (Not Done, OK, Tolerance, Action, and No Tol Set).
+-  You can now sort test lists by due date
+-  You can now `customize the test status
+   display <https://bitbucket.org/tohccmedphys/qatrackplus/issues/200/tolerance-action-level-naming>`__
+   (default remains Act/Tol/OK)
+-  Test value input fields should now be more `mobile device
+   friendly <https://bitbucket.org/tohccmedphys/qatrackplus/issues/210/change-text-input-type-to-number-for>`__
+-  pydicom is now available in the `default calculation
+   context <https://bitbucket.org/tohccmedphys/qatrackplus/issues/219/add-pydicom-to-default-calculation-context>`__
+   (along with numpy & scipy)
+-  You can now filter test lists to review `by which groups the test
+   lists are visible
+   to <https://bitbucket.org/tohccmedphys/qatrackplus/issues/227/visible-to>`__
+
+A more complete list of bugs fixed and features added can be found `in
+the issues
+tracker <https://bitbucket.org/tohccmedphys/qatrackplus/issues?milestone=0.2.9>`__!
+
+Deprecation Notices
+~~~~~~~~~~~~~~~~~~~
+
+As QATrack+, Python & Django and the web continue to evolve,
+occassionally we need to deprecate some of the versions of Python & web
+browsers we support. The next major release of QATrack+ will no longer
+officially support the following items:
+
+-  Python 2.6 (Python 2.7 & 3.4+ only): In order to provide support for
+   Python 3 we will be dropping support for Python 2.6
+-  IE7-IE10 (IE 11+ Only): IE7-IE10 are no longer supported by Microsoft
+   and we will no longer be testing these platforms.
+
+Upgrade Instructions
+--------------------
+
+If you are uncomfortable with doing the upgrade yourself, or would like
+assistance for any reason, please email randle.taylor@gmail.com and I
+will be more than happy to set up a time to be on call to help you
+troubleshoot or to do a remote support session and walk through the
+upgrade process with you. It is much easier for me to schedule time to
+help you before you start your upgrade, then it is to drop everything
+without warning and help you if get stuck on one of these steps!
+
+::
+
+    Note: this release introduces some database schema changes. The database migrations have
+    been tested on SQLServer, PostgreSQL, MySQL & SQLite but it is important that you:
+
+    BACK UP YOUR DATABASE BEFORE ATTEMPTING THIS UPGRADE
+
+**If any of the following steps results in an error, stop and figure out
+why before carrying on to the next step!**
+
+Linux/Apache Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  Back up your database
+2.  ``source ~/venvs/qatrack/bin/activate``
+3.  ``cd ~/web/qatrackplus``
+4.  ``git rm --cached qatrack/wsgi.py``
+5.  ``git pull origin master``
+6.  ``pip install --upgrade pip``
+7.  ``pip install -r requirements/base.txt``
+8.  ``python manage.py syncdb``
+9.  ``python manage.py migrate``
+10. ``python manage.py collectstatic``
+11. Open your qatrack/local\_settings.py file and add the line:
+    ``ALLOWED_HOSTS = ['your_servername_or_ip_here']`` e.g.
+    ``ALLOWED_HOSTS = ['52.123.4.9']`` or
+    ``ALLOWED_HOSTS = ['YOURHOSTNAME']``
+12. ``sudo service apache2 restart``
+
+Windows / IIS
+~~~~~~~~~~~~~
+
+1.  Back up your database
+2.  Open a git bash shell
+3.  export WINPTY=$(which winpty)
+4.  ``source /c/deploy/venvs/qatrack/Scripts/activate``
+5.  ``cd /c/deploy/qatrackplus``
+6.  ``git rm --cached qatrack/wsgi.py``
+7.  ``git pull origin master``
+8.  ``pip install --upgrade pip``
+9.  ``pip install -r requirements/base.txt``
+10. ``pip install -r requirements/win.txt`` # Windows only!
+11. ``$WINPTY python manage.py syncdb``
+12. ``$WINPTY python manage.py migrate``
+13. ``$WINPTY python manage.py collectstatic``
+14. Open your qatrack/local\_settings.py file and add the line:
+    ``ALLOWED_HOSTS = ['127.0.0.1', 'localhost']``
+15. Restart the QATrack+ app (i.e. the CherryPy service)
+
+If when you load a page in QATrack+ you see an error you may need to
+enable ``use_legacy_date_fields`` for the SQL Server driver. Open your
+local\_settings.py file and add the ``OPTIONS`` section shown below:
+
+::
+
+    #!python
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sqlserver_ado',
+            'NAME': '*******',        
+            'USER': '********', 
+            'PASSWORD': '******',
+            'HOST': '******',  
+            'PORT': '',  
+            # Add this options section!
+            'OPTIONS': {
+                'use_legacy_date_fields': True
+            }
+        }
+    }
+
+General
+~~~~~~~
+
+1. This last step only applies to those of you who have composite tests
+   that rely on the current value of a multiple choice test. Since this
+   update `changes the way multiple choice values are
+   stored <https://bitbucket.org/tohccmedphys/qatrackplus/issues/162/adding-new-multiple-choice-options-can>`__
+   you need to update the calculation procedures for these tests. For
+   example if your calculation procedure currently looks like this:
+
+   ::
+
+       test = Test.objects.get(name="Dosemeter")
+       choices = test.choices.split(",")
+       choice_idx = choices.index(dosemeter)
+
+       previous_results = TestInstance.objects.filter(
+           unit_test_info__test__slug="your_test_macro_name",
+           value = choice_idx,
+       ).latest("work_completed")
+
+   you will need to modify it slightly like so:
+
+   ::
+
+       previous_results = TestInstance.objects.filter(
+           unit_test_info__test__slug="your_test_macro_name",
+           string_value = dosemeter,
+       ).latest("work_completed")

@@ -1,0 +1,377 @@
+Deploying QATrack+ with OS X Server's Built-in Apache & PostgreSQL
+==================================================================
+
+This guide is going to walk you through installing QATrack+ on an OS X
+server with Apache as the web server and PostgreSQL as the database.
+
+The steps we will be undertaking are:
+
+1.  Setting up and configuring OS X
+2.  Installing git
+3.  Checking out the QATrack+ source code
+4.  Setting up the website
+5.  Setting up our python environment
+6.  Setting up Apache & mod\_wsgi
+7.  Setting up a database
+8.  Final config of QATrack+
+9.  Temporary Workaround: Downgrade Django
+10. Final word
+
+I will be using OS X 10.8 Server (Mountain Lion Server) for this guide.
+
+This guide assumes you have at least a basic level of familiarity with
+Linux/UNIX and the command line.
+
+1. Setting up and configuring OS X
+----------------------------------
+
+Install OS X, OS X Server (if not yet done, then through the App Store),
+and then XCode (through the App Store). I believe that Xcode is required
+for its compilers, but you could install gcc and/or install other
+dependencies if you prefer. Xcode is also required to install Fink.
+
+Install the command line tools for Xcode. To do this open Xcode, enter
+preferences, downloads, and install.
+
+Install java, a requirement for Fink:
+
+::
+
+    sudo javac
+
+Install gfortran from `Install gfortran from gfortran-mlion.tar.gz
+(4.8) <http://prdownloads.sourceforge.net/hpc/gfortran-mlion.tar.gz?download>`__
+
+::
+
+    sudo tar -xvf gfortran-mlion.tar -C /
+
+2. Installing git
+-----------------
+
+Git is the version control software that QATrack+ uses. To install git
+on OS X, download GIT from http://git-scm.com/download/mac and install
+the .dmg package. (used Git 1.8.2.1 for this install).
+
+Note that the install requires that you allow applications downloaded
+from anywhere. This is a setting within System Preferences --> Security
+& Privacy on OS X.
+
+Next setup your git installation:
+
+::
+
+    #!bash
+    git config --global user.name "YourName"
+    git config --global user.email "YourEmail@email.ca"
+
+3. Checking out the QATrack+ source code
+----------------------------------------
+
+Now that we have git installed we can proceed to grab the latest version
+of QATrack+. To checkout the code enter the following commands:
+
+::
+
+    cd /Library/Server/Web/Data/WebApps/
+    sudo git clone https://randlet@bitbucket.org/tohccmedphys/qatrackplus.git
+    Cloning into 'qatrackplus'...
+    remote: Counting objects: 7727, done.
+    remote: Compressing objects: 100% (2248/2248), done.
+    remote: Total 7727 (delta 5519), reused 7192 (delta 5128)
+    Receiving objects: 100% (7727/7727), 2.17 MiB, done.
+    Resolving deltas: 100% (5519/5519), done.
+
+4. Setting up the website
+-------------------------
+
+I don't know why, but apache within OS X doesn't deal well with the
+wsgi.py file. I believe that it may be as simple as expecting a .wsgi
+suffix to the file.
+
+A simple workaround:
+
+::
+
+    cd /Library/Server/Web/Data/WebApps/qatrackplus/qatrack/
+    sudo cp wsgi.py qatrack.wsgi
+
+::
+
+    sudo nano /Library/Server/Web/Config/apache2/httpd_qatrack.conf
+
+::
+
+    # Options ExecCGI
+    # Options +Indexes
+
+    WSGIScriptAlias /  /Library/Server/Web/Data/WebApps/qatrackplus/qatrack/qatrack.wsgi
+    #WSGIPythonPath /
+    WSGIApplicationGroup %{GLOBAL}
+
+
+    <Directory /Library/Server/Web/Data/WebApps/qatrackplus>
+    Order deny,allow
+    Allow from all
+    </Directory>
+
+    alias /static /Library/Server/Web/Data/WebApps/qatrackplus/qatrack/static
+
+(Exit, save file (buffer)).
+
+::
+
+    sudo nano /Library/Server/Web/Config/apache2/webapps/com.qatrack.webapp.qatrack.plist
+
+enter the following text:
+
+::
+
+    <?xml version="1.0" encoding="UTF-7"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+            <key>name</key>
+            <string>com.qatrack.webapp.qatrack</string>
+            <key>displayName</key>
+            <string>QATrackPlus WebApp</string>
+            <key>launchKeys</key>
+            <array/>
+            <key>proxies</key>
+            <dict/>
+            <key>installationIndicatorFilePath</key>
+            <string>/Library/Server/Web/Data/WebApps/qatrackplus/qatrack/qatrack.wsgi</string>
+            <key>includeFiles</key>
+            <array>
+                    <string>/Library/Server/Web/Config/apache2/httpd_qatrack.conf</string>
+            </array>
+            <key>requiredModuleNames</key>
+            <array>
+                    <string>wsgi_module</string>
+            </array>
+    </dict>
+    </plist>
+
+Exit, save file (buffer).
+
+Open the OS X Server App. Select Websites
+
+There may be a default website created on your server's host. Assuming
+that you don't want to keep this, remove it so that you are left with
+just 'Server Website' and 'Server Website (SSL)'. To remove it, just
+select it and click on the minus sign.
+
+Ensure that 'Enable Python web applications' is enabled, and of course,
+that the Websites server is turned on.
+
+Select Server Website and click the pencil to edit settings. Click Edit
+Advanced Settings... Disable the Python "Hello World" app Enable the
+QATrackPlus WebApp
+
+5. Setting up our python environment
+------------------------------------
+
+If you wish to install virtualenv, this would be the time to do so.
+Follow the instructions that are shown for the linux instructions (and
+please update this wiki). For this test environment I am operating a
+single virtual server therefore am not in need of having multiple Python
+environments.
+
+::
+
+    sudo easy_install pip
+
+Change back to the location where we checked out the source code:
+
+::
+
+    cd /Library/Server/Web/Data/WebApps/qatrackplus/
+
+In that directory there is a directory with text files
+(requirements/base.txt, requirements/optional.txt) that list the
+required Python packages for QATrack+. A little prep work is required to
+get them to install correctly. After you install all the required libs:
+
+::
+
+    sudo pip install -r requirements/base.txt
+    sudo pip install scipy
+    sudo pip install -r requirements/optional.txt
+
+6. Setting up Apache & mod\_wsgi
+--------------------------------
+
+The next step to take is to configure the Apache web server. Apache and
+mod\_wsgi can be installed with the following commands:
+
+::
+
+    sudo nano /Library/Server/Web/Data/WebApps/qatrackplus/qatrack/qatrack.wsgi
+
+::
+
+    """
+    WSGI config for qatrack project.
+
+    This module contains the WSGI application used by Django's development server
+    and any production WSGI deployments. It should expose a module-level variable
+    named ``application``. Django's ``runserver`` and ``runfcgi`` commands discover
+    this application via the ``WSGI_APPLICATION`` setting.
+
+    Usually you will have the standard Django WSGI application here, but it also
+    might make sense to replace the whole Django WSGI application with a custom one
+    that later delegates to the Django one. For example, you could introduce WSGI
+    middleware here, or combine a Django application with an application of another
+    framework.
+
+    """
+    import sys, os
+    sys.path.append('/Library/Server/Web/Data/WebApps')
+    sys.path.append('/Library/Server/Web/Data/WebApps/qatrackplus')
+
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "qatrack.settings")
+
+    # This application object is used by any WSGI server configured to use this
+    # file. This includes Django's development server, if the WSGI_APPLICATION
+    # setting points here.
+    from django.core.wsgi import get_wsgi_application
+    application = get_wsgi_application()
+
+    # Apply WSGI middleware here.
+    # from helloworld.wsgi import HelloWorldApplication
+    # application = HelloWorldApplication(application)
+
+::
+
+    sudo serveradmin stop web
+    sudo serveradmin start web
+
+7. Setting up a database
+------------------------
+
+::
+
+    pip install psycopg2
+
+Start the embedded Postgres:
+
+::
+
+    sudo serveradmin start postgres
+
+Then:
+
+::
+
+    sudo -u _postgres psql template1
+
+::
+
+    template1=# CREATE USER qatrack with PASSWORD 'qatrackpass';
+    CREATE ROLE
+
+    template1=# CREATE DATABASE qatrackdb;
+    CREATE DATABASE
+
+    template1=# GRANT ALL PRIVILEGES ON DATABASE qatrackdb to qatrack;
+    GRANT
+    template1=\q#
+
+::
+
+    sudo serveradmin stop postgres
+    sudo serveradmin start postgres
+
+8. Final config of QATrack+
+---------------------------
+
+Next (we're almost done, I promise!) we need to tell QATrack+ how to
+connect to our database.
+
+Create a file called local\_settings.py in
+/Library/Server/Web/Data/WebApps/qatrackplus/qatrack/ and put the
+following Python code in it:
+
+::
+
+    TIME_ZONE = 'America/Halifax'
+
+    MEDIA_URL = '/qatrackplus/media/'
+    # STATIC_URL = '/qatrack/static/'
+    # LOGIN_EXEMPT_URLS = [r"^accounts/",]
+    LOGIN_REDIRECT_URL = '/qatrackplus/qa/unit/'
+    LOGIN_URL = "/qatrackplus/accounts/login/"
+
+    FIXTURE_DIRS = (
+        'qatrack/fixtures/',
+    )
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'qatrackdb',                      # Or path to database file if using sqlite3.
+            'USER': 'qatrack',                      # Not used with sqlite3.
+            'PASSWORD': 'qatrackpass',                  # Not used with sqlite3.
+            'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+
+    ALLOWED_HOSTS = ['your_server_ip_here']  # See local settings docs
+
+For details of what the ``ALLOWED_HOSTS`` setting should be, please see
+`the local\_settings.py page <../settings.html>`__.
+
+And then create the tables in your database via sycndb/migrate
+
+::
+
+    #!bash
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+
+We also need to collect all our static files in a single location for
+Apache to serve (answer 'yes' when asked)
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py collectstatic
+
+9. Temporary Workaround: Downgrade Django
+-----------------------------------------
+
+from the google groups (thanks Doug & Randle):
+
+::
+
+        pip uninstall django
+        pip install django==1.4
+
+This step will be removed at some point...
+
+BUT: pip install django==1.4 has the line: Requested django==1.4, but
+installing version 1.5.1.
+
+SO: downloaded and installed Django from
+https://www.djangoproject.com/download/
+
+::
+
+    tar xzvf Django-1.4.x.tar.gz
+    cd Django-1.4.x
+    sudo python setup.py install
+
+10. Final word
+--------------
+
+There are a lot of steps getting everything set up so don't be
+discouraged if everything doesn't go completely smoothly! If you run
+into trouble, please get in touch with me on the `QATrack+ mailing
+list <https://groups.google.com/forum/?fromgroups#!forum/qatrack>`__ and
+I can help you out.
+
+R. Taylor - Feb 2012
+
+E. Reynard - May 2013

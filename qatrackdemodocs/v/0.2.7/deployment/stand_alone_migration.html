@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>!.html &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">!.html</a></li>
+<li><a class="reference internal" href="#id9">!.html</a></li>
+<li><a class="reference internal" href="#bash">!bash</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>!.html</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.7/deployment/stand_alone_migration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>If you spent a lot of time configuring the standalone demo version of
+QATrack+ and would like to migrate your test configuration to a
+permanent QATrack+ installation you can take the following steps (after
+you&#8217;ve completed the initial setup of your permanent server).</p>
+<ul class="simple">
+<li>Open a Windows command prompt and navigate to the location of your
+standalone QATrack+ installation e.g.: ```</li>
+</ul>
+<div class="section" id="html">
+<h1>!.html<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h1>
+<p>cd
+&#8220;C:<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\Users`</span></a><a href="#id3"><span class="problematic" id="id4">:raw-latex:`\rataylor`</span></a><a href="#id5"><span class="problematic" id="id6">:raw-latex:`\Desktop`</span></a><a href="#id7"><span class="problematic" id="id8">:raw-latex:`\qatrackplus`</span></a>-portable-0.2.7&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">Type</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h1>!.html<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h1>
+<p>&#8220;Portable Python 2.7.3.1:raw-latex:<cite>App</cite><a href="#id10"><span class="problematic" id="id11">:raw-latex:`\python`</span></a>.exe&#8221;
+qatrackplus:raw-latex:<cite>manage</cite>.py dumpdata &#8211;natural &#8211;indent=4 -e
+contenttypes -e auth.Permission &gt; data.json</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>The data.json file will now contain the contents of your demo database and is ready to be loaded into your production database using the following steps (make sure you activate your QATrack+ virtualenv first).
+
+* Copy the data.json file to the root directory of your permanent QATrack+ installation.
+* Enter the commands (if you did any initial test/unit configuration on your permanent database prior to this, the first command will *IRRETRIEVABLY DELETE IT*! If you&#39;re starting with a fresh production installation this isn&#39;t a concern...):
+</pre></div>
+</div>
+</div>
+<div class="section" id="bash">
+<h1>!bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h1>
+<p>python manage.py reset qa units # answer yes, yes &lt;- This DELETES
+existing test/unit config in db python manage.py loaddata data.json</p>
+<p>``` and you&#8217;re done!</p>
+<p>If you run into any trouble with this process, please post to the
+<a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/qatrack">Google
+Group</a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

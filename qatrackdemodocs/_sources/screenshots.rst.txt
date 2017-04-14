@@ -1,0 +1,150 @@
+QATrack+ Screenshots
+====================
+
+Here you will find a selection of screenshots showing both the front end
+interface and the administrators interface.
+
+Main User Interface
+-------------------
+
+Choosing a unit to perform QA on
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: images/screenshots/choose_unit.png
+   :alt: Choosing a unit to perform QA on in QA
+
+   Choosing a unit to perform QA on in QA
+
+Choosing a test list to perform
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tables of test lists contain information about when the test list was
+last performed, when it is next due and the status of the tests from the
+last qa session
+
+.. figure:: images/screenshots/choose_list.png
+   :alt: Choosing a test list to perform
+
+   Choosing a test list to perform
+
+Performing a test list
+~~~~~~~~~~~~~~~~~~~~~~
+
+The interface for performing test lists. The image below demonstrates
+simple numerical inputs as well as calculated values (e.g.
+temperature-pressure correction and dose)
+
+.. figure:: images/screenshots/list_interface.png
+   :alt: Performing QA
+
+   Performing QA
+
+Test procedures can be embedded using plain text, html, or links to
+external documents
+
+.. figure:: images/screenshots/test_procedure.png
+   :alt: Embedded Test Procedures
+
+   Embedded Test Procedures
+
+Overview of units QA program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are multiple options for keeping tabs on the current status of
+your QA program, including an overview page summarizing the current
+status of QA on all units.
+
+.. figure:: images/screenshots/unit_overview.png
+   :alt: QA Overview image
+
+   QA Overview image
+
+Review Test List History
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Choose a QA session from the past to review.
+
+.. figure:: images/screenshots/list_history.png
+   :alt: List of historical QA sessions
+
+   List of historical QA sessions
+
+Review an individual QA session.
+
+.. figure:: images/screenshots/list_review.png
+   :alt: Review a QA session
+
+   Review a QA session
+
+Data plotting
+~~~~~~~~~~~~~
+
+QATrack+ has a convenient interface for plotting and trending historical
+QA data. Both basic plots and statistical process control charts are
+available.
+
+.. figure:: images/screenshots/trending.png
+   :alt: Basic Trending Functions
+
+   Basic Trending Functions
+
+.. figure:: images/screenshots/process_control.png
+   :alt: Statistical Process Control Charts
+
+   Statistical Process Control Charts
+
+Administrators Interface
+------------------------
+
+QATrack+ has a built in administrators backend for defining tests,
+references & tolerances, and managing users and groups.
+
+.. figure:: images/screenshots/main_admin_page.png
+   :alt: Main Admin Page
+
+   Main Admin Page
+
+.. figure:: images/screenshots/manage_user.png
+   :alt: Manage user
+
+   Manage user
+
+Defining Tests
+~~~~~~~~~~~~~~
+
+The interface for defining tests is simple to use and allows you to
+choose between a number of different test types.
+
+.. figure:: images/screenshots/define_test.png
+   :alt: Defining a new test
+
+   Defining a new test
+
+Test values can be computed from the results of other tests using the
+Composite test type.
+
+.. figure:: images/screenshots/composite_test.png
+   :alt: Defining a new test
+
+   Defining a new test
+
+Creating Test Lists
+~~~~~~~~~~~~~~~~~~~
+
+Lists of tests to be performed together are easily defined.
+
+.. figure:: images/screenshots/define_test_list.png
+   :alt: Defining a new test list
+
+   Defining a new test list
+
+References & Tolerances
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Setting and updating reference and tolerance values for a test on a unit
+is easily achieved through the admin interface.
+
+.. figure:: images/screenshots/set_ref_tol.png
+   :alt: Setting references and tolerances
+
+   Setting references and tolerances

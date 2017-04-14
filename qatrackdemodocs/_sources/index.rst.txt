@@ -1,0 +1,99 @@
+QATrack+ Documentation
+======================
+
+*Note: This wiki should be considered a `living
+document <http://en.wikipedia.org/wiki/Living_document>`__. Signing up
+for a `free
+account <https://bitbucket.org/account/signup/?plan=5_users>`__ and
+adding content, correcting errors or editing existing content and
+contributing new `tutorials <admin/tutorials/tutorials.html>`__ is
+encouraged!*
+
+-  Geting Started
+-  Evaluating QATrack+
+-  Implementing QATrack+ in the Clinic
+-  Contributing to the QATrack+ project
+
+-  Users & Administrators documentation:
+
+   -  `Version 0.2.9 <v/0.2.9/home.html>`__
+   -  `Version 0.2.8 <v/0.2.8/home.html>`__
+   -  `Version 0.2.7 <v/0.2.7/home.html>`__
+
+Getting Started with QATrack+
+-----------------------------
+
+Since QATrack+ is a web application (i.e. a client/server configuration)
+getting it installed and set up correctly is not as simple as running a
+one-click installer: it will require a time investment and some
+technical skills (however there is a single file download for evaluating
+QATrack+ described below). The process will be different depending on
+the specific requirements of your clinic and the platform (Operating
+System/server software/database) you choose but to help you get started,
+we are providing a number of tutorials on how to deploy QATrack+ on
+various platforms. If you want some help deciding what platform to use
+or need some help installing and configuring QATrack+, please post in
+the `QATrack+ discussion group/mailing
+list <https://groups.google.com/forum/?fromgroups#!forum/qatrack>`__ and
+I will be happy to help out however I can!
+
+Evaluating QATrack+
+~~~~~~~~~~~~~~~~~~~
+
+If you want to take QATrack+ for a test drive and have access to a
+Windows computer, the easiest path is to `download the latest
+version <https://bitbucket.org/tohccmedphys/qatrackplus/downloads>`__ of
+the standalone QATrack+ program. Simply download a file, unzip it
+somewhere and run the *qatrackplus.bat* file. This will start a simple
+web server with an embedded database and allow you to try out QATrack+
+on your desktop. More details are available in the README.txt file
+included with that download.
+
+This standalone version should be used for testing and getting a feel
+for the latest version of QATrack+. Due to limitations in its database
+and webserver, **the standalone version is not meant to be used in
+situations where multiple users will be accessing it at the same time**
+(i.e. most clinical settings).
+
+Implementing QATrack+ in the Clinic
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once you have decided that you would like to use QATrack+ the first
+thing to do is `join the QATrack+ discussion
+group <https://groups.google.com/forum/?fromgroups#!forum/qatrack>`__!
+Obviously this isn't mandatory, but it is your best avenue for getting
+implementation advice, help with configuration, discussing new features
+etc. Plus, we would love to hear where QATrack+ is being used!
+
+Deploying QATrack+
+
+Since QATrack+ can be deployed on multiple OS's (Windows/Linux/Mac) with
+multiple different databases (PostgreSQL, MySQL, Oracle, MSSQL) you
+should first determine (in consultation with your IT department if
+appropriate ) what the most appropriate platform for running QATrack+ in
+your clinic is.
+
+The recommended platform for running QATrack+ is using a Linux server
+with PostgreSQL as a database. That said, you are certainly free to
+choose another platform that either you or your IT department are more
+comfortable with. In fact, due to the hospitals IT infrastructure, at
+The Ottawa Hospital Cancer Centre, we use a Microsoft based stack based
+on Windows Server 2008 & MS SQL Server.
+
+A number of installation & deployment guides are currently being worked
+on and you can find them on our `deployment
+page <v/0.2.9/deployment/about.html>`__.
+
+Contributing to QATrack+
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+We would love to have people from outside TOHCC contributing to the
+QATrack+ project. You do not need to be a programmer to help out with
+the project! Some ideas on ways to contribute include:
+
+-  `Report bugs or submit ideas for
+   features <https://bitbucket.org/tohccmedphys/qatrackplus/issues>`__
+-  `Help out with development <v/0.2.9/developers/about.html>`__
+-  `Translations <https://groups.google.com/forum/?fromgroups#!topic/qatrack/WOcWcm_VRs8>`__
+-  Contribute new, or edit existing `documentation <edit/Home>`__ and
+   `tutorials <v/0.2.9/admin/tutorials/tutorials.html>`__

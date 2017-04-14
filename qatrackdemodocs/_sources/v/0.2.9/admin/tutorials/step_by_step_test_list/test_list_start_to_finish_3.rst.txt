@@ -1,0 +1,107 @@
+A step-by-step introduction to QATrack+ administration (continued)
+==================================================================
+
+`(Previous Page) <test_list_start_to_finish_2.html>`__
+
+Creating a new user group
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Return to the main admin page and click on the **Groups** link under the
+**Auth** section and then click the **Add group** button in the top
+right.
+
+Set the **Name** field to ``Physics`` and choose the following set of
+permissions:
+
+-  **qa \| test instance \| Can view test history**
+-  **qa \| test instance \| Can view charts of test history**
+-  **qa \| test instance \| Can review tests**
+-  **qa \| test instance \| Can review & approve self-performed tests**
+-  **qa \| test instance \| Can skip without comment**
+-  **qa \| test list instance \| Can add test list instance**
+-  **qa \| test list instance \| Can perform subset of tests**
+-  **qa \| test list instance \| Can view previously completed
+   instances**
+-  **qa \| test list instance \| Can change test list instance**
+-  **qa \| frequency \| Choose QA by Frequency**
+-  **qa \| test list instance \| Can override date**
+-  **qa \| unit test info \| Can view Refs and Tols**
+-  **qa \| unit test collection \| Can view program overview**
+-  **qa \| unit test collection \| Can view TLI and UTC not visible to
+   user's groups**
+
+Your group should look like the following:
+
+.. figure:: physics_group.png
+   :alt: defining a physics group
+
+   defining a physics group
+
+Click **Save** and you will now see your new group in the listings page.
+
+.. figure:: group_listing.png
+   :alt: group listings
+
+   group listings
+
+The last step is to add yourself to the ``Physics`` group. Visit your
+user profile by going to the **Users** section under the **Auth**
+section and clicking on your username.
+
+.. figure:: edit_user.png
+   :alt: choose a user to edit
+
+   choose a user to edit
+
+On the next page find the **Groups** select box and select *Physics*.
+
+.. figure:: select_group.png
+   :alt: selecting a group
+
+   selecting a group
+
+Click on **Save** to finalize the addition of yourself to the *Physics*
+group.
+
+Creating test statuses
+~~~~~~~~~~~~~~~~~~~~~~
+
+We are going to create two test statuses; first an ``Unreviewed`` status
+which will be the default status given to test data when they are
+performed and second an ``Approved`` status that can be applied to the
+tests after they have been reviewed.
+
+From the main admin page click on the **Statuses** link under the **QA**
+section and click the **Add test instance status** button in the top
+right.
+
+Give the status a **Name** of ``Unreviewed``, a **Slug** of
+``unreviewed`` and a description of
+``Default status for tests which have just been completed.``. Next,
+check off the **Is default** checkbox and then click **Save and add
+another**.
+
+.. figure:: unreviewed.png
+   :alt: Unreviewed status
+
+   Unreviewed status
+
+Create an ``Approved`` status similar to the ``Unreviewed`` status but
+this time leave the **Is default** box unchecked and also uncheck the
+**Requires review** checkbox. Click **Save** when you're finished.
+
+.. figure:: reviewed.png
+   :alt: Reviewed status
+
+   Reviewed status
+
+You should now see your two statuses in the listing.
+
+.. figure:: test_statuses.png
+   :alt: test status listings
+
+   test status listings
+
+Now that we have done the initial configuration we can begin to cover
+test and test list configuration. This is covered in the `next step of
+the tutorial <test_list_start_to_finish_4.html>`__.

@@ -1,0 +1,48 @@
+A step-by-step introduction to QATrack+ administration (continued)
+==================================================================
+
+`(Previous Page) <test_list_start_to_finish_4.html>`__
+
+In this part of the tutorial we will create a test list made up of the 6
+tests we defined in the previous part of this tutorial.
+
+Creating the test list
+~~~~~~~~~~~~~~~~~~~~~~
+
+To create the test list, visit the **Test Lists** link under the **QA**
+section from the main admin page and then click on **Add test list** in
+the top right hand corner.
+
+Give the test list the name *Machine Output* and slug *machine-output*.
+We will ignore the description and sublist fields for now.
+
+Under the **Test list memberships** section click on green cross/\ *Add
+another Test list membership* link at the bottom to make a 6th text box
+appear. Now click the first magnifying glass and click on the
+*Temperature* test in the window that pops up.
+
+.. figure:: select_test.png
+   :alt: Selecting a test
+
+   Selecting a test
+
+Repeat this step for the other 5 tests we defined at which point the
+*Test list memberships* section should look like:
+
+.. figure:: memberships.png
+   :alt: Test list memberships
+
+   Test list memberships
+
+If you now click **Save and continue editing** the memberships section
+should show the actual tets names (and macro names):
+
+.. figure:: memberships_after_save.png
+   :alt: Test list memberships
+
+   Test list memberships
+
+That's it! Now that we've created our tests and test list we can assign
+it to the `unit we created earlier <test_list_start_to_finish_2.html>`__.
+This is covered in the `next step of this
+tutorial <test_list_start_to_finish_6.html>`__.

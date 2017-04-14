@@ -1,0 +1,109 @@
+A step-by-step introduction to QATrack+ administration
+======================================================
+
+This guide will take you through:
+
+1. Logging in and accessing the admin interface
+
+2. Changing the name displayed at the top of your QATrack+ website
+
+3. creating a radiation `unit <../../units.html>`__
+
+4. creating different `user groups <../../auth.html>`__
+
+5. configuring `test statuses <../../statuses.html>`__
+
+6. setting up a `test list <../../test_lists.html>`__ for performing a
+   linac output measurement,
+
+7. `assigning the test list to a unit <../../assign_to_unit.html>`__
+
+8. and finally `setting references and
+   tolerances <../../setting_refs_and_tols.html>`__ for your tests.
+
+This tutorial assumes your website administrator has QATrack+ configured
+and running on a server somewhere and has assigned you a
+username/password with `superuser <../../auth.html>`__ status.
+
+Logging in and accessing the admin interface
+--------------------------------------------
+
+Access QATrack+ (your website adminstrator should have provided you with
+a URL) in your favourite webbrowser. QATrack+ looks and works best with
+`Chrome <https://www.google.com/intl/en/chrome/browser/>`__ or
+`Firefox <http://www.mozilla.org/en-US/firefox/new/>`__ but Internet
+Explorer versions 7 and up are also supported.
+
+If you are not already logged in, you will be taken to the login page:
+
+.. figure:: login.png
+   :alt: Login screen
+
+   Login screen
+
+enter your username and password and click the **Log In** button.
+
+.. figure:: after_login.png
+   :alt: First login
+
+   First login
+
+After logging in, you should see a screen similar to the one below.
+There's not much here since we haven't defined any units or test lists
+yet but in the top right hand corner beside your name you should see
+that you are part of the *Administrators* group.
+
+Click the little dropdown arrow next to your name in the top right hand
+corner, and then select the **Admin** option from the dropdown menu.
+
+.. figure:: access_admin.png
+   :alt: Accessing the admin site
+
+   Accessing the admin site
+
+This takes you to the main admin page where you will be doing all of
+your QATrack+ configuration.
+
+Setting up the name of your QATrack+ website
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As you may have noticed in earlier screen shots, the words "example.com"
+are displayed at the top of your website. Let's change that to
+"QATrack+".
+
+From the main admin page find the **Sites** section and click on the
+**Sites** link.
+
+.. figure:: sites_section.png
+   :alt: Sites section of the admin page
+
+   Sites section of the admin page
+
+Click on the ``example.com`` entry under the **Domain name** column
+header.
+
+.. figure:: example_dot_com.png
+   :alt: example.com
+
+   example.com
+
+and then set the relevant fields (ask your admin if you're not sure of
+the domain name to use) and click **Save** when you're finished.
+
+.. figure:: set_name.png
+   :alt: Setting the site name
+
+   Setting the site name
+
+If you now return to the main site (at any time you can click the
+**QATrack+ administration** header at the top of the admin pages to
+return to the main QATrack+ site) you should see your site now says
+**QATrack+** at the top rather than **example.com**.
+
+.. figure:: changed_name.png
+   :alt: changed site name
+
+   changed site name
+
+In the `next step of this tutorial <test_list_start_to_finish_2.html>`__
+we will configure a new radiation unit.
