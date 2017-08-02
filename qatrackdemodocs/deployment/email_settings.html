@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>QATrack+ email settings &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">QATrack+ email settings</a><ul>
+<li><a class="reference internal" href="#email-host-settings">Email host settings</a></li>
+<li><a class="reference internal" href="#notification-specific-settings">Notification specific settings</a><ul>
+<li><a class="reference internal" href="#email-subject-templates">Email &amp; Subject templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>QATrack+ email settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployment/email_settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="qatrack-email-settings">
+<h1>QATrack+ email settings<a class="headerlink" href="#qatrack-email-settings" title="Permalink to this headline">¶</a></h1>
+<p>QATrack+ has the ability to send <a class="reference external" href="../admin/email.html">email
+notifications</a> when tests are at action or
+tolerance levels. In order for this to function you need access to an
+SMTP server that can send the emails for you.</p>
+<p>In order to override the default settings, in your local_settings.py
+file you should set the following variables appropriately.</p>
+<div class="section" id="email-host-settings">
+<h2>Email host settings<a class="headerlink" href="#email-host-settings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">EMAIL_HOST</span></code> should be set to the SMTP host you are using (e.g.
+&#8216;smtp.gmail.com&#8217; or &#8216;smtp.mail.your.hospital&#8217;)</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_HOST_USER</span></code> this is the default username of the account to
+access the SMTP server</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_HOST_PASSWORD</span></code> this is the default account of the account to
+access the SMTP server</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_USE_TLS</span></code> set to True to use secure connection when
+connecting to the server</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_PORT</span></code> set to the port number to connect to the smtp server
+on (25 if <code class="docutils literal"><span class="pre">EMAIL_USE_TLS</span></code> is False, 587 if True)</li>
+</ul>
+<p>Note that <code class="docutils literal"><span class="pre">EMAIL_HOST_USER</span></code> and <code class="docutils literal"><span class="pre">EMAIL_HOST_PASSWORD</span></code> can be set to
+None or &#8220;&#8221; if no authentication is required.</p>
+<p>An example of these settings for a secure connection is shown here (for
+gmail):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s2">&quot;smtp.gmail.com&quot;</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;randle.taylor@gmail.com&#39;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;my_very_secure_password&#39;</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+</pre></div>
+</div>
+<p>and for an unsecured connection:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s2">&quot;MYHOSPITALSMTPSERVER&quot;</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">25</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notification-specific-settings">
+<h2>Notification specific settings<a class="headerlink" href="#notification-specific-settings" title="Permalink to this headline">¶</a></h2>
+<p>These settings allow you to override the default notification settings
+in your local_settings.py file:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_USER</span></code> allows you to use a diferent user from
+the default set above (set to None to use <code class="docutils literal"><span class="pre">EMAIL_HOST_USER</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_PWD</span></code> password to go along with
+<code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_USER</span></code></li>
+<li><code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_SENDER</span></code> name to use in the email &#8220;From&#8221; address</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_SUBJECT_TEMPLATE</span></code> allows you to override the
+default template to use for rendering the email subject line (see
+below)</li>
+<li><code class="docutils literal"><span class="pre">EMAIL_NOTIFICATION_TEMPLATE</span></code> allows you to override the default
+template to use for rendering the email body (see below)</li>
+</ul>
+<p>An example of these settings is shown here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#-----------------------------------------------------------------------------</span>
+<span class="c1"># Email and notification settings</span>
+<span class="n">EMAIL_NOTIFICATION_USER</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">EMAIL_NOTIFICATION_PWD</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">EMAIL_NOTIFICATION_SENDER</span> <span class="o">=</span> <span class="s2">&quot;Your Custom Name Here&quot;</span>
+<span class="n">EMAIL_NOTIFICATION_SUBJECT_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;my_custom_subject_template.txt&quot;</span>
+<span class="n">EMAIL_NOTIFICATION_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;my_custom_html_email.html&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="email-subject-templates">
+<h3>Email &amp; Subject templates<a class="headerlink" href="#email-subject-templates" title="Permalink to this headline">¶</a></h3>
+<p>Emails are generated using <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/templates/api/">the Django template
+language</a>
+with the following context available:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">test_list_instance</span></code> The TestListInstance object containing
+information about the test list and unit where the tests were being
+performed.</li>
+<li><code class="docutils literal"><span class="pre">failing_tests</span></code> a
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/querysets/">queryset</a>
+of all tests that failed.</li>
+<li><code class="docutils literal"><span class="pre">tolerance_tests</span></code> a
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/querysets/">queryset</a>
+of all tests that are at tolerance level.</li>
+</ul>
+<p>To create your own templates, use the examples below as a starting point
+and save them in the qatrack/notifications/templates/ directory and set
+the filenames for the TEMPLATE settings above.</p>
+<p>An example subject template is shown below</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">work_completed</span><span class="o">|</span><span class="n">date</span><span class="p">:</span><span class="s2">&quot;DATE_FORMAT&quot;</span><span class="p">}}</span> <span class="o">-</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">unit_test_collection</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">name</span> <span class="p">}},</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">test_list</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span> <span class="o">-</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">failing_tests</span> <span class="o">%</span><span class="p">}</span> <span class="n">Tests</span> <span class="n">at</span> <span class="n">Action</span><span class="p">:</span> <span class="p">{{</span><span class="n">failing_tests</span><span class="o">.</span><span class="n">count</span><span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tolerance_tests</span> <span class="o">%</span><span class="p">}</span> <span class="n">Tests</span> <span class="n">at</span> <span class="n">Tolerance</span><span class="p">:</span> <span class="p">{{</span><span class="n">tolerance_tests</span><span class="o">.</span><span class="n">count</span><span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>An example plain text email template is shown belwo</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">===</span> <span class="n">Notifications</span> <span class="k">for</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">test_list</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span> <span class="o">===</span>
+
+<span class="n">Test</span> <span class="n">List</span> <span class="p">:</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">test_list</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span>
+<span class="n">Unit</span>      <span class="p">:</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">unit_test_collection</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span>
+<span class="n">Date</span>      <span class="p">:</span> <span class="p">{{</span><span class="n">test_list_instance</span><span class="o">.</span><span class="n">work_completed</span> <span class="p">}}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">failing_tests</span> <span class="o">%</span><span class="p">}</span>
+<span class="n">Failing</span> <span class="n">Tests</span>
+<span class="o">=============</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">test_instance</span> <span class="ow">in</span> <span class="n">failing_tests</span> <span class="o">%</span><span class="p">}</span>
+    <span class="n">Test</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">unit_test_info</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span>
+    <span class="n">Value</span> <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">value_display</span><span class="p">}}</span>
+    <span class="n">Ref</span><span class="o">.</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">reference</span><span class="p">}}</span>
+    <span class="n">Tol</span><span class="o">.</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">tolerance</span><span class="p">}}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tolerance_tests</span> <span class="o">%</span><span class="p">}</span>
+<span class="n">Tests</span> <span class="n">at</span> <span class="n">Tolerance</span>
+<span class="o">==================</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">test_instance</span> <span class="ow">in</span> <span class="n">tolerance_tests</span> <span class="o">%</span><span class="p">}</span>
+    <span class="n">Test</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">unit_test_info</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span>
+    <span class="n">Value</span> <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">value_display</span><span class="p">}}</span>
+    <span class="n">Ref</span><span class="o">.</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">reference</span><span class="p">}}</span>
+    <span class="n">Tol</span><span class="o">.</span>  <span class="p">:</span> <span class="p">{{</span><span class="n">test_instance</span><span class="o">.</span><span class="n">tolerance</span><span class="p">}}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

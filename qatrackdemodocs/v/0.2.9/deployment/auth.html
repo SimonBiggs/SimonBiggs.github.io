@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Authentication &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">User Authentication</a><ul>
+<li><a class="reference internal" href="#active-directory-settings">Active Directory Settings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>User Authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.9/deployment/auth.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-authentication">
+<h1>User Authentication<a class="headerlink" href="#user-authentication" title="Permalink to this headline">¶</a></h1>
+<p>There are currently two methods of authenticating users. The default
+Django authentication backend, which requires an administrator to create
+users manually and an <a class="reference external" href="http://en.wikipedia.org/wiki/Active_Directory">Active
+Directory</a> backend
+(<a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/src/master/qatrack/accounts/backends.py?at=master">source
+code</a>).</p>
+<div class="section" id="active-directory-settings">
+<h2>Active Directory Settings<a class="headerlink" href="#active-directory-settings" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the Active Directory backend you need to set the
+following variables in your settings.py (or local_settings.py) file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">AUTHENTICATION_BACKENDS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;django.contrib.auth.backends.ModelBackend&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;qatrack.accounts.backends.ActiveDirectoryGroupMembershipSSLBackend&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">DEFAULT_GROUPS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Therapy&quot;</span><span class="p">]</span> <span class="c1">#List of user groups to add new users to when they sign up</span>
+<span class="n">AD_DNS_NAME</span><span class="o">=</span><span class="s1">&#39;dns.name.of.your.ldap.server.ca&#39;</span>
+
+<span class="c1"># If using non-SSL use these</span>
+<span class="n">AD_LDAP_PORT</span><span class="o">=</span><span class="mi">389</span>
+<span class="n">AD_LDAP_URL</span><span class="o">=</span><span class="s1">&#39;ldap://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">AD_DNS_NAME</span><span class="p">,</span><span class="n">AD_LDAP_PORT</span><span class="p">)</span>
+
+<span class="c1"># If using SSL use these:</span>
+<span class="c1">#AD_LDAP_PORT=636</span>
+<span class="c1">#AD_LDAP_URL=&#39;ldaps://%s:%s&#39; % (AD_DNS_NAME,AD_LDAP_PORT)</span>
+
+
+<span class="n">AD_SEARCH_DN</span> <span class="o">=</span> <span class="s2">&quot;DC=yourdomain,dc=yourhospital,dc=on,dc=ca&quot;</span> <span class="c1">#e.g. to search yourdomain.yourhospital.on.ca</span>
+<span class="n">AD_NT4_DOMAIN</span><span class="o">=</span><span class="s1">&#39;YOURDOMAIN&#39;</span>
+<span class="n">AD_SEARCH_FIELDS</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">,</span><span class="s1">&#39;givenName&#39;</span><span class="p">,</span><span class="s1">&#39;sn&#39;</span><span class="p">,</span><span class="s1">&#39;sAMAccountName&#39;</span><span class="p">,</span><span class="s1">&#39;memberOf&#39;</span><span class="p">]</span>
+<span class="n">AD_MEMBERSHIP_REQ</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Group1&quot;</span><span class="p">,</span> <span class="s2">&quot;Group2&quot;</span><span class="p">]</span> <span class="c1">#Required AD group memberships in order to gain access to QATrack+</span>
+<span class="c1">#AD_CERT_FILE=&#39;/path/to/your/cert.txt&#39;</span>
+</pre></div>
+</div>
+<p>Domain names, domain controller names and other useful AD info can
+usually be found by running
+<a class="reference external" href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/gpresult.mspx?mfr=true">gpresult</a>
+from .html.exe.</p>
+<p>QATrack+ requires the python-ldap package and binaries for that package
+can be found on
+<a class="reference external" href="http://pypi.python.org/pypi/python-ldap/2.4.8%7CPyPi">PyPi</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

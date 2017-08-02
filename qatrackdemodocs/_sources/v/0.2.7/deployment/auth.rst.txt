@@ -1,0 +1,49 @@
+User Authentication
+===================
+
+There are currently two methods of authenticating users. The default
+Django authentication backend, which requires an administrator to create
+users manually and an `Active
+Directory <http://en.wikipedia.org/wiki/Active_Directory>`__ backend
+(`source
+code <https://bitbucket.org/tohccmedphys/qatrackplus/src/master/qatrack/accounts/backends.py?at=master>`__).
+
+Active Directory Settings
+-------------------------
+
+In order to use the Active Directory backend you need to set the
+following variables in your settings.py (or local\_settings.py) file:
+
+::
+
+    AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+        'qatrack.accounts.backends.ActiveDirectoryGroupMembershipSSLBackend',
+    )
+
+    DEFAULT_GROUPS = ["Therapy"] #List of user groups to add new users to when they sign up
+    AD_DNS_NAME='dns.name.of.your.ldap.server.ca'
+
+    # If using non-SSL use these
+    AD_LDAP_PORT=389
+    AD_LDAP_URL='ldap://%s:%s' % (AD_DNS_NAME,AD_LDAP_PORT)
+
+    # If using SSL use these:
+    #AD_LDAP_PORT=636
+    #AD_LDAP_URL='ldaps://%s:%s' % (AD_DNS_NAME,AD_LDAP_PORT)
+
+
+    AD_SEARCH_DN = "DC=yourdomain,dc=yourhospital,dc=on,dc=ca" #e.g. to search yourdomain.yourhospital.on.ca
+    AD_NT4_DOMAIN='YOURDOMAIN'
+    AD_SEARCH_FIELDS= ['mail','givenName','sn','sAMAccountName','memberOf']
+    AD_MEMBERSHIP_REQ=["Group1", "Group2"] #Required AD group memberships in order to gain access to QATrack+
+    #AD_CERT_FILE='/path/to/your/cert.txt'
+
+Domain names, domain controller names and other useful AD info can
+usually be found by running
+`gpresult <http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/gpresult.mspx?mfr=true>`__
+from .html.exe.
+
+QATrack+ requires the python-ldap package and binaries for that package
+can be found on
+`PyPi <http://pypi.python.org/pypi/python-ldap/2.4.8%7CPyPi>`__.

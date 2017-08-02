@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A step-by-step introduction to QATrack+ administration &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">A step-by-step introduction to QATrack+ administration</a><ul>
+<li><a class="reference internal" href="#logging-in-and-accessing-the-admin-interface">Logging in and accessing the admin interface</a><ul>
+<li><a class="reference internal" href="#setting-up-the-name-of-your-qatrack-website">Setting up the name of your QATrack+ website</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>A step-by-step introduction to QATrack+ administration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/admin/tutorials/step_by_step_test_list/test_list_start_to_finish.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-step-by-step-introduction-to-qatrack-administration">
+<h1>A step-by-step introduction to QATrack+ administration<a class="headerlink" href="#a-step-by-step-introduction-to-qatrack-administration" title="Permalink to this headline">¶</a></h1>
+<p>This guide will take you through:</p>
+<ol class="arabic simple">
+<li>Logging in and accessing the admin interface</li>
+<li>Changing the name displayed at the top of your QATrack+ website</li>
+<li>creating a radiation <a class="reference external" href="../../units.html">unit</a></li>
+<li>creating different <a class="reference external" href="../../auth.html">user groups</a></li>
+<li>configuring <a class="reference external" href="../../statuses.html">test statuses</a></li>
+<li>setting up a <a class="reference external" href="../../test_lists.html">test list</a> for performing a
+linac output measurement,</li>
+<li><a class="reference external" href="../../assign_to_unit.html">assigning the test list to a unit</a></li>
+<li>and finally <a class="reference external" href="../../setting_refs_and_tols.html">setting references and
+tolerances</a> for your tests.</li>
+</ol>
+<p>This tutorial assumes your website administrator has QATrack+ configured
+and running on a server somewhere and has assigned you a
+username/password with <a class="reference external" href="../../auth.html">superuser</a> status.</p>
+<div class="section" id="logging-in-and-accessing-the-admin-interface">
+<h2>Logging in and accessing the admin interface<a class="headerlink" href="#logging-in-and-accessing-the-admin-interface" title="Permalink to this headline">¶</a></h2>
+<p>Access QATrack+ (your website adminstrator should have provided you with
+a URL) in your favourite webbrowser. QATrack+ looks and works best with
+<a class="reference external" href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or
+<a class="reference external" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> but Internet
+Explorer versions 7 and up are also supported.</p>
+<p>If you are not already logged in, you will be taken to the login page:</p>
+<div class="figure" id="id1">
+<img alt="Login screen" src="../../../_images/login.png" />
+<p class="caption"><span class="caption-text">Login screen</span></p>
+</div>
+<p>enter your username and password and click the <strong>Log In</strong> button.</p>
+<div class="figure" id="id2">
+<img alt="First login" src="../../../_images/after_login.png" />
+<p class="caption"><span class="caption-text">First login</span></p>
+</div>
+<p>After logging in, you should see a screen similar to the one below.
+There&#8217;s not much here since we haven&#8217;t defined any units or test lists
+yet but in the top right hand corner beside your name you should see
+that you are part of the <em>Administrators</em> group.</p>
+<p>Click the little dropdown arrow next to your name in the top right hand
+corner, and then select the <strong>Admin</strong> option from the dropdown menu.</p>
+<div class="figure" id="id3">
+<img alt="Accessing the admin site" src="../../../_images/access_admin.png" />
+<p class="caption"><span class="caption-text">Accessing the admin site</span></p>
+</div>
+<p>This takes you to the main admin page where you will be doing all of
+your QATrack+ configuration.</p>
+<div class="section" id="setting-up-the-name-of-your-qatrack-website">
+<h3>Setting up the name of your QATrack+ website<a class="headerlink" href="#setting-up-the-name-of-your-qatrack-website" title="Permalink to this headline">¶</a></h3>
+<p>As you may have noticed in earlier screen shots, the words &#8220;example.com&#8221;
+are displayed at the top of your website. Let&#8217;s change that to
+&#8220;QATrack+&#8221;.</p>
+<p>From the main admin page find the <strong>Sites</strong> section and click on the
+<strong>Sites</strong> link.</p>
+<div class="figure" id="id4">
+<img alt="Sites section of the admin page" src="../../../_images/sites_section.png" />
+<p class="caption"><span class="caption-text">Sites section of the admin page</span></p>
+</div>
+<p>Click on the <code class="docutils literal"><span class="pre">example.com</span></code> entry under the <strong>Domain name</strong> column
+header.</p>
+<div class="figure" id="id5">
+<img alt="example.com" src="../../../_images/example_dot_com.png" />
+<p class="caption"><span class="caption-text">example.com</span></p>
+</div>
+<p>and then set the relevant fields (ask your admin if you&#8217;re not sure of
+the domain name to use) and click <strong>Save</strong> when you&#8217;re finished.</p>
+<div class="figure" id="id6">
+<img alt="Setting the site name" src="../../../_images/set_name.png" />
+<p class="caption"><span class="caption-text">Setting the site name</span></p>
+</div>
+<p>If you now return to the main site (at any time you can click the
+<strong>QATrack+ administration</strong> header at the top of the admin pages to
+return to the main QATrack+ site) you should see your site now says
+<strong>QATrack+</strong> at the top rather than <strong>example.com</strong>.</p>
+<div class="figure" id="id7">
+<img alt="changed site name" src="../../../_images/changed_name.png" />
+<p class="caption"><span class="caption-text">changed site name</span></p>
+</div>
+<p>In the <a class="reference external" href="test_list_start_to_finish_2.html">next step of this tutorial</a>
+we will configure a new radiation unit.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

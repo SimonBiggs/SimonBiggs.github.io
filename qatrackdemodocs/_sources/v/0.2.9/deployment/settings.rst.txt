@@ -1,0 +1,222 @@
+QATrack+ Local Settings
+=======================
+
+Local settings allow you to override the default QATrack+ settings to
+better meet your clinics needs. The most important settings are
+explained below.
+
+These settings should be defined in a ``local_settings.py`` file in the
+main directory (same directory as ``settings.py``)
+
+DEBUG Setting
+-------------
+
+When deploying your site for clinical use, you should set:
+
+::
+
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+
+however, when you are experiencing issues getting your site deployed,
+setting:
+
+::
+
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+
+will show you a detailed error traceback which can be used to diagnose
+any issues.
+
+Allowed Host Setting
+--------------------
+
+If you are behind a hospital firewall you can set the ``ALLOWED_HOSTS``
+setting to:
+
+::
+
+    ALLOWED_HOSTS = ['*']
+
+otherwise you need to set allowed hosts either to your server name or IP
+address (e.g. for Apache):
+
+::
+
+    ALLOWED_HOSTS = ['52.123.4.9']
+
+or if you are running QATrack+ behind a reverse proxy (e.g. using IIS &
+CherryPy):
+
+::
+
+    ALLOWED_HOSTS = ['127.0.0.1']
+
+Email Settings
+--------------
+
+See the `email settings page <email_settings.html>`__ for details.
+
+Admin Email
+-----------
+
+Who should be emailed when internal QATrack+ errors occur:
+
+::
+
+    ADMINS = (
+        ('Admin Name', 'admin.email@yourplace.com'),
+    )
+    MANAGERS = ADMINS
+
+Cache Settings
+--------------
+
+By default QATrack+ stores cached pages and values on disk in the
+directory ``qatrack/cache/cache_data/`` but this can be changed by
+copying the Python dictionary below into your ``local_settings.py``
+file:
+
+::
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': '/path/to/your/desired/cache/data/location/',
+            'TIMEOUT': 24*60*60, # cache timeout of 24hours
+        }
+    }
+
+Generally you shouldn't need to change this unless you have concerns
+about disk usage.
+
+Time Zone Settings
+------------------
+
+By default QATrack+ is configured to use North American Eastern Standard
+Time so you will need to adjust this to reflect your local time zone.
+
+In your *local\_settings.py* file add a line like the following:
+
+::
+
+    TIME_ZONE = 'America/Toronto'
+
+where 'America/Toronto' is replaced with your local timezone (e.g.
+``TIME_ZONE = 'Australia/Sydney'``. If you are unsure, you can find a
+list of `valid timezones on
+Wikipedia <http://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__.
+
+Icon Settings
+-------------
+
+By default QATrack+ will show icons to indicate the pass/fail or
+due/overdue/not due status of tests and test lists.
+
+Examples of the icons can be seen on
+`BitBucket <https://bitbucket.org/tohccmedphys/qatrackplus/pull-request/11/add-icons-to-reduce-dependence-on-red/diff>`__
+
+To override the default settings, copy the following Python dictionary
+to your ``local_settings.py`` file and change the relevant setting to
+True/False.
+
+::
+
+    ICON_SETTINGS = {
+        'SHOW_STATUS_ICONS_PERFORM':  True,
+        'SHOW_STATUS_ICONS_LISTING':  True,
+        'SHOW_STATUS_ICONS_REVIEW':  True,
+        'SHOW_STATUS_ICONS_HISTORY':  False,
+        'SHOW_REVIEW_ICONS':  True,
+        'SHOW_DUE_ICONS':  True,
+    }
+
+-  ``SHOW_STATUS_ICONS_PERFORM`` controls whether the icons are shown
+   when a user is performing a test list.
+-  ``SHOW_STATUS_ICONS_LISTING`` controls whether icons are shown on
+   listings pages which show the results of the last QA session.
+   (Default True)
+-  ``SHOW STATUS_ICONS_REVIEW`` controls whether the icons are shown
+   when a user is reviewing a test list. (Default True)
+-  ``SHOW STATUS_ICONS_HISTORY`` controls whether the icons are shown
+   for historical results when a user is performing or reviewing a test
+   list. (Default False)
+-  ``SHOW_REVIEW_ICONS`` control whether to show warning icon for
+   unreviewed test lists. (Default True)
+-  ``SHOW_DUE_ICONS`` control whether to show icons for the due status
+   of test lists. (Default True)
+
+Tolerance Naming Settings
+-------------------------
+
+By changing the following settings you can alter the phrasing that
+QATrack+ uses for indicating whether a test is passing/failing. The
+``TEST_STATUS_DISPLAY_SHORT`` settings are used when performing a test
+list and the ``TEST_STATUS_DISPLAY`` settings are used in notifications
+and when displaying historical results.
+
+::
+
+    TEST_STATUS_DISPLAY = {
+        'action': "Action",
+        'fail': "Fail",
+        'not_done': "Not Done",
+        'done': "Done",
+        'ok': "OK",
+        'tolerance': "Tolerance",
+        'no_tol': "No Tol Set",
+    }
+
+    TEST_STATUS_DISPLAY_SHORT = {
+        'action': "ACT",
+        'fail': "Fail",
+        'not_done': "Not Done",
+        'done': "Done",
+        'ok': "OK",
+        'tolerance': "TOL",
+        'no_tol': "NO TOL",
+    }
+
+The meaning of the individual keys is as follows:
+
+-  ``action``: Test is failing or at action level (shown to users with
+   permission to view Refs/Tols)
+-  ``fail``: Test is failing or at action level (shown to users without
+   permission to view Refs/Tols)
+-  ``not_done``: Test was not completed
+-  ``done``: Test was completed
+-  ``ok``: Test is passing / within tolerance
+-  ``tolerance``: The test is at tolerance (shown to users with
+   permission to view Refs/Tols)
+-  ``no_tol``: No tolerances set for this test
+
+Other Settings
+--------------
+
+AUTO\_REVIEW\_DEFAULT
+~~~~~~~~~~~~~~~~~~~~~
+
+Set ``AUTO_REVIEW_DEFAULT = True`` in your ``local_settings.py`` file in
+order to enable `Auto Review <../admin/auto_review.html>`__ by default.
+
+DEFAULT\_WARNING\_MESSAGE
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Set ``DEFAULT_WARNING_MESSAGE = "Your custom message"`` to change the
+default warning message that will be shown when a performed test is at
+action level. If ``DEFAULT_WARNING_MESSAGE = ""`` then the default will
+be to not show any warning message when a test is at action level.
+
+ORDER\_UNITS\_BY
+~~~~~~~~~~~~~~~~
+
+Set ``ORDER_UNITS_BY = 'name'`` in your ``local_settings.py`` file in
+order to order units by ``name`` rather than ``number``
+
+REVIEW\_DIFF\_COL
+~~~~~~~~~~~~~~~~~
+
+Set ``REVIEW_DIFF_COL = True`` to include a difference column when
+reviewing test list results. This column shows the difference between a
+test value and its reference value.

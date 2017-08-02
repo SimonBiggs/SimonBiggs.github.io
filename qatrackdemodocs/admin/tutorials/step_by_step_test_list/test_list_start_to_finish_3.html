@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A step-by-step introduction to QATrack+ administration (continued) &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">A step-by-step introduction to QATrack+ administration (continued)</a><ul>
+<li><a class="reference internal" href="#creating-a-new-user-group">Creating a new user group</a></li>
+<li><a class="reference internal" href="#creating-test-statuses">Creating test statuses</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>A step-by-step introduction to QATrack+ administration (continued)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/admin/tutorials/step_by_step_test_list/test_list_start_to_finish_3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-step-by-step-introduction-to-qatrack-administration-continued">
+<h1>A step-by-step introduction to QATrack+ administration (continued)<a class="headerlink" href="#a-step-by-step-introduction-to-qatrack-administration-continued" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="test_list_start_to_finish_2.html">(Previous Page)</a></p>
+<div class="section" id="creating-a-new-user-group">
+<h2>Creating a new user group<a class="headerlink" href="#creating-a-new-user-group" title="Permalink to this headline">¶</a></h2>
+<p>Return to the main admin page and click on the <strong>Groups</strong> link under the
+<strong>Auth</strong> section and then click the <strong>Add group</strong> button in the top
+right.</p>
+<p>Set the <strong>Name</strong> field to <code class="docutils literal"><span class="pre">Physics</span></code> and choose the following set of
+permissions:</p>
+<ul class="simple">
+<li><strong>qa | frequency | Choose QA by Frequency</strong></li>
+<li><strong>qa | test instance | Can review tests</strong></li>
+<li><strong>qa | test instance | Can chart test history</strong></li>
+<li><strong>qa | test instance | Can view test history</strong></li>
+<li><strong>qa | test instance | Can skip without comment</strong></li>
+<li><strong>qa | test list instance | Can add test list instance</strong></li>
+<li><strong>qa | test list instance | Can perform subset of tests</strong></li>
+<li><strong>qa | test list instance | Can view previously completed
+instances</strong></li>
+<li><strong>qa | test list instance | Can change test list instance</strong></li>
+<li><strong>qa | test list instance | Can override date</strong></li>
+<li><strong>qa | unit test info | Can view Refs and Tols</strong></li>
+</ul>
+<p>Your group should look like the following:</p>
+<div class="figure" id="id1">
+<img alt="defining a physics group" src="../../../_images/physics_group.png" />
+<p class="caption"><span class="caption-text">defining a physics group</span></p>
+</div>
+<p>Click <strong>Save</strong> and you will now see your new group in the listings page.</p>
+<div class="figure" id="id2">
+<img alt="group listings" src="../../../_images/group_listing.png" />
+<p class="caption"><span class="caption-text">group listings</span></p>
+</div>
+<p>The last step is to add yourself to the <code class="docutils literal"><span class="pre">Physics</span></code> group. Visit your
+user profile by going to the <strong>Users</strong> section under the <strong>Auth</strong>
+section and clicking on your username.</p>
+<div class="figure" id="id3">
+<img alt="choose a user to edit" src="../../../_images/edit_user.png" />
+<p class="caption"><span class="caption-text">choose a user to edit</span></p>
+</div>
+<p>On the next page find the <strong>Groups</strong> select box and select <em>Physics</em>.</p>
+<div class="figure" id="id4">
+<img alt="selecting a group" src="../../../_images/select_group.png" />
+<p class="caption"><span class="caption-text">selecting a group</span></p>
+</div>
+<p>Click on <strong>Save</strong> to finalize the addition of yourself to the <em>Physics</em>
+group.</p>
+</div>
+<div class="section" id="creating-test-statuses">
+<h2>Creating test statuses<a class="headerlink" href="#creating-test-statuses" title="Permalink to this headline">¶</a></h2>
+<p>We are going to create two test statuses; first an <code class="docutils literal"><span class="pre">Unreviewed</span></code> status
+which will be the default status given to test data when they are
+performed and second an <code class="docutils literal"><span class="pre">Approved</span></code> status that can be applied to the
+tests after they have been reviewed.</p>
+<p>From the main admin page click on the <strong>Statuses</strong> link under the <strong>QA</strong>
+section and click the <strong>Add test instance status</strong> button in the top
+right.</p>
+<p>Give the status a <strong>Name</strong> of <code class="docutils literal"><span class="pre">Unreviewed</span></code>, a <strong>Slug</strong> of
+<code class="docutils literal"><span class="pre">unreviewed</span></code> and a description of
+<code class="docutils literal"><span class="pre">Default</span> <span class="pre">status</span> <span class="pre">for</span> <span class="pre">tests</span> <span class="pre">which</span> <span class="pre">have</span> <span class="pre">just</span> <span class="pre">been</span> <span class="pre">completed.</span></code>. Next,
+check off the <strong>Is default</strong> checkbox and then click <strong>Save and add
+another</strong>.</p>
+<div class="figure" id="id5">
+<img alt="Unreviewed status" src="../../../_images/unreviewed.png" />
+<p class="caption"><span class="caption-text">Unreviewed status</span></p>
+</div>
+<p>Create an <code class="docutils literal"><span class="pre">Approved</span></code> status similar to the <code class="docutils literal"><span class="pre">Unreviewed</span></code> status but
+this time leave the <strong>Is default</strong> box unchecked and also uncheck the
+<strong>Requires review</strong> checkbox. Click <strong>Save</strong> when you&#8217;re finished.</p>
+<div class="figure" id="id6">
+<img alt="Reviewed status" src="../../../_images/reviewed.png" />
+<p class="caption"><span class="caption-text">Reviewed status</span></p>
+</div>
+<p>You should now see your two statuses in the listing.</p>
+<div class="figure" id="id7">
+<img alt="test status listings" src="../../../_images/test_statuses.png" />
+<p class="caption"><span class="caption-text">test status listings</span></p>
+</div>
+<p>Now that we have done the initial configuration we can begin to cover
+test and test list configuration. This is covered in the <a class="reference external" href="test_list_start_to_finish_4.html">next step of
+the tutorial</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

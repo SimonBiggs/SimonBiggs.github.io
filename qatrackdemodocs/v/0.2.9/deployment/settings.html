@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>QATrack+ Local Settings &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">QATrack+ Local Settings</a><ul>
+<li><a class="reference internal" href="#debug-setting">DEBUG Setting</a></li>
+<li><a class="reference internal" href="#allowed-host-setting">Allowed Host Setting</a></li>
+<li><a class="reference internal" href="#email-settings">Email Settings</a></li>
+<li><a class="reference internal" href="#admin-email">Admin Email</a></li>
+<li><a class="reference internal" href="#cache-settings">Cache Settings</a></li>
+<li><a class="reference internal" href="#time-zone-settings">Time Zone Settings</a></li>
+<li><a class="reference internal" href="#icon-settings">Icon Settings</a></li>
+<li><a class="reference internal" href="#tolerance-naming-settings">Tolerance Naming Settings</a></li>
+<li><a class="reference internal" href="#other-settings">Other Settings</a><ul>
+<li><a class="reference internal" href="#auto-review-default">AUTO_REVIEW_DEFAULT</a></li>
+<li><a class="reference internal" href="#default-warning-message">DEFAULT_WARNING_MESSAGE</a></li>
+<li><a class="reference internal" href="#order-units-by">ORDER_UNITS_BY</a></li>
+<li><a class="reference internal" href="#review-diff-col">REVIEW_DIFF_COL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>QATrack+ Local Settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.9/deployment/settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="qatrack-local-settings">
+<h1>QATrack+ Local Settings<a class="headerlink" href="#qatrack-local-settings" title="Permalink to this headline">¶</a></h1>
+<p>Local settings allow you to override the default QATrack+ settings to
+better meet your clinics needs. The most important settings are
+explained below.</p>
+<p>These settings should be defined in a <code class="docutils literal"><span class="pre">local_settings.py</span></code> file in the
+main directory (same directory as <code class="docutils literal"><span class="pre">settings.py</span></code>)</p>
+<div class="section" id="debug-setting">
+<h2>DEBUG Setting<a class="headerlink" href="#debug-setting" title="Permalink to this headline">¶</a></h2>
+<p>When deploying your site for clinical use, you should set:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="n">DEBUG</span>
+</pre></div>
+</div>
+<p>however, when you are experiencing issues getting your site deployed,
+setting:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="n">DEBUG</span>
+</pre></div>
+</div>
+<p>will show you a detailed error traceback which can be used to diagnose
+any issues.</p>
+</div>
+<div class="section" id="allowed-host-setting">
+<h2>Allowed Host Setting<a class="headerlink" href="#allowed-host-setting" title="Permalink to this headline">¶</a></h2>
+<p>If you are behind a hospital firewall you can set the <code class="docutils literal"><span class="pre">ALLOWED_HOSTS</span></code>
+setting to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>otherwise you need to set allowed hosts either to your server name or IP
+address (e.g. for Apache):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;52.123.4.9&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>or if you are running QATrack+ behind a reverse proxy (e.g. using IIS &amp;
+CherryPy):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="email-settings">
+<h2>Email Settings<a class="headerlink" href="#email-settings" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference external" href="email_settings.html">email settings page</a> for details.</p>
+</div>
+<div class="section" id="admin-email">
+<h2>Admin Email<a class="headerlink" href="#admin-email" title="Permalink to this headline">¶</a></h2>
+<p>Who should be emailed when internal QATrack+ errors occur:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ADMINS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;Admin Name&#39;</span><span class="p">,</span> <span class="s1">&#39;admin.email@yourplace.com&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">MANAGERS</span> <span class="o">=</span> <span class="n">ADMINS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cache-settings">
+<h2>Cache Settings<a class="headerlink" href="#cache-settings" title="Permalink to this headline">¶</a></h2>
+<p>By default QATrack+ stores cached pages and values on disk in the
+directory <code class="docutils literal"><span class="pre">qatrack/cache/cache_data/</span></code> but this can be changed by
+copying the Python dictionary below into your <code class="docutils literal"><span class="pre">local_settings.py</span></code>
+file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CACHES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.core.cache.backends.filebased.FileBasedCache&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LOCATION&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/to/your/desired/cache/data/location/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;TIMEOUT&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">,</span> <span class="c1"># cache timeout of 24hours</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Generally you shouldn&#8217;t need to change this unless you have concerns
+about disk usage.</p>
+</div>
+<div class="section" id="time-zone-settings">
+<h2>Time Zone Settings<a class="headerlink" href="#time-zone-settings" title="Permalink to this headline">¶</a></h2>
+<p>By default QATrack+ is configured to use North American Eastern Standard
+Time so you will need to adjust this to reflect your local time zone.</p>
+<p>In your <em>local_settings.py</em> file add a line like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;America/Toronto&#39;</span>
+</pre></div>
+</div>
+<p>where &#8216;America/Toronto&#8217; is replaced with your local timezone (e.g.
+<code class="docutils literal"><span class="pre">TIME_ZONE</span> <span class="pre">=</span> <span class="pre">'Australia/Sydney'</span></code>. If you are unsure, you can find a
+list of <a class="reference external" href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">valid timezones on
+Wikipedia</a>.</p>
+</div>
+<div class="section" id="icon-settings">
+<h2>Icon Settings<a class="headerlink" href="#icon-settings" title="Permalink to this headline">¶</a></h2>
+<p>By default QATrack+ will show icons to indicate the pass/fail or
+due/overdue/not due status of tests and test lists.</p>
+<p>Examples of the icons can be seen on
+<a class="reference external" href="https://bitbucket.org/tohccmedphys/qatrackplus/pull-request/11/add-icons-to-reduce-dependence-on-red/diff">BitBucket</a></p>
+<p>To override the default settings, copy the following Python dictionary
+to your <code class="docutils literal"><span class="pre">local_settings.py</span></code> file and change the relevant setting to
+True/False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ICON_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SHOW_STATUS_ICONS_PERFORM&#39;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;SHOW_STATUS_ICONS_LISTING&#39;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;SHOW_STATUS_ICONS_REVIEW&#39;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;SHOW_STATUS_ICONS_HISTORY&#39;</span><span class="p">:</span>  <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;SHOW_REVIEW_ICONS&#39;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;SHOW_DUE_ICONS&#39;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">SHOW_STATUS_ICONS_PERFORM</span></code> controls whether the icons are shown
+when a user is performing a test list.</li>
+<li><code class="docutils literal"><span class="pre">SHOW_STATUS_ICONS_LISTING</span></code> controls whether icons are shown on
+listings pages which show the results of the last QA session.
+(Default True)</li>
+<li><code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS_ICONS_REVIEW</span></code> controls whether the icons are shown
+when a user is reviewing a test list. (Default True)</li>
+<li><code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS_ICONS_HISTORY</span></code> controls whether the icons are shown
+for historical results when a user is performing or reviewing a test
+list. (Default False)</li>
+<li><code class="docutils literal"><span class="pre">SHOW_REVIEW_ICONS</span></code> control whether to show warning icon for
+unreviewed test lists. (Default True)</li>
+<li><code class="docutils literal"><span class="pre">SHOW_DUE_ICONS</span></code> control whether to show icons for the due status
+of test lists. (Default True)</li>
+</ul>
+</div>
+<div class="section" id="tolerance-naming-settings">
+<h2>Tolerance Naming Settings<a class="headerlink" href="#tolerance-naming-settings" title="Permalink to this headline">¶</a></h2>
+<p>By changing the following settings you can alter the phrasing that
+QATrack+ uses for indicating whether a test is passing/failing. The
+<code class="docutils literal"><span class="pre">TEST_STATUS_DISPLAY_SHORT</span></code> settings are used when performing a test
+list and the <code class="docutils literal"><span class="pre">TEST_STATUS_DISPLAY</span></code> settings are used in notifications
+and when displaying historical results.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">TEST_STATUS_DISPLAY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s2">&quot;Action&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;fail&#39;</span><span class="p">:</span> <span class="s2">&quot;Fail&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;not_done&#39;</span><span class="p">:</span> <span class="s2">&quot;Not Done&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;done&#39;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;tolerance&#39;</span><span class="p">:</span> <span class="s2">&quot;Tolerance&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;no_tol&#39;</span><span class="p">:</span> <span class="s2">&quot;No Tol Set&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">TEST_STATUS_DISPLAY_SHORT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s2">&quot;ACT&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;fail&#39;</span><span class="p">:</span> <span class="s2">&quot;Fail&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;not_done&#39;</span><span class="p">:</span> <span class="s2">&quot;Not Done&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;done&#39;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;tolerance&#39;</span><span class="p">:</span> <span class="s2">&quot;TOL&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;no_tol&#39;</span><span class="p">:</span> <span class="s2">&quot;NO TOL&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The meaning of the individual keys is as follows:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">action</span></code>: Test is failing or at action level (shown to users with
+permission to view Refs/Tols)</li>
+<li><code class="docutils literal"><span class="pre">fail</span></code>: Test is failing or at action level (shown to users without
+permission to view Refs/Tols)</li>
+<li><code class="docutils literal"><span class="pre">not_done</span></code>: Test was not completed</li>
+<li><code class="docutils literal"><span class="pre">done</span></code>: Test was completed</li>
+<li><code class="docutils literal"><span class="pre">ok</span></code>: Test is passing / within tolerance</li>
+<li><code class="docutils literal"><span class="pre">tolerance</span></code>: The test is at tolerance (shown to users with
+permission to view Refs/Tols)</li>
+<li><code class="docutils literal"><span class="pre">no_tol</span></code>: No tolerances set for this test</li>
+</ul>
+</div>
+<div class="section" id="other-settings">
+<h2>Other Settings<a class="headerlink" href="#other-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="auto-review-default">
+<h3>AUTO_REVIEW_DEFAULT<a class="headerlink" href="#auto-review-default" title="Permalink to this headline">¶</a></h3>
+<p>Set <code class="docutils literal"><span class="pre">AUTO_REVIEW_DEFAULT</span> <span class="pre">=</span> <span class="pre">True</span></code> in your <code class="docutils literal"><span class="pre">local_settings.py</span></code> file in
+order to enable <a class="reference external" href="../admin/auto_review.html">Auto Review</a> by default.</p>
+</div>
+<div class="section" id="default-warning-message">
+<h3>DEFAULT_WARNING_MESSAGE<a class="headerlink" href="#default-warning-message" title="Permalink to this headline">¶</a></h3>
+<p>Set <code class="docutils literal"><span class="pre">DEFAULT_WARNING_MESSAGE</span> <span class="pre">=</span> <span class="pre">&quot;Your</span> <span class="pre">custom</span> <span class="pre">message&quot;</span></code> to change the
+default warning message that will be shown when a performed test is at
+action level. If <code class="docutils literal"><span class="pre">DEFAULT_WARNING_MESSAGE</span> <span class="pre">=</span> <span class="pre">&quot;&quot;</span></code> then the default will
+be to not show any warning message when a test is at action level.</p>
+</div>
+<div class="section" id="order-units-by">
+<h3>ORDER_UNITS_BY<a class="headerlink" href="#order-units-by" title="Permalink to this headline">¶</a></h3>
+<p>Set <code class="docutils literal"><span class="pre">ORDER_UNITS_BY</span> <span class="pre">=</span> <span class="pre">'name'</span></code> in your <code class="docutils literal"><span class="pre">local_settings.py</span></code> file in
+order to order units by <code class="docutils literal"><span class="pre">name</span></code> rather than <code class="docutils literal"><span class="pre">number</span></code></p>
+</div>
+<div class="section" id="review-diff-col">
+<h3>REVIEW_DIFF_COL<a class="headerlink" href="#review-diff-col" title="Permalink to this headline">¶</a></h3>
+<p>Set <code class="docutils literal"><span class="pre">REVIEW_DIFF_COL</span> <span class="pre">=</span> <span class="pre">True</span></code> to include a difference column when
+reviewing test list results. This column shows the difference between a
+test value and its reference value.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

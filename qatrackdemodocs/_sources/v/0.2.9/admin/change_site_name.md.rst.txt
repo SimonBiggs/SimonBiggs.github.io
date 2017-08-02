@@ -1,0 +1,11 @@
+To change the name of your site from example.com:
+
+1. From the drop down menu at the top right of the screen (by your
+   username) select "Admin"
+2. In the Sites section click on the "Sites" or "Change" link.
+3. Click on the example.com site
+4. Set the Domain name field to your server domain and root of your
+   QATrack installation (e.g. ``yourcomputer/qatrack`` or
+   ``123.456.1.1/qatrack``) and the Display name to what you want shown
+   in the top left hand corner of your site.
+5. Click Save

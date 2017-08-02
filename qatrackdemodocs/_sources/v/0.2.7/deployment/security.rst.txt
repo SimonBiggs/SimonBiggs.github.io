@@ -1,0 +1,50 @@
+Notes on Security
+=================
+
+Generally the `example deployment options <about.html>`__ are configured
+using http connections rather than https connections and it is important
+to consider the security implications of this.
+
+QATrack+ requires users to login to the system with a username and
+password. Since http requests are not secure the username & password are
+transmitted over the wire in clear text making them susceptible to
+`sniffing <http://en.wikipedia.org/wiki/Packet_analyzer>`__. QATrack+ is
+generally meant to run on secure intranets (e.g. everyone with access to
+the network is "trusted") so this may or may not be a concern for you.
+
+If you are worried about password sniffing or other attacks, your server
+can be set up either to use encrypted connections using the https
+protocol or using `Single Sign On & Integrated
+Authentication <windows/iisFastCGI.html>`__. This is especially important
+if your site is exposed to external networks (e.g. the internet).
+
+Please discuss these issues with your IT team!
+
+Using https connections
+-----------------------
+
+Using https connections requires you to have an SSL certificate
+installed on your server. The exact implementation of this is left up to
+the person deploying your QATrack+ installation, but I am happy to give
+advice if I can on the `QATrack+ google
+group <https://groups.google.com/forum/#!forum/qatrack>`__.
+
+SSL certificates can either be purchased from a commercial provider, or
+you can create self-signed certificates using `Windows
+Server <http://technet.microsoft.com/en-us/library/cc753127(v=ws.10).aspx>`__
+or
+`OpenSSL <http://stackoverflow.com/questions/10175812/how-to-build-a-self-signed-certificate-with-openssl>`__
+on Linux (Mac?).
+
+The simplest approach to using https is to have QATrack+ running on a
+WSGI server (Apache/ModWSGI, CherryPy, gunicorn, uwsgi etc) behind a
+reverse proxy (e.g. nginx, IIS, Apache) where your reverse proxy only
+accepts https connections and then forwards those requests as http to
+your WSGI server. This forces the decryption to happen in your reverse
+proxy and QATrack+ then does not need to concern itself with https
+itself. This is shown conceptually below.
+
+.. figure:: https.png
+   :alt: https connection
+
+   https connection

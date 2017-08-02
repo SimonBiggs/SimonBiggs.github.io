@@ -1,0 +1,93 @@
+A step-by-step introduction to QATrack+ administration (continued)
+==================================================================
+
+`(Previous Page) <test_list_start_to_finish_5.html>`__
+
+In this part of the tutorial we will assign our test list to a unit and
+ensure that it is functioning correctly on the main site.
+
+Assigning the test list
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To assign the test list to a unit, visit the **Assing Test Lists to
+Units** link under the **QA** section from the main admin page and then
+click on **Add unit test collection** in the top right hand corner.
+
+Select the *Test Unit* from the **Unit:** dropdown, and then create a
+new `frequency <../frequencies>`__ by clicking on the green cross next
+to the **Frequency** dropdown. Give the frequency the name *Monthly*,
+slug *monthly* and enter *28*, *28*, *35* for **Nominal interval**,
+**Due Interval** and for **Overdue interval**, respectively.
+
+.. figure:: new_frequency.png
+   :alt: creating a new frequency
+
+   creating a new frequency
+
+Select the *Physics* option from the **Assigned to:** dropdown and *test
+list* from the **Content Type** dropdown. After selecting *test list*
+you will be able to select *Machine Output* from the *Object id*
+dropdown.
+
+.. figure:: assign_to_unit.png
+   :alt: Assigning to a unit
+
+   Assigning to a unit
+
+When you're finished click **Save**.
+
+Checking our work
+~~~~~~~~~~~~~~~~~
+
+Visit the main site (you can click the *QATrack+ administration* header
+at the top of the admin page) and select the *Choose Unit* link from the
+*Perform QA* dropdown at the top of the page. On the next page choose
+the *Monthly* option from the *Test Unit* drop down.
+
+.. figure:: choose_monthly.png
+   :alt: Choosing Monthly
+
+   Choosing Monthly
+
+On the next page click **Perform Monthly QA** beside the *Machine
+Output* test list.
+
+.. figure:: test_list_listing.png
+   :alt: Monthly test listings
+
+   Monthly test listings
+
+You should now see the test list you defined:
+
+.. figure:: final_test_list.png
+   :alt: Final test list
+
+   Final test list
+
+Fill in sample values of :
+
+-  Temperature = 24
+-  Pressure = 760
+-  Ion Chamber Reading = 2.56
+
+And you should see the *Temperature-Pressure Correction* and *Dose*
+values calculated as 1.007 and 1.017 respectively.
+
+.. figure:: calculated_results.png
+   :alt: Calculated results
+
+   Calculated results
+
+Notice that the **Status** for the tests all show *No Tol Set*. This is
+because we haven't set reference values and tolerance/action levels for
+these tests. That procedure is `covered
+elsewhere <../../setting_refs_and_tols.html>`__.
+
+Wrapping Up
+~~~~~~~~~~~
+
+We have now gone through the basics of taking QATrack+ from a blank
+installation all the way to performing our first test list! Check out
+the `admin guide <../../guide.html>`__ (for configuration) and `users
+guide <../../../users/guide.html>`__\ (for end user instructions) for more
+information.

@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Notes on Security &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Notes on Security</a><ul>
+<li><a class="reference internal" href="#using-https-connections">Using https connections</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Notes on Security</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployment/security.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="notes-on-security">
+<h1>Notes on Security<a class="headerlink" href="#notes-on-security" title="Permalink to this headline">¶</a></h1>
+<p>Generally the <a class="reference external" href="about.html">example deployment options</a> are configured
+using http connections rather than https connections and it is important
+to consider the security implications of this.</p>
+<p>QATrack+ requires users to login to the system with a username and
+password. Since http requests are not secure the username &amp; password are
+transmitted over the wire in clear text making them susceptible to
+<a class="reference external" href="http://en.wikipedia.org/wiki/Packet_analyzer">sniffing</a>. QATrack+ is
+generally meant to run on secure intranets (e.g. everyone with access to
+the network is &#8220;trusted&#8221;) so this may or may not be a concern for you.</p>
+<p>If you are worried about password sniffing or other attacks, your server
+can be set up either to use encrypted connections using the https
+protocol or using <a class="reference external" href="windows/iisFastCGI.html">Single Sign On &amp; Integrated
+Authentication</a>. This is especially important
+if your site is exposed to external networks (e.g. the internet).</p>
+<p>Please discuss these issues with your IT team!</p>
+<div class="section" id="using-https-connections">
+<h2>Using https connections<a class="headerlink" href="#using-https-connections" title="Permalink to this headline">¶</a></h2>
+<p>Using https connections requires you to have an SSL certificate
+installed on your server. The exact implementation of this is left up to
+the person deploying your QATrack+ installation, but I am happy to give
+advice if I can on the <a class="reference external" href="https://groups.google.com/forum/#!forum/qatrack">QATrack+ google
+group</a>.</p>
+<p>SSL certificates can either be purchased from a commercial provider, or
+you can create self-signed certificates using <a class="reference external" href="http://technet.microsoft.com/en-us/library/cc753127(v=ws.10).aspx">Windows
+Server</a>
+or
+<a class="reference external" href="http://stackoverflow.com/questions/10175812/how-to-build-a-self-signed-certificate-with-openssl">OpenSSL</a>
+on Linux (Mac?).</p>
+<p>The simplest approach to using https is to have QATrack+ running on a
+WSGI server (Apache/ModWSGI, CherryPy, gunicorn, uwsgi etc) behind a
+reverse proxy (e.g. nginx, IIS, Apache) where your reverse proxy only
+accepts https connections and then forwards those requests as http to
+your WSGI server. This forces the decryption to happen in your reverse
+proxy and QATrack+ then does not need to concern itself with https
+itself. This is shown conceptually below.</p>
+<div class="figure" id="id1">
+<img alt="https connection" src="../_images/https.png" />
+<p class="caption"><span class="caption-text">https connection</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

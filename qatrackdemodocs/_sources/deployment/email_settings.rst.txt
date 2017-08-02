@@ -1,0 +1,136 @@
+QATrack+ email settings
+=======================
+
+QATrack+ has the ability to send `email
+notifications <../admin/email.html>`__ when tests are at action or
+tolerance levels. In order for this to function you need access to an
+SMTP server that can send the emails for you.
+
+In order to override the default settings, in your local\_settings.py
+file you should set the following variables appropriately.
+
+Email host settings
+-------------------
+
+-  ``EMAIL_HOST`` should be set to the SMTP host you are using (e.g.
+   'smtp.gmail.com' or 'smtp.mail.your.hospital')
+-  ``EMAIL_HOST_USER`` this is the default username of the account to
+   access the SMTP server
+-  ``EMAIL_HOST_PASSWORD`` this is the default account of the account to
+   access the SMTP server
+-  ``EMAIL_USE_TLS`` set to True to use secure connection when
+   connecting to the server
+-  ``EMAIL_PORT`` set to the port number to connect to the smtp server
+   on (25 if ``EMAIL_USE_TLS`` is False, 587 if True)
+
+Note that ``EMAIL_HOST_USER`` and ``EMAIL_HOST_PASSWORD`` can be set to
+None or "" if no authentication is required.
+
+An example of these settings for a secure connection is shown here (for
+gmail):
+
+::
+
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_HOST_USER = 'randle.taylor@gmail.com'
+    EMAIL_HOST_PASSWORD = 'my_very_secure_password'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+
+and for an unsecured connection:
+
+::
+
+    EMAIL_HOST = "MYHOSPITALSMTPSERVER"
+    EMAIL_HOST_USER = None
+    EMAIL_HOST_PASSWORD = None
+    EMAIL_USE_TLS = False
+    EMAIL_PORT = 25
+
+Notification specific settings
+------------------------------
+
+These settings allow you to override the default notification settings
+in your local\_settings.py file:
+
+-  ``EMAIL_NOTIFICATION_USER`` allows you to use a diferent user from
+   the default set above (set to None to use ``EMAIL_HOST_USER``)
+-  ``EMAIL_NOTIFICATION_PWD`` password to go along with
+   ``EMAIL_NOTIFICATION_USER``
+-  ``EMAIL_NOTIFICATION_SENDER`` name to use in the email "From" address
+-  ``EMAIL_NOTIFICATION_SUBJECT_TEMPLATE`` allows you to override the
+   default template to use for rendering the email subject line (see
+   below)
+-  ``EMAIL_NOTIFICATION_TEMPLATE`` allows you to override the default
+   template to use for rendering the email body (see below)
+
+An example of these settings is shown here:
+
+::
+
+    #-----------------------------------------------------------------------------
+    # Email and notification settings
+    EMAIL_NOTIFICATION_USER = None
+    EMAIL_NOTIFICATION_PWD = None
+    EMAIL_NOTIFICATION_SENDER = "Your Custom Name Here"
+    EMAIL_NOTIFICATION_SUBJECT_TEMPLATE = "my_custom_subject_template.txt"
+    EMAIL_NOTIFICATION_TEMPLATE = "my_custom_html_email.html"
+
+Email & Subject templates
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Emails are generated using `the Django template
+language <https://docs.djangoproject.com/en/dev/ref/templates/api/>`__
+with the following context available:
+
+-  ``test_list_instance`` The TestListInstance object containing
+   information about the test list and unit where the tests were being
+   performed.
+-  ``failing_tests`` a
+   `queryset <https://docs.djangoproject.com/en/dev/ref/models/querysets/>`__
+   of all tests that failed.
+-  ``tolerance_tests`` a
+   `queryset <https://docs.djangoproject.com/en/dev/ref/models/querysets/>`__
+   of all tests that are at tolerance level.
+
+To create your own templates, use the examples below as a starting point
+and save them in the qatrack/notifications/templates/ directory and set
+the filenames for the TEMPLATE settings above.
+
+An example subject template is shown below
+
+::
+
+    {{test_list_instance.work_completed|date:"DATE_FORMAT"}} - {{test_list_instance.unit_test_collection.unit.name }}, {{test_list_instance.test_list.name}} - {% if failing_tests %} Tests at Action: {{failing_tests.count}} {% endif %} {% if tolerance_tests %} Tests at Tolerance: {{tolerance_tests.count}} {% endif %}
+
+An example plain text email template is shown belwo
+
+::
+
+    === Notifications for {{test_list_instance.test_list.name}} ===
+
+    Test List : {{test_list_instance.test_list.name}}
+    Unit      : {{test_list_instance.unit_test_collection.unit.name}}
+    Date      : {{test_list_instance.work_completed }}
+
+    {% if failing_tests %}
+    Failing Tests
+    =============
+    {% for test_instance in failing_tests %}
+        Test  : {{test_instance.unit_test_info.test.name}}
+        Value : {{test_instance.value_display}}
+        Ref.  : {{test_instance.reference}}
+        Tol.  : {{test_instance.tolerance}}
+    {% endfor %}
+    {% endif %}
+
+    {% if tolerance_tests %}
+    Tests at Tolerance
+    ==================
+    {% for test_instance in tolerance_tests %}
+        Test  : {{test_instance.unit_test_info.test.name}}
+        Value : {{test_instance.value_display}}
+        Ref.  : {{test_instance.reference}}
+        Tol.  : {{test_instance.tolerance}}
+    {% endfor %}
+    {% endif %}

@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ with OS X Server’s Built-in Apache &amp; PostgreSQL &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+ with OS X Server&#8217;s Built-in Apache &amp; PostgreSQL</a><ul>
+<li><a class="reference internal" href="#setting-up-and-configuring-os-x">1. Setting up and configuring OS X</a></li>
+<li><a class="reference internal" href="#installing-git">2. Installing git</a></li>
+<li><a class="reference internal" href="#checking-out-the-qatrack-source-code">3. Checking out the QATrack+ source code</a></li>
+<li><a class="reference internal" href="#setting-up-the-website">4. Setting up the website</a></li>
+<li><a class="reference internal" href="#setting-up-our-python-environment">5. Setting up our python environment</a></li>
+<li><a class="reference internal" href="#setting-up-apache-mod-wsgi">6. Setting up Apache &amp; mod_wsgi</a></li>
+<li><a class="reference internal" href="#setting-up-a-database">7. Setting up a database</a></li>
+<li><a class="reference internal" href="#final-config-of-qatrack">8. Final config of QATrack+</a></li>
+<li><a class="reference internal" href="#temporary-workaround-downgrade-django">9. Temporary Workaround: Downgrade Django</a></li>
+<li><a class="reference internal" href="#final-word">10. Final word</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+ with OS X Server&#8217;s Built-in Apache &amp; PostgreSQL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/v/0.2.8/deployment/osx/osxinstall.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack-with-os-x-server-s-built-in-apache-postgresql">
+<h1>Deploying QATrack+ with OS X Server&#8217;s Built-in Apache &amp; PostgreSQL<a class="headerlink" href="#deploying-qatrack-with-os-x-server-s-built-in-apache-postgresql" title="Permalink to this headline">¶</a></h1>
+<p>This guide is going to walk you through installing QATrack+ on an OS X
+server with Apache as the web server and PostgreSQL as the database.</p>
+<p>The steps we will be undertaking are:</p>
+<ol class="arabic simple">
+<li>Setting up and configuring OS X</li>
+<li>Installing git</li>
+<li>Checking out the QATrack+ source code</li>
+<li>Setting up the website</li>
+<li>Setting up our python environment</li>
+<li>Setting up Apache &amp; mod_wsgi</li>
+<li>Setting up a database</li>
+<li>Final config of QATrack+</li>
+<li>Temporary Workaround: Downgrade Django</li>
+<li>Final word</li>
+</ol>
+<p>I will be using OS X 10.8 Server (Mountain Lion Server) for this guide.</p>
+<p>This guide assumes you have at least a basic level of familiarity with
+Linux/UNIX and the command line.</p>
+<div class="section" id="setting-up-and-configuring-os-x">
+<h2>1. Setting up and configuring OS X<a class="headerlink" href="#setting-up-and-configuring-os-x" title="Permalink to this headline">¶</a></h2>
+<p>Install OS X, OS X Server (if not yet done, then through the App Store),
+and then XCode (through the App Store). I believe that Xcode is required
+for its compilers, but you could install gcc and/or install other
+dependencies if you prefer. Xcode is also required to install Fink.</p>
+<p>Install the command line tools for Xcode. To do this open Xcode, enter
+preferences, downloads, and install.</p>
+<p>Install java, a requirement for Fink:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">javac</span>
+</pre></div>
+</div>
+<p>Install gfortran from <a class="reference external" href="http://prdownloads.sourceforge.net/hpc/gfortran-mlion.tar.gz?download">Install gfortran from gfortran-mlion.tar.gz
+(4.8)</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">gfortran</span><span class="o">-</span><span class="n">mlion</span><span class="o">.</span><span class="n">tar</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-git">
+<h2>2. Installing git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h2>
+<p>Git is the version control software that QATrack+ uses. To install git
+on OS X, download GIT from <a class="reference external" href="http://git-scm.com/download/mac">http://git-scm.com/download/mac</a> and install
+the .dmg package. (used Git 1.8.2.1 for this install).</p>
+<p>Note that the install requires that you allow applications downloaded
+from anywhere. This is a setting within System Preferences &#8211;&gt; Security
+&amp; Privacy on OS X.</p>
+<p>Next setup your git installation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;YourName&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;YourEmail@email.ca&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-out-the-qatrack-source-code">
+<h2>3. Checking out the QATrack+ source code<a class="headerlink" href="#checking-out-the-qatrack-source-code" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have git installed we can proceed to grab the latest version
+of QATrack+. To checkout the code enter the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">randlet</span><span class="nd">@bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tohccmedphys</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">.</span><span class="n">git</span>
+<span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;qatrackplus&#39;</span><span class="o">...</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">7727</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">2248</span><span class="o">/</span><span class="mi">2248</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Total</span> <span class="mi">7727</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">5519</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">7192</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">5128</span><span class="p">)</span>
+<span class="n">Receiving</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">7727</span><span class="o">/</span><span class="mi">7727</span><span class="p">),</span> <span class="mf">2.17</span> <span class="n">MiB</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Resolving</span> <span class="n">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">5519</span><span class="o">/</span><span class="mi">5519</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-the-website">
+<h2>4. Setting up the website<a class="headerlink" href="#setting-up-the-website" title="Permalink to this headline">¶</a></h2>
+<p>I don&#8217;t know why, but apache within OS X doesn&#8217;t deal well with the
+wsgi.py file. I believe that it may be as simple as expecting a .wsgi
+suffix to the file.</p>
+<p>A simple workaround:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="n">wsgi</span><span class="o">.</span><span class="n">py</span> <span class="n">qatrack</span><span class="o">.</span><span class="n">wsgi</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Config</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">httpd_qatrack</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Options ExecCGI</span>
+<span class="c1"># Options +Indexes</span>
+
+<span class="n">WSGIScriptAlias</span> <span class="o">/</span>  <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">qatrack</span><span class="o">.</span><span class="n">wsgi</span>
+<span class="c1">#WSGIPythonPath /</span>
+<span class="n">WSGIApplicationGroup</span> <span class="o">%</span><span class="p">{</span><span class="n">GLOBAL</span><span class="p">}</span>
+
+
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">&gt;</span>
+<span class="n">Order</span> <span class="n">deny</span><span class="p">,</span><span class="n">allow</span>
+<span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+
+<span class="n">alias</span> <span class="o">/</span><span class="n">static</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">static</span>
+</pre></div>
+</div>
+<p>(Exit, save file (buffer)).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Config</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">webapps</span><span class="o">/</span><span class="n">com</span><span class="o">.</span><span class="n">qatrack</span><span class="o">.</span><span class="n">webapp</span><span class="o">.</span><span class="n">qatrack</span><span class="o">.</span><span class="n">plist</span>
+</pre></div>
+</div>
+<p>enter the following text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-7&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+        &lt;key&gt;name&lt;/key&gt;
+        &lt;string&gt;com.qatrack.webapp.qatrack&lt;/string&gt;
+        &lt;key&gt;displayName&lt;/key&gt;
+        &lt;string&gt;QATrackPlus WebApp&lt;/string&gt;
+        &lt;key&gt;launchKeys&lt;/key&gt;
+        &lt;array/&gt;
+        &lt;key&gt;proxies&lt;/key&gt;
+        &lt;dict/&gt;
+        &lt;key&gt;installationIndicatorFilePath&lt;/key&gt;
+        &lt;string&gt;/Library/Server/Web/Data/WebApps/qatrackplus/qatrack/qatrack.wsgi&lt;/string&gt;
+        &lt;key&gt;includeFiles&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;/Library/Server/Web/Config/apache2/httpd_qatrack.conf&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;requiredModuleNames&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;wsgi_module&lt;/string&gt;
+        &lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></div>
+</div>
+<p>Exit, save file (buffer).</p>
+<p>Open the OS X Server App. Select Websites</p>
+<p>There may be a default website created on your server&#8217;s host. Assuming
+that you don&#8217;t want to keep this, remove it so that you are left with
+just &#8216;Server Website&#8217; and &#8216;Server Website (SSL)&#8217;. To remove it, just
+select it and click on the minus sign.</p>
+<p>Ensure that &#8216;Enable Python web applications&#8217; is enabled, and of course,
+that the Websites server is turned on.</p>
+<p>Select Server Website and click the pencil to edit settings. Click Edit
+Advanced Settings... Disable the Python &#8220;Hello World&#8221; app Enable the
+QATrackPlus WebApp</p>
+</div>
+<div class="section" id="setting-up-our-python-environment">
+<h2>5. Setting up our python environment<a class="headerlink" href="#setting-up-our-python-environment" title="Permalink to this headline">¶</a></h2>
+<p>If you wish to install virtualenv, this would be the time to do so.
+Follow the instructions that are shown for the linux instructions (and
+please update this wiki). For this test environment I am operating a
+single virtual server therefore am not in need of having multiple Python
+environments.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">easy_install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>Change back to the location where we checked out the source code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>In that directory there is a directory with text files
+(requirements/base.txt, requirements/optional.txt) that list the
+required Python packages for QATrack+. A little prep work is required to
+get them to install correctly. After you install all the required libs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">optional</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-apache-mod-wsgi">
+<h2>6. Setting up Apache &amp; mod_wsgi<a class="headerlink" href="#setting-up-apache-mod-wsgi" title="Permalink to this headline">¶</a></h2>
+<p>The next step to take is to configure the Apache web server. Apache and
+mod_wsgi can be installed with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Server</span><span class="o">/</span><span class="n">Web</span><span class="o">/</span><span class="n">Data</span><span class="o">/</span><span class="n">WebApps</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">qatrack</span><span class="o">.</span><span class="n">wsgi</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">WSGI config for qatrack project.</span>
+
+<span class="sd">This module contains the WSGI application used by Django&#39;s development server</span>
+<span class="sd">and any production WSGI deployments. It should expose a module-level variable</span>
+<span class="sd">named ``application``. Django&#39;s ``runserver`` and ``runfcgi`` commands discover</span>
+<span class="sd">this application via the ``WSGI_APPLICATION`` setting.</span>
+
+<span class="sd">Usually you will have the standard Django WSGI application here, but it also</span>
+<span class="sd">might make sense to replace the whole Django WSGI application with a custom one</span>
+<span class="sd">that later delegates to the Django one. For example, you could introduce WSGI</span>
+<span class="sd">middleware here, or combine a Django application with an application of another</span>
+<span class="sd">framework.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Library/Server/Web/Data/WebApps&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Library/Server/Web/Data/WebApps/qatrackplus&#39;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;DJANGO_SETTINGS_MODULE&quot;</span><span class="p">,</span> <span class="s2">&quot;qatrack.settings&quot;</span><span class="p">)</span>
+
+<span class="c1"># This application object is used by any WSGI server configured to use this</span>
+<span class="c1"># file. This includes Django&#39;s development server, if the WSGI_APPLICATION</span>
+<span class="c1"># setting points here.</span>
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="k">import</span> <span class="n">get_wsgi_application</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span>
+
+<span class="c1"># Apply WSGI middleware here.</span>
+<span class="c1"># from helloworld.wsgi import HelloWorldApplication</span>
+<span class="c1"># application = HelloWorldApplication(application)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">serveradmin</span> <span class="n">stop</span> <span class="n">web</span>
+<span class="n">sudo</span> <span class="n">serveradmin</span> <span class="n">start</span> <span class="n">web</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-a-database">
+<h2>7. Setting up a database<a class="headerlink" href="#setting-up-a-database" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
+</pre></div>
+</div>
+<p>Start the embedded Postgres:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">serveradmin</span> <span class="n">start</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">_postgres</span> <span class="n">psql</span> <span class="n">template1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">template1</span><span class="o">=</span><span class="c1"># CREATE USER qatrack with PASSWORD &#39;qatrackpass&#39;;</span>
+<span class="n">CREATE</span> <span class="n">ROLE</span>
+
+<span class="n">template1</span><span class="o">=</span><span class="c1"># CREATE DATABASE qatrackdb;</span>
+<span class="n">CREATE</span> <span class="n">DATABASE</span>
+
+<span class="n">template1</span><span class="o">=</span><span class="c1"># GRANT ALL PRIVILEGES ON DATABASE qatrackdb to qatrack;</span>
+<span class="n">GRANT</span>
+<span class="n">template1</span><span class="o">=</span>\<span class="n">q</span><span class="c1">#</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">serveradmin</span> <span class="n">stop</span> <span class="n">postgres</span>
+<span class="n">sudo</span> <span class="n">serveradmin</span> <span class="n">start</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-config-of-qatrack">
+<h2>8. Final config of QATrack+<a class="headerlink" href="#final-config-of-qatrack" title="Permalink to this headline">¶</a></h2>
+<p>Next (we&#8217;re almost done, I promise!) we need to tell QATrack+ how to
+connect to our database.</p>
+<p>Create a file called local_settings.py in
+/Library/Server/Web/Data/WebApps/qatrackplus/qatrack/ and put the
+following Python code in it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;America/Halifax&#39;</span>
+
+<span class="n">MEDIA_URL</span> <span class="o">=</span> <span class="s1">&#39;/qatrackplus/media/&#39;</span>
+<span class="c1"># STATIC_URL = &#39;/qatrack/static/&#39;</span>
+<span class="c1"># LOGIN_EXEMPT_URLS = [r&quot;^accounts/&quot;,]</span>
+<span class="n">LOGIN_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">&#39;/qatrackplus/qa/unit/&#39;</span>
+<span class="n">LOGIN_URL</span> <span class="o">=</span> <span class="s2">&quot;/qatrackplus/accounts/login/&quot;</span>
+
+<span class="n">FIXTURE_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;qatrack/fixtures/&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span> <span class="c1"># Add &#39;postgresql_psycopg2&#39;, &#39;mysql&#39;, &#39;sqlite3&#39; or &#39;oracle&#39;.</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackdb&#39;</span><span class="p">,</span>                      <span class="c1"># Or path to database file if using sqlite3.</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrack&#39;</span><span class="p">,</span>                      <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackpass&#39;</span><span class="p">,</span>                  <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for localhost. Not used with sqlite3.</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for default. Not used with sqlite3.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And then create the tables in your database via sycndb/migrate</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+</pre></div>
+</div>
+<p>We also need to collect all our static files in a single location for
+Apache to serve (answer &#8216;yes&#8217; when asked)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py collectstatic
+</pre></div>
+</div>
+</div>
+<div class="section" id="temporary-workaround-downgrade-django">
+<h2>9. Temporary Workaround: Downgrade Django<a class="headerlink" href="#temporary-workaround-downgrade-django" title="Permalink to this headline">¶</a></h2>
+<p>from the google groups (thanks Doug &amp; Randle):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">django</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">==</span><span class="mf">1.4</span>
+</pre></div>
+</div>
+<p>This step will be removed at some point...</p>
+<p>BUT: pip install django==1.4 has the line: Requested django==1.4, but
+installing version 1.5.1.</p>
+<p>SO: downloaded and installed Django from
+<a class="reference external" href="https://www.djangoproject.com/download/">https://www.djangoproject.com/download/</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xzvf</span> <span class="n">Django</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">Django</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="n">x</span>
+<span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-word">
+<h2>10. Final word<a class="headerlink" href="#final-word" title="Permalink to this headline">¶</a></h2>
+<p>There are a lot of steps getting everything set up so don&#8217;t be
+discouraged if everything doesn&#8217;t go completely smoothly! If you run
+into trouble, please get in touch with me on the <a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/qatrack">QATrack+ mailing
+list</a> and
+I can help you out.</p>
+<ol class="upperalpha simple" start="18">
+<li>Taylor - Feb 2012</li>
+</ol>
+<ol class="upperalpha simple" start="5">
+<li>Reynard - May 2013</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

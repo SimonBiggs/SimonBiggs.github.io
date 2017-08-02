@@ -1,0 +1,65 @@
+A step-by-step introduction to QATrack+ administration (continued)
+==================================================================
+
+`(Previous Page) <test_list_start_to_finish.html>`__
+
+Return to the main admin page and click on the **Units** link under the
+**Units** section.
+
+.. figure:: units_section.png
+   :alt: Units section on main admin page
+
+   Units section on main admin page
+
+From here click on the **Add unit** button in the top right hand corner.
+
+.. figure:: add_unit.png
+   :alt: Adding a new unit
+
+   Adding a new unit
+
+Enter ``1`` for the **Number** and ``Test Unit`` for the **Name** field.
+We will leave the **Serial Number**, **Location** and **Install date**
+blank for now. You will notice that the **Type** dropdown is empty since
+we haven't defined any unit types yet.
+
+Clicking on the green cross beside **Type** will bring up a dialogue box
+where we can create a new type of unit. Fill in ``Synergy S``,
+``Elekta``, and ``Synergy S`` for the **Name** (i.e. the display name
+for this unit type), **Vendor** and **Model** fields respectively and
+then click **Save**.
+
+.. figure:: add_unit_type.png
+   :alt: Defining a new unit type
+
+   Defining a new unit type
+
+Since there are no modalities yet defined, we will need to add some
+before we can save our unit.
+
+Click the little green cross beside the **Modalities** input and in the
+dialogue box that pops up, choose the ``Photon`` modality type, and
+enter ``6`` in the **Energy** input before clicking **Save**. Repeat
+these steps to add a 15MV modality as well.
+
+You are now finished configuring your first unit and it should look
+similar to the image below:
+
+.. figure:: completed_unit.png
+   :alt: completed unit
+
+   completed unit
+
+Clicking **Save** will take you back to the units listing page where you
+should see your ``Test Unit`` listed.
+
+.. figure:: unit_listing.png
+   :alt: Units listing
+
+   Units listing
+
+If you need to edit this unit in future, navigate to this page and click
+on the name of the unit you want to edit.
+
+In the `next step of the tutorial <test_list_start_to_finish_3.html>`__ we
+will create a new user group and a couple fo test statuses.

@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Test List Cycles &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Configuring Test List Cycles</a><ul>
+<li><a class="reference internal" href="#creating-a-new-test-list-cycle">Creating a new Test List Cycle</a></li>
+<li><a class="reference internal" href="#name">Name</a></li>
+<li><a class="reference internal" href="#slug">Slug</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#test-list-cycle-memberships">Test list cycle memberships</a></li>
+<li><a class="reference internal" href="#removing-a-list-from-a-test-list-cycle">Removing a list from a test list cycle</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuring Test List Cycles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.7/admin/test_list_cycles.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-test-list-cycles">
+<h1>Configuring Test List Cycles<a class="headerlink" href="#configuring-test-list-cycles" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>test list cycle</strong> allows you to group multiple <a class="reference external" href="test_lists.html">test
+lists</a> into a single repeating cycle that can be
+assigned to a unit.</p>
+<p>For example, at our clinic, on a number of units, the therapists daily
+QA is on a repeating 2 or 4 day cycle where the actual tests they
+perform vary slightly by day. A test list cycle allows us to handle this
+situation without the therapists having to keep track of which day was
+done last.</p>
+<p>For a 4 day cycle, you would create 4 separate test lists (e.g. Morning
+Outputs Day 1, Morning Outputs Day 2, Morning Outputs Day 3, Morning
+Outputs Day 4) and then create a Test List Cycle made up of those 4 Test
+Lists. You would then assign that Test List Cycle to the unit with a
+daily frequency, rather than assigning each of the 4 test lists
+individually.</p>
+<p>When a user performs a Test List Cycle, it checks which test list in the
+cycle was performed last and automatically presents them with the tests
+in the next days test list. So if Day 2 was performed yesterday, they
+will be presented with the Day 3 tests today. You can also manually
+override which day you want to perform.</p>
+<p>Defining a test list cycle is described below.</p>
+<div class="section" id="creating-a-new-test-list-cycle">
+<h2>Creating a new Test List Cycle<a class="headerlink" href="#creating-a-new-test-list-cycle" title="Permalink to this headline">¶</a></h2>
+<p>From the main admin page select the <strong>Test list cycles</strong> page and click
+the <strong>Add test list cycle</strong> button in the top right corner of the page.
+The fields for defining a test list cycle are described below.</p>
+</div>
+<div class="section" id="name">
+<h2>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>A descriptive name that will be displayed in listings of test-lists.</p>
+</div>
+<div class="section" id="slug">
+<h2>Slug<a class="headerlink" href="#slug" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#slugfield">slug is a URL friendly short
+label</a>
+for a test list. It should consist of only letters, numbers, underscores
+and hyphens.</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><em>Optional</em></p>
+<p>A concise description of what this test list is for.</p>
+</div>
+<div class="section" id="test-list-cycle-memberships">
+<h2>Test list cycle memberships<a class="headerlink" href="#test-list-cycle-memberships" title="Permalink to this headline">¶</a></h2>
+<p>To add a test list to your cycle click the magnifying glass beside the
+first text box uder the <strong>Test list cycle memberships</strong> section. (Note
+prior to version 0.2.6 you first need to click the <strong>Add another Test
+List Cycle Membership</strong> link to create a new row in the <strong>Test list
+cycle memberships</strong> list.)</p>
+<div class="figure" id="id1">
+<img alt="Search for test list" src="../../../_images/test_list_cycle_search1.png" />
+<p class="caption"><span class="caption-text">Search for test list</span></p>
+</div>
+<p>This will bring up a dialogue box where you can search or navigate to
+the test list that you want to add to your cycle.</p>
+<div class="figure" id="id2">
+<img alt="Test List Cycle Search Results" src="../../../_images/test_list_cycle_search_results1.png" />
+<p class="caption"><span class="caption-text">Test List Cycle Search Results</span></p>
+</div>
+<p>Clicking on the name of the test list you want to add will close the
+dialogue and add the test list to your cycle. Repeat these steps until
+you have added all the required test lists to your cycle.</p>
+<div class="figure" id="id3">
+<img alt="Test List Cycle ID's" src="../../../_images/cycle_memberships1.png" />
+<p class="caption"><span class="caption-text">Test List Cycle ID&#8217;s</span></p>
+</div>
+<p>Once you have added all your test lists, click the <strong>Save and continue
+editing</strong> button and confirm all your test lists are present and in the
+correct order.</p>
+<div class="figure" id="id4">
+<img alt="Test List Cycle after save" src="../../../_images/cycle_memberships_saved1.png" />
+<p class="caption"><span class="caption-text">Test List Cycle after save</span></p>
+</div>
+<p>If you need to reorder the test lists you can do so by dragging and
+dropping the test list rows into a different order and then saving the
+changes.</p>
+</div>
+<div class="section" id="removing-a-list-from-a-test-list-cycle">
+<h2>Removing a list from a test list cycle<a class="headerlink" href="#removing-a-list-from-a-test-list-cycle" title="Permalink to this headline">¶</a></h2>
+<p>To remove a test list from a cycle, click the checkbox under the
+<strong>Delete</strong> column of the <strong>Test list cycle memberships</strong> listing and
+then save the cycle.</p>
+<div class="figure" id="id5">
+<img alt="Removing a test list from a cycle" src="../../../_images/alter_cycle1.png" />
+<p class="caption"><span class="caption-text">Removing a test list from a cycle</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

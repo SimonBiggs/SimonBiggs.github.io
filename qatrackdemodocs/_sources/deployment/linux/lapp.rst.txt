@@ -1,0 +1,511 @@
+Deploying QATrack+ with Linux Apache & PostgreSQL
+=================================================
+
+This guide is going to walk you through installing QATrack+ on a Linux
+server with Apache as the web server and PostgreSQL as the database.
+
+The steps we will be undertaking are:
+
+1. Installing and configuring git
+2. Checkout the latest release of the QATrack+ source code from
+   bitbucket.
+3. Setting up our Python environment (including virtualenv)
+4. Making sure everything is working up to this point
+5. Installing Apache web server and mod\_wsgi and then configuring it to
+   serve our QATrack+ site.
+6. Installing the PostgreSQL (or MySQL) database server and setting up a
+   database for QATrack+
+7. Final configuration of QATrack+
+
+I will be using Ubuntu 12.04 LTS for this guide but steps should be
+similar on other versions of Ubuntu or other Linux systems.
+
+This guide assumes you have at least a basic level of familiarity with
+Linux and the command line.
+
+1. Installing git
+-----------------
+
+Git is the version control software that QATrack+ uses. To install git
+on Ubuntu run the following command:
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ sudo apt-get install git
+
+Next setup your git installation:
+
+::
+
+    #!bash
+    git config --global user.name "randlet"
+    git config --global user.email rataylor@toh.on.ca
+
+2. Checking out the QATrack+ source code
+----------------------------------------
+
+Now that we have git installed we can proceed to grab the latest version
+of QATrack+. To checkout the code enter the following commands:
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ mkdir ~/web
+    (qatrack)randlet@ubuntu:~$ cd ~/web
+    (qatrack)randlet@ubuntu:~/web$ git clone https://randlet@bitbucket.org/tohccmedphys/qatrackplus.git
+    Cloning into 'qatrackplus'...
+    remote: Counting objects: 6897, done.
+    remote: Compressing objects: 100% (2042/2042), done.
+    remote: Total 6897 (delta 4895), reused 6605 (delta 4705)
+    Receiving objects: 100% (6897/6897), 2.07 MiB, done.
+    Resolving deltas: 100% (4895/4895), done.
+    (qatrack)randlet@ubuntu:~/web$
+
+3. Setting up our python environment
+------------------------------------
+
+This tutorial is going to make use of
+`virtualenv <http://pypi.python.org/pypi/virtualenv>`__ which allows you
+to easily manage multiple Python environments on a single server. This
+is not strictly required but is considered a best practice in the Python
+world.
+
+To install virtualenv:
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ sudo apt-get install python-setuptools
+    randlet@ubuntu:~$ sudo easy_install pip
+    randlet@ubuntu:~$ sudo pip install virtualenv==1.9
+
+Now that we have virtualenv installed we will create a new Python
+environment for QATrack+.
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ mkdir ~/venvs
+    randlet@ubuntu:~$ virtualenv ~/venvs/qatrack
+
+To activate our new environment:
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ source ~/venvs/qatrack/bin/activate
+    (qatrack)randlet@ubuntu:~$ which python
+    /home/randlet/venvs/qatrack/bin/python
+    (qatrack)randlet@ubuntu:~$
+
+Change back to the location where we checked out the source code:
+
+::
+
+    #!bash
+
+    randlet@ubuntu:~$ cd ~/web/qatrackplus
+
+In that directory there is a directory with text files
+(requirements/base.txt, requirements/optional.txt) that list the
+required Python packages for QATrack+. A little prep work is required to
+get them to install correctly. Enter the following commands to install
+the preliminary libraries:
+
+::
+
+    #!bash
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install build-essential gfortran
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install python-dev
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install libatlas-dev libatlas-base-dev liblapack-dev
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install libpng12-dev libfreetype6 libfreetype6-dev
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get build-dep python-matplotlib
+
+After you install all the required libs:
+
+::
+
+    #!bash
+    pip install -r requirements/base.txt
+    pip install numpy
+    pip install scipy
+    pip install -r requirements/optional.txt
+
+4. Making sure everything is working so far
+-------------------------------------------
+
+Before we move on to installing a proper web server and database we will
+pause to make sure everything is working correctly at this point.
+
+From the main qatrack directory enter the following commands
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ mkdir db
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+
+When running syncdb you will be asked if you want to create a superuser.
+Answer yes and then enter a username and password.
+
+Once that has finished running enter the following command:
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+
+You should now have temporary sqlite database that can be used to verify
+our setup has been going well. Next we will start the builtin (for
+testing purposes) webserver and see if we can access our site/
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver
+    Validating  models...
+
+    0 errors found
+    Django version 1.4, using settings 'qatrack.settings'
+    Development server is running at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+If you now visit 127.0.0.1:8000 in a browser you should be redirected to
+a QATrack+ login page.
+
+After you have confirmed you can view the site, quit the server by
+hitting CTRL-C.
+
+    Note: depending on your setup, you may need to modify your firewall
+    and use runserver something like the following:
+
+    ::
+
+        (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver MYSERVERNAME:8000
+
+    for example, I am using an Amazon EC2 instance for this tutorial, so
+    I had to open port 8000 in the firewall and use the following
+    runserver command:
+
+    ::
+
+        (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver ec2-54-242-252-245.compute-1.amazonaws.com:8000
+        Validating models...
+
+        0 errors found
+        Django version 1.4, using settings 'qatrack.settings'
+        Development server is running at http://ec2-54-242-252-245.compute-1.amazonaws.com:8000/
+
+5. Installing Apache & mod\_wsgi
+--------------------------------
+
+The next step to take is to install and configure the Apache web server.
+Apache and mod\_wsgi can be installed with the following commands, also
+enable mod\_rewrite:
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install apache2 libapache2-mod-wsgi
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo a2enmod rewrite
+
+Next we can setup Apache to serve our Django site...edit
+/etc/apache2/httpd.conf so it looks like the following (making sure the
+paths are correct for your setup).
+
+::
+
+    #!bash
+    WSGIScriptAlias / /home/randlet/web/qatrackplus/qatrack/wsgi.py
+    WSGIPythonPath /
+    WSGIApplicationGroup %{GLOBAL}
+    WSGIPythonHome /home/randlet/venvs/qatrack
+
+    <Directory /home/randlet/web/qatrackplus>
+    Order deny,allow
+    Allow from all
+    </Directory>
+
+    alias /static /home/randlet/web/qatrackplus/qatrack/static
+    alias /media /home/randlet/web/qatrackplus/qatrack/media
+
+    If you want to host QATrack+ somewhere other than the root of your
+    server (e.g. you want to host the QATrack+ application at
+    http://myserver/qatrackplus/), you will need to include the
+    following lines in your qatrack/local\_settings.py file
+
+    ::
+
+        LOGIN_REDIRECT_URL = "/qatrackplus/qa/unit/"
+        LOGIN_URL = "/qatrackplus/accounts/login/"
+
+    and set up a couple more rules in your Apache config. A (slightly
+    modified) example provided by Darcy Mason is included below.
+
+    ::
+
+        RewriteEngine On
+
+        # First let anything starting with qadb already pass through
+        RewriteRule ^/qatrackplus(.*)$ /qatrackplus/$1 [PT,L]
+
+        # Similarly, anything with /static prefix should pass through unchanged
+
+        RewriteRule ^/static(.*)$ /home/randlet/web/qatrackplus/qatrack/static$1 [PT]
+        RewriteRule ^/media(.*)$ /home/randlet/web/qatrackplus/qatrack/media$1 [PT]
+
+        # Anything else needs a url prefixed with /qatrackplus/
+        RewriteRule ^/qa(.*)$ /qatrackplus/qa$1 [PT]
+
+
+        #Then the /qatrackplus url is pointed to Django through mod-wsgi:
+
+        WSGIScriptAlias /qatrackplus /home/randlet/web/qatrackplus/qatrack/wsgi.py
+
+        WSGIPythonPath /qatrackplus/
+
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIPythonHome /home/randlet/venvs/qatrack
+
+        <Directory /home/randlet/web/qatrackplus/qatrack>
+
+        <Files wsgi.py>
+
+        Order deny,allow
+
+        Allow from all
+
+        </Files>
+
+        </Directory>
+
+
+        alias /static /home/randlet/web/qatrackplus/qatrack/static
+
+*Note I am certainly no Apache expert so I am probably ignoring many
+Apache/mod\_wsgi best practices here ;) If someone wants to make
+improvements that would be great!*
+
+Now edit the file ~/web/qatrackplus/qatrack/wsgi.py so it looks like the
+following (again making sure the paths are appropriate for your setup)
+
+::
+
+    #!python
+
+    """
+    WSGI config for qatrack project.
+
+    This module contains the WSGI application used by Django's development server
+    and any production WSGI deployments. It should expose a module-level variable
+    named ``application``. Django's ``runserver`` and ``runfcgi`` commands discover
+    this application via the ``WSGI_APPLICATION`` setting.
+
+    Usually you will have the standard Django WSGI application here, but it also
+    might make sense to replace the whole Django WSGI application with a custom one
+    that later delegates to the Django one. For example, you could introduce WSGI
+    middleware here, or combine a Django application with an application of another
+    framework.
+
+    """
+    import os
+    import sys
+
+    sys.path.append('/home/randlet/web/qatrackplus')
+
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "qatrack.settings")
+
+    # This application object is used by any WSGI server configured to use this
+    # file. This includes Django's development server, if the WSGI_APPLICATION
+    # setting points here.
+    from django.core.wsgi import get_wsgi_application
+    application = get_wsgi_application()
+
+    # Apply WSGI middleware here.
+    # from helloworld.wsgi import HelloWorldApplication
+    # application = HelloWorldApplication(application)
+
+Now restart apache:
+
+::
+
+    #!bash
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo service apache2 restart
+     * Restarting web server apache2
+     ... waiting ..........   ...done.
+
+If you visit your site again in the browser you should see the QATrack+
+login page (it's okay if you see a yellow OperationalError page as
+well...it just means the path to the temporary database is not correct
+but Apache is working correctly.)
+
+If you get an internal server error or the site doesn't appear to load,
+check the Apache error log files for more information (default location
+is /var/log/apache2/error.log).
+
+6. Setting up a database
+------------------------
+
+If Apache is working correctly at this point, we can move on and set up
+a database. The official Django recommendation is PostgreSQL but MySQL
+will work fine as well. Choose whichever one you are more comfortable
+with.
+
+PostgreSQL
+~~~~~~~~~~
+
+Install PostgreSQL and the Python adapter:
+
+::
+
+    #!bash
+
+    sudo apt-get install postgresql libpq-dev
+    pip install psycopg2
+
+Now we can create and configure a user and database for QATrack+:
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo -u postgres psql template1
+    psql (9.1.7)
+    Type "help" for help.
+
+    template1=# ALTER USER postgres with encrypted password 'your_pg_password';
+    ALTER ROLE
+    template1=# CREATE DATABASE qatrackdb;
+    CREATE DATABASE
+    template1=# CREATE USER qatrack with PASSWORD 'qatrackpass';
+    CREATE ROLE
+    template1=# GRANT ALL PRIVILEGES ON DATABASE qatrackdb to qatrack;
+    GRANT
+    template1=\q#
+
+Now edit /etc/postgresql/9.1/main/pg\_hba.conf and scroll down to the
+bottom and change the two instances of ``peer`` to `.html5`` so it looks
+like:
+
+::
+
+    #!bash
+
+    # Database administrative login by Unix domain socket
+    local   all             postgres                               .html5
+
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+    # "local" is for Unix domain socket connections only
+    local   all             all                                    .html5
+    # IPv4 local connections:
+    host    all             all             127.0.0.1/32           .html5
+    # IPv6 local connections:
+    host    all             all             ::1/128                .html5
+
+and restart the pg server:
+
+::
+
+    #!bash
+    sudo service postgresql restart
+
+MySQL
+~~~~~
+
+Install MySQL and the Python adapter:
+
+::
+
+    #!bash
+
+    sudo apt-get install mysql-server libmysqlclient-dev
+    pip install mysql-python
+
+Now we can create and configure a user and database for QATrack+:
+
+::
+
+    #!bash
+    mysql -u root -p
+
+and then enter the following commands in the MySQL shell:
+
+::
+
+    #!bash
+    CREATE DATABASE qatrackdb;
+    GRANT ALL ON qatrackdb.* TO 'qatrack'@'localhost' IDENTIFIED BY 'qatrackpass';
+    quit
+
+7. Final config of QATrack+
+---------------------------
+
+Next (we're almost done, I promise!) we need to tell QATrack+ how to
+connect to our database.
+
+Create a file called local\_settings.py in ~/web/qatrackplus/qatrack/
+and put the following Python code in it (choose the correct engine -
+postgreqal\_psycopg2 or mysql):
+
+::
+
+    #!python
+
+    DEBUG = False
+    TEMPLATE_DEBUG=False
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'qatrackdb',                      # Or path to database file if using sqlite3.
+            'USER': 'qatrack',                      # Not used with sqlite3.
+            'PASSWORD': 'qatrackpass',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+
+And then create the tables in your database via sycndb/migrate
+
+::
+
+    #!bash
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py loaddata fixtures/defaults/*/*
+
+We also need to collect all our static files in a single location for
+Apache to serve (answer 'yes' when asked)
+
+::
+
+    #!bash
+
+    (qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py collectstatic
+
+8. Final word
+-------------
+
+There are a lot of steps getting everything set up so don't be
+discouraged if everything doesn't go completely smoothly! If you run
+into trouble, please get in touch with me on the `QATrack+ mailing
+list <https://groups.google.com/forum/?fromgroups#!forum/qatrack>`__ and
+I can help you out.
+
+R. Taylor - Feb 2012
+
+9. References
+-------------
+
+http://bailey.st/blog/2012/05/02/ubuntu-django-postgresql-and-nginx-a-rock-solid-web-stack/

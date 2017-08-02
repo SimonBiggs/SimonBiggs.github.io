@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ with Windows, Apache &amp; PostgreSQL &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+ with Windows, Apache &amp; PostgreSQL</a><ul>
+<li><a class="reference internal" href="#note-this-guide-is-still-in-progress">Note this guide is still in progress</a><ul>
+<li><a class="reference internal" href="#installing-git">1. Installing git</a></li>
+<li><a class="reference internal" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">2. Checkout the latest release of QATrack+ source code from bitbucket</a></li>
+<li><a class="reference internal" href="#setting-up-our-python-environment">3. Setting up our Python environment</a></li>
+<li><a class="reference internal" href="#checking-everything-is-functional-so-far">4. Checking everything is functional so far</a></li>
+<li><a class="reference internal" href="#creating-a-database-with-postgressql">5. Creating a database with PostgresSQL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-qatrack-to-use-your-new-database">Configuring QATrack+ to use your new database</a><ul>
+<li><a class="reference internal" href="#configuring-apache-to-serve-qatrack">6. Configuring Apache to Serve QATrack+</a></li>
+<li><a class="reference internal" href="#wrap-up">8. Wrap Up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+ with Windows, Apache &amp; PostgreSQL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deployment/windows/wapp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack-with-windows-apache-postgresql">
+<h1>Deploying QATrack+ with Windows, Apache &amp; PostgreSQL<a class="headerlink" href="#deploying-qatrack-with-windows-apache-postgresql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="note-this-guide-is-still-in-progress">
+<h2>Note this guide is still in progress<a class="headerlink" href="#note-this-guide-is-still-in-progress" title="Permalink to this headline">¶</a></h2>
+<p>This guide is going to walk you through installing QATrack+ on a Windows
+Desktop with the Apache Webserver and PostgreSQL database.</p>
+<ol class="arabic simple">
+<li>Installing and configuring git</li>
+<li>Checkout the latest release of the QATrack+ source code from
+bitbucket.</li>
+<li>Setting up our Python environment (including virtualenv)</li>
+<li>Making sure everything is working up to this point</li>
+<li>Setting up a database with PostgreSQL &amp; pgAdmin</li>
+<li>Configuring Apache &amp; mod_wsgi</li>
+<li>Wrap up</li>
+</ol>
+<div class="section" id="installing-git">
+<h3>1. Installing git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h3>
+<p>Go to <a class="reference external" href="http://git-scm.com">http://git-scm.com</a> and download the latest version of git
+(msysgit) for Windows (Git-1.8.1.2-preview20130201 at the time of
+writing). Run the installer. I just leave all the settings on their
+defaults but you are free to modify them if you like.</p>
+<p>Step 1 done ;)</p>
+</div>
+<div class="section" id="checkout-the-latest-release-of-qatrack-source-code-from-bitbucket">
+<h3>2. Checkout the latest release of QATrack+ source code from bitbucket<a class="headerlink" href="#checkout-the-latest-release-of-qatrack-source-code-from-bitbucket" title="Permalink to this headline">¶</a></h3>
+<p>From the Start Menu look for the Git folder under All Programs and
+select Git Bash. This will open up a console window which we will be
+using fairly heavily for the rest of the process. (Note: this is a
+fairly full featured bash shell and is a lot more powerful than the
+default windows command prompt).</p>
+<p>To create a home for QATrack+ and check out the source code, use the
+following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+
+<span class="n">mkdir</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tohccmedphys</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-our-python-environment">
+<h3>3. Setting up our Python environment<a class="headerlink" href="#setting-up-our-python-environment" title="Permalink to this headline">¶</a></h3>
+<p><em>Note all Python packages should be 32 bit versions even on 64 bit
+machines</em></p>
+<p>Go to <a class="reference external" href="http://www.python.org/download/">http://www.python.org/download/</a> and download the <em>32 bit</em> Python
+2.7.X Windows Installer for Python (current version is 2.7.3 at the time
+of writing &#8211; QATrack+ does not currently support Python3). Go through
+the installer using the default options (Install for all users).</p>
+<p>Next go to <a class="reference external" href="http://pypi.python.org/pypi/setuptools#files">http://pypi.python.org/pypi/setuptools#files</a> and download and
+run the MS Windows Installer (setuptools-0.6c11.win32-py2.7.exe at the
+time of writing)</p>
+<p>We now need to download Scipy, matplotlib and pywin32. Go to
+<a class="reference external" href="http://sourceforge.net/projects/scipy/files/scipy/0.11.0/">http://sourceforge.net/projects/scipy/files/scipy/0.11.0/</a> and download
+the win32 superpack (eg scipy-0.11.0-win32-superpack-python27.exe. Save
+it in C:<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\deploy`</span></a>&nbsp;or somewhere else you can remember.
+Likewise, visit <a class="reference external" href="http://matplotlib.org/downloads.html">http://matplotlib.org/downloads.html</a> and download the
+latest 32 bit version of matplotlib for Windows
+(matplotlib-1.2.0.win32-py2.7.exe at the time of writing). Visit
+<a class="reference external" href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/">http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/</a> and
+download pywin32-218.win32-py2.7.exe. Finally visit
+<a class="reference external" href="http://www.stickpeople.com/projects/python/win-psycopg">http://www.stickpeople.com/projects/python/win-psycopg</a> and download
+psycopg2-2.5.2.win32-py2.7-pg9.2.6-release.exe.</p>
+<p>You will also want to add Python to your PATH environment variable. The
+process is slightly different depending on if you are on XP or something
+newer but the gist of it is: * Right click on My Computer * Select
+Advanced (or Advanced System Settings) * Select Environment Variables
+* Select Path under the System variables section and then click edit *
+<strong>Append</strong>
+;C:<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\Python`27;C::raw-latex:`</span></a>Python`27:raw-latex:<a href="#id5"><span class="problematic" id="id6">`</span></a>Scripts <a href="#id7"><span class="problematic" id="id8">`</span></a>to
+the end of the path. Don&#8217;t overwrite the existing value! * Click
+Ok/Ok/Ok</p>
+<p>Close the git bash command prompt you had open before and then open a
+new one (this will give you access to the updated PATH variable).</p>
+<p>In your new git bash window the command <code class="docutils literal"><span class="pre">which</span> <span class="pre">python</span></code> should return
+<code class="docutils literal"><span class="pre">/c/Python27/python</span></code>. If it doesn&#8217;t then your PATH variable has not
+been set correctly.</p>
+<p>We&#8217;re now ready to install all the libraries QATrack+ depends on. To
+install them, run the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span>
+<span class="n">easy_install</span> <span class="n">pip</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span><span class="o">==</span><span class="mf">1.9</span>
+<span class="n">mkdir</span> <span class="n">venvs</span>
+<span class="n">virtualenv</span> <span class="n">venvs</span><span class="o">/</span><span class="n">qatrack</span>
+<span class="n">source</span> <span class="n">venvs</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">Scripts</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">easy_install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.7</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">scipy</span><span class="o">-</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">win32</span><span class="o">-</span><span class="n">superpack</span><span class="o">-</span><span class="n">python2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="mf">0.</span><span class="n">win32</span><span class="o">-</span><span class="n">py2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">pywin32</span><span class="o">-</span><span class="mf">218.</span><span class="n">win32</span><span class="o">-</span><span class="n">py2</span><span class="o">.</span><span class="mf">7.</span><span class="n">exe</span>
+<span class="n">easy_install</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">psycopg2</span><span class="o">-</span><span class="mf">2.5</span><span class="o">.</span><span class="mf">2.</span><span class="n">win32</span><span class="o">-</span><span class="n">py2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">pg9</span><span class="o">.</span><span class="mf">2.6</span><span class="o">-</span><span class="n">release</span><span class="o">.</span><span class="n">exe</span>
+<span class="n">cd</span> <span class="n">qatrackplus</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">optional</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">win</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-everything-is-functional-so-far">
+<h3>4. Checking everything is functional so far<a class="headerlink" href="#checking-everything-is-functional-so-far" title="Permalink to this headline">¶</a></h3>
+<p>Getting everything installed was a pain, so lets take a minute and check
+everything is now functioning as it should: create a directory called
+&#8216;db&#8217; in the main qatrackplus directory and then setup a temporary
+database for testing (answer &#8216;yes&#8217; and create a super user when
+prompted).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span>
+<span class="n">mkdir</span> <span class="n">db</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">fixtures</span><span class="o">/</span><span class="n">defaults</span><span class="o">/*/*</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+<p>You should now be able to run the built in test server and access your
+QATrack+ site for the first time! At the command prompt type the
+following to start the server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+<p>You should then be able to open a browser window and visit
+<a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> where you will be redirected to a login page (you
+can login using the superuser you created earlier).</p>
+<p>In the terminal hit <code class="docutils literal"><span class="pre">Ctrl+C</span></code> to kill the server.</p>
+</div>
+<div class="section" id="creating-a-database-with-postgressql">
+<h3>5. Creating a database with PostgresSQL<a class="headerlink" href="#creating-a-database-with-postgressql" title="Permalink to this headline">¶</a></h3>
+<p>Visit the <a class="reference external" href="http://www.enterprisedb.com/products-services-training/pgdownload#windows">EDB download
+page</a>
+and download the Postgres 9.x.x installer for your version of Windows
+(i.e. x86-32 or x86-64).</p>
+<p>Run the installer, accepting the default options.</p>
+<p>From the start menu find and open pgAdminIII (under the PostgreSQL
+folder).</p>
+<p>In the Object Browser frame, right click the PostgreSQL 9.X server,
+click &#8216;Connect&#8217;, and enter the password you used when you set up
+PostgreSQL.</p>
+<div class="figure" id="id13">
+<img alt="Connect to PostgreSQL server" src="../../_images/pg_connect.png" />
+<p class="caption"><span class="caption-text">Connect to PostgreSQL server</span></p>
+</div>
+<p>Right click on the <code class="docutils literal"><span class="pre">Login</span> <span class="pre">Roles</span></code> item and select
+<code class="docutils literal"><span class="pre">New</span> <span class="pre">Login</span> <span class="pre">Role...</span></code>.</p>
+<div class="figure" id="id14">
+<img alt="New Login Role" src="../../_images/new_login.png" />
+<p class="caption"><span class="caption-text">New Login Role</span></p>
+</div>
+<p>In the Properties tab enter <code class="docutils literal"><span class="pre">qatrack</span></code> for the Role name and then click
+the Definition tab and enter a password (e.g. <code class="docutils literal"><span class="pre">qatrackpass</span></code>). On the
+Role Privleges enable the <code class="docutils literal"><span class="pre">Can</span> <span class="pre">create</span> <span class="pre">databases</span></code> option and then click
+OK.</p>
+<div class="figure" id="id15">
+<img alt="QATrack login role" src="../../_images/login_role.png" />
+<p class="caption"><span class="caption-text">QATrack login role</span></p>
+</div>
+<p>Next right click on the Databases item and select <code class="docutils literal"><span class="pre">New</span> <span class="pre">Database...</span></code>.</p>
+<div class="figure" id="id16">
+<img alt="Creating a new db" src="../../_images/new_pg_db.png" />
+<p class="caption"><span class="caption-text">Creating a new db</span></p>
+</div>
+<p>Enter <code class="docutils literal"><span class="pre">qatrackdb</span></code> as the Name and select <code class="docutils literal"><span class="pre">qatrack</span></code> as the Owner then
+click OK.</p>
+<div class="figure" id="id17">
+<img alt="Creating QATrack db" src="../../_images/qatrack_pg_db.png" />
+<p class="caption"><span class="caption-text">Creating QATrack db</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-qatrack-to-use-your-new-database">
+<h2>Configuring QATrack+ to use your new database<a class="headerlink" href="#configuring-qatrack-to-use-your-new-database" title="Permalink to this headline">¶</a></h2>
+<p>Create a file called local_settings.py in
+/c/deploy/qatrackplus/qatrack/ and add the following contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span> <span class="c1"># Add &#39;postgresql_psycopg2&#39;, &#39;mysql&#39;, &#39;sqlite3&#39; or &#39;oracle&#39;.</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackdb&#39;</span><span class="p">,</span>                      <span class="c1"># Or path to database file if using sqlite3.</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrack&#39;</span><span class="p">,</span>                      <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackpass&#39;</span><span class="p">,</span>                  <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for localhost. Not used with sqlite3.</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for default. Not used with sqlite3.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once again, we will configure our new PostgreSQL database from the
+command prompt (answer &#8216;yes&#8217; and create a super user when prompted):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">fixtures</span><span class="o">/</span><span class="n">defaults</span><span class="o">/*/*</span>
+</pre></div>
+</div>
+<div class="section" id="configuring-apache-to-serve-qatrack">
+<h3>6. Configuring Apache to Serve QATrack+<a class="headerlink" href="#configuring-apache-to-serve-qatrack" title="Permalink to this headline">¶</a></h3>
+<p>Django&#8217;s built in web server that we used earlier is not meant to be
+used in production. Instead we will be using Apache2 &amp; mod_wsgi to
+serve QATrack+. Visit an Apache download mirror site (e.g.
+<a class="reference external" href="http://apache.marz.ca//httpd/binaries/win32/">http://apache.marz.ca//httpd/binaries/win32/</a>) and download and run
+httpd-2.2.25-win32-x86-openssl-0.9.XX.msi.</p>
+<p>Enter your computers network domain name (or computer name as shown in
+the screenshot below). <img alt="Configure Apache Server" src="../../_images/configure_apache.png" /> and then complete the
+installer with the default values.</p>
+<p>You should now be able to visit <a class="reference external" href="http://localhost/">http://localhost/</a> or
+<a class="reference external" href="http://yourcomputername/">http://yourcomputername/</a> and see an &#8220;It works!&#8221; page.</p>
+<div class="figure" id="id18">
+<img alt="Apache &quot;it works&quot; page" src="../../_images/it_works.png" />
+<p class="caption"><span class="caption-text">Apache &#8220;it works&#8221; page</span></p>
+</div>
+<p>Next we need to install mod_wsgi for Apache. Visit
+<a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#mod_wsgi">http://www.lfd.uci.edu/~gohlke/pythonlibs/#mod_wsgi</a> and download
+mod_wsgi-3.4.ap22.win32-py2.7.zip. Unzip the file and copy
+<code class="docutils literal"><span class="pre">mod_wsgi.so</span></code> to the <code class="docutils literal"><span class="pre">modules</span></code> directory of your Apache installation
+(e.g. C:<a href="#id9"><span class="problematic" id="id10">:raw-latex:`\Program `Files (x86):raw-latex:`</span></a>Apache <cite>Software
+Foundation:raw-latex:</cite>Apache`2.2:raw-latex:<cite>modules `or
+C::raw-latex:</cite>Program <cite>Files:raw-latex:</cite>Apache <cite>Software
+Foundation:raw-latex:</cite>Apache`22:raw-latex:<cite>modules</cite>)[1].</p>
+<p>In the folder Apache Software
+Foundation:raw-latex:<cite>Apache`2.2:raw-latex:</cite>conf <a href="#id11"><span class="problematic" id="id12">`</span></a>there is a file
+called httpd.conf. Open that file in a text editor and look for the
+section of LoadModule` statements and add the following line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">LoadModule</span> <span class="n">wsgi_module</span> <span class="n">modules</span><span class="o">/</span><span class="n">mod_wsgi</span><span class="o">.</span><span class="n">so</span>
+</pre></div>
+</div>
+<p>now go to the bottom of the file and enter the line</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Include</span> <span class="s2">&quot;c:/deploy/qatrackplus/apache/apache_django_wsgi.conf&quot;</span>
+</pre></div>
+</div>
+<p>Now create a new folder called <code class="docutils literal"><span class="pre">apache</span></code> in the
+<code class="docutils literal"><span class="pre">C:\deploy\qatrackplus\</span></code> folder. In that folder you will create the
+following two files:</p>
+<ol class="arabic simple">
+<li>Create a file called django.wsgi
+(<code class="docutils literal"><span class="pre">C:\deploy\qatrackplus\apache\django.wsgi</span></code>) and put the following
+contents in it:</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c:/deploy/qatrackplus&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;c:/deploy/qatrackplus/qatrack&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;qatrack.settings&#39;</span>
+
+
+<span class="c1"># Activate your virtual env</span>
+<span class="n">activate_env</span><span class="o">=</span><span class="s2">&quot;c:/deploy/venvs/qatrack/Scripts/activate_this.py&quot;</span>
+<span class="n">execfile</span><span class="p">(</span><span class="n">activate_env</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">__file__</span><span class="o">=</span><span class="n">activate_env</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">django.core.handlers.wsgi</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">wsgi</span><span class="o">.</span><span class="n">WSGIHandler</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Create a file called apache_django_wsgi.conf
+(<code class="docutils literal"><span class="pre">C:\deploy\qatrackplus\apache\apache_django_wsgi.conf</span></code>) with the
+following content:</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Alias</span> <span class="o">/</span><span class="n">static</span>  <span class="s2">&quot;C:/deploy/qatrackplus/qatrack/static&quot;</span>
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">static</span><span class="o">&gt;</span>
+    <span class="n">Order</span> <span class="n">allow</span><span class="p">,</span><span class="n">deny</span>
+    <span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+
+<span class="n">Alias</span> <span class="o">/</span><span class="n">media</span> <span class="s2">&quot;C:/deploy/qatrackplus/qatrack/media&quot;</span>
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span><span class="o">/</span><span class="n">qatrack</span><span class="o">/</span><span class="n">media</span><span class="o">&gt;</span>
+    <span class="n">Order</span> <span class="n">allow</span><span class="p">,</span><span class="n">deny</span>
+    <span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+
+<span class="n">WSGIApplicationGroup</span> <span class="o">%</span><span class="p">{</span><span class="n">GLOBAL</span><span class="p">}</span>
+<span class="n">WSGIScriptAlias</span> <span class="o">/</span><span class="n">qatrack</span> <span class="s2">&quot;c:/deploy/qatrackplus/apache/django.wsgi&quot;</span>
+
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="s2">&quot;c:/deploy/qatrackplus/apache&quot;</span><span class="o">&gt;</span>
+<span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">80</span><span class="o">&gt;</span>
+    <span class="n">DocumentRoot</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span><span class="n">deploy</span><span class="o">/</span><span class="n">qatrackplus</span>
+    <span class="n">ServerName</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+<span class="o">&lt;/</span><span class="n">VirtualHost</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Add the following three lines to the bottom of the <code class="docutils literal"><span class="pre">local_settings.py</span></code>
+file you created earlier:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+
+<span class="n">FORCE_SCRIPT_NAME</span><span class="o">=</span><span class="s2">&quot;/qatrack&quot;</span>
+<span class="n">LOGIN_REDIRECT_URL</span> <span class="o">=</span> <span class="s2">&quot;/qatrack/qa/unit/&quot;</span>
+<span class="n">LOGIN_URL</span> <span class="o">=</span> <span class="s2">&quot;/qatrack/accounts/login/&quot;</span>
+</pre></div>
+</div>
+<p>Now restart the Apache server (Start-&gt;All Programs-&gt;Apache HTTP
+Server-&gt;Control Apache Server-&gt;Restart)</p>
+<p>You should now be able to visit <a class="reference external" href="http://yourcomputername/qatrack/">http://yourcomputername/qatrack/</a> and
+login to QATrack+ using the superuser name and password you created
+earlier!</p>
+</div>
+<div class="section" id="wrap-up">
+<h3>8. Wrap Up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h3>
+<p>This guide has shown you one method of deploying QATrack+ on Windows
+using free and/or open source.software! If you&#8217;re stuck with a Windows
+stack it will likely work for you! Hit me up on the <a class="reference external" href="https://groups.google.com/forum/?fromgroups=#!forum/qatrack">QATrack+ Google
+Group</a>
+if you want to discuss some other alternatives for deploying on Windows.</p>
+<p>References:</p>
+<p>[1] <a class="reference external" href="http://stackoverflow.com/a/11602894/79802">http://stackoverflow.com/a/11602894/79802</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

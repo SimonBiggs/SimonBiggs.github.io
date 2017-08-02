@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Test Lists &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Configuring Test Lists</a><ul>
+<li><a class="reference internal" href="#name">Name</a></li>
+<li><a class="reference internal" href="#slug">Slug</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#sublists">Sublists</a><ul>
+<li><a class="reference internal" href="#test-list-memberships">Test List memberships</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reordering-tests-within-a-test-list">Reordering Tests within a test list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuring Test Lists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/v/0.2.7/admin/test_lists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-test-lists">
+<h1>Configuring Test Lists<a class="headerlink" href="#configuring-test-lists" title="Permalink to this headline">¶</a></h1>
+<p>To edit existing test lists or create new test lists click on the <strong>Test
+Lists</strong> in the <strong>QA</strong> section on the main admin page.</p>
+<p>Create a new test list by clicking the <strong>Add Test List</strong> link on the
+<strong>Test Lists</strong> admin page. The fields for defining a new test list are
+described below.</p>
+<div class="section" id="name">
+<h2>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>A descriptive name that will be displayed in listings of test-lists.</p>
+</div>
+<div class="section" id="slug">
+<h2>Slug<a class="headerlink" href="#slug" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#slugfield">slug is a URL friendly short
+label</a>
+for a test list. It should consist of only letters, numbers, underscores
+and hyphens.</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><em>Optional</em></p>
+<p>A concise description of what this test list is for.</p>
+</div>
+<div class="section" id="sublists">
+<h2>Sublists<a class="headerlink" href="#sublists" title="Permalink to this headline">¶</a></h2>
+<p><em>Optional</em></p>
+<p>Test lists can be composed of both individual <a class="reference external" href="tests.html">tests</a> as
+well as including the tests from another test list. To include all the
+tests from another test list simply move the test list who&#8217;s test you
+want want to include from the <strong>Available sublists</strong> to the <strong>Chosen
+sublists</strong>.</p>
+<div class="section" id="test-list-memberships">
+<h3>Test List memberships<a class="headerlink" href="#test-list-memberships" title="Permalink to this headline">¶</a></h3>
+<p>In order to add a test to your test list, click the magnifying glass
+beside the first text box under the <strong>Test</strong> header.</p>
+<div class="figure" id="id1">
+<img alt="search for test" src="../../../_images/search_for_test1.png" />
+<p class="caption"><span class="caption-text">search for test</span></p>
+</div>
+<p>This will bring up a dialogue box that you can use to search for the
+test you want to add (or create a new one).</p>
+<div class="figure" id="id2">
+<img alt="Search results" src="../../../_images/search_results1.png" />
+<p class="caption"><span class="caption-text">Search results</span></p>
+</div>
+<p>Once you&#8217;ve found the test you want to add, clicking on its name will
+close the dialogue box and add the test to your test list.</p>
+<div class="figure" id="id3">
+<img alt="Test added to list" src="../../../_images/test_added_to_list1.png" />
+<p class="caption"><span class="caption-text">Test added to list</span></p>
+</div>
+<p>If you now click the <strong>Save and continue editing</strong> button at the bottom
+of the page, you will see the name of your test next to its id number.</p>
+<div class="figure" id="id4">
+<img alt="Test added and saved" src="../../../_images/test_added_and_saved1.png" />
+<p class="caption"><span class="caption-text">Test added and saved</span></p>
+</div>
+<p>Continue to add tests in this fashion (you can add many tests without
+saving in between) until you have added all the required tests.</p>
+<p>When you are finished click **Save and continue editing* and confirm
+that all your tests are present. See the section below for instructions
+on how to reorder the tests if required.</p>
+</div>
+</div>
+<div class="section" id="reordering-tests-within-a-test-list">
+<h2>Reordering Tests within a test list<a class="headerlink" href="#reordering-tests-within-a-test-list" title="Permalink to this headline">¶</a></h2>
+<p>Tests can easily be reordered by dragging and dropping a tests row into
+a new position in the list. After you have finished reordering click
+<strong>Save and continue editing</strong> and ensure all your tests are now in the
+correct order.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

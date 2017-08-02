@@ -1,0 +1,89 @@
+Deploying QATrack+
+==================
+
+A note about security
+~~~~~~~~~~~~~~~~~~~~~
+
+Before deploying QATrack+ in the clinic, please take the time to read
+about security & QATrack+ on the `security notes page <security.html>`__.
+
+Deployment Options
+~~~~~~~~~~~~~~~~~~
+
+Django applications like QATrack+ are `typically deployed on a Linux
+server using PostgreSQL or MySQL as the
+database <https://docs.djangoproject.com/en/dev/howto/deployment/>`__.
+If your department has Linux support/experience this is the recommended
+way to deploy QATrack+.
+
+That said, at TOHCC we are primarily a Microsoft based clinic and
+therefore have deployed QATrack+ using Windows Server 2008R2 and
+SQLServer2008 and have been generally happy with this setup.
+
+Deployment on a Mac server is also relatively straightforward.
+
+Below you can find a number of guides (works in progress) for a variety
+of platforms.
+
+-  `Linux/Apache/PostgreSQL(or MySQL) <linux/lapp.html>`__
+   (**recommended**)
+-  `Windows Server/IIS/CherryPy/SQL Server <windows/iis.html>`__ (TOHCC's
+   current setup serving 2 campuses & 100+ users)
+-  `Windows Server/IIS/SQL Server <windows/iisFastCGI.html>`__ (Full MS
+   implementation with SSO/Integrated Authentication)
+-  `Windows Desktop/Apache/PostgreSQL <windows/wapp.html>`__ (Run QATrack+
+   from a Windows desktop)
+-  `Windows Desktop/Apache/MySQL <windows/wamp.html>`__ (Run QATrack+ from
+   a Windows desktop)
+-  `OS X Server(ML)/Apache/PostgreSQL <osx/osxinstall.html>`__
+
+Python Environment (virtualenv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The deployment guides above make use of Python's
+`http://www.virtualenv.org/ <virtualenv>`__ to isolate the QATrack+
+Python environment from the system Python version. While not strictly
+required it is considered a "best practice" in the Python community and
+allows multiple applications requiring different library versions to run
+side by side on the same server. You will want to always remember to
+activate the QATrack+ virtualenv (explained in the deployment guides)
+before installing, upgrading or managing your QATrack+ installation.
+
+Hosting at a non root url
+-------------------------
+
+*(new in v0.2.6)*
+
+If you want to host your QATrack+ installation at a non root directory
+of your server than you need to set FORCE\_SCRIPT\_NAME in your
+local\_settings.py file to the location of your QATrack+ installation.
+If for example your QATrack+ installation is configured to live at
+http://yourservername/qatrack then you need to include lines like:
+
+::
+
+    #!python
+    FORCE_SCRIPT_NAME = "/qatrack"
+    LOGIN_URL = "/qatrack/accounts/login/"
+    LOGIN_REDIRECT_URL = "/qatrack/qa/unit/"
+
+Note that the leading slash is required but no trailing slash should be
+included.
+
+You may also need to modify your server configuration slightly (url
+rewrites etc.) to account for the difference.
+
+Configuring QATrack+ for your needs
+-----------------------------------
+
+There are lots of settings in QATrack+ that can be tweaked to meet the
+specific needs of your clinic. Some of the most common ones are
+described below (in progress!). Generally the qatrack/settings.py file
+should be left alone and any customizations for your clinic should be
+placed in a qatrack/local\_settings.py file.
+
+-  `Using Active Directory for User
+   Authentication <active_directory.html>`__
+-  `QATrack+ email settings <email_settings.html>`__
+-  `QATrack+ local settings <settings.html>`__
+-  `QATrack+ custom css rules <site_css.html>`__

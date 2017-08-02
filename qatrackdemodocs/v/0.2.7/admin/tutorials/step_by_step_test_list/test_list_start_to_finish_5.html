@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>A step-by-step introduction to QATrack+ administration (continued) &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../../../index.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">A step-by-step introduction to QATrack+ administration (continued)</a><ul>
+<li><a class="reference internal" href="#creating-the-test-list">Creating the test list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>A step-by-step introduction to QATrack+ administration (continued)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/v/0.2.7/admin/tutorials/step_by_step_test_list/test_list_start_to_finish_5.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="a-step-by-step-introduction-to-qatrack-administration-continued">
+<h1>A step-by-step introduction to QATrack+ administration (continued)<a class="headerlink" href="#a-step-by-step-introduction-to-qatrack-administration-continued" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="test_list_start_to_finish_4.html">(Previous Page)</a></p>
+<p>In this part of the tutorial we will create a test list made up of the 6
+tests we defined in the previous part of this tutorial.</p>
+<div class="section" id="creating-the-test-list">
+<h2>Creating the test list<a class="headerlink" href="#creating-the-test-list" title="Permalink to this headline">¶</a></h2>
+<p>To create the test list, visit the <strong>Test Lists</strong> link under the <strong>QA</strong>
+section from the main admin page and then click on <strong>Add test list</strong> in
+the top right hand corner.</p>
+<p>Give the test list the name <em>Machine Output</em> and slug <em>machine-output</em>.
+We will ignore the description and sublist fields for now.</p>
+<p>Under the <strong>Test list memberships</strong> section click on green cross/<em>Add
+another Test list membership</em> link at the bottom to make a 6th text box
+appear. Now click the first magnifying glass and click on the
+<em>Temperature</em> test in the window that pops up.</p>
+<div class="figure" id="id1">
+<img alt="Selecting a test" src="../../../../../_images/select_test1.png" />
+<p class="caption"><span class="caption-text">Selecting a test</span></p>
+</div>
+<p>Repeat this step for the other 5 tests we defined at which point the
+<em>Test list memberships</em> section should look like:</p>
+<div class="figure" id="id2">
+<img alt="Test list memberships" src="../../../../../_images/memberships1.png" />
+<p class="caption"><span class="caption-text">Test list memberships</span></p>
+</div>
+<p>If you now click <strong>Save and continue editing</strong> the memberships section
+should show the actual tets names (and macro names):</p>
+<div class="figure" id="id3">
+<img alt="Test list memberships" src="../../../../../_images/memberships_after_save1.png" />
+<p class="caption"><span class="caption-text">Test list memberships</span></p>
+</div>
+<p>That&#8217;s it! Now that we&#8217;ve created our tests and test list we can assign
+it to the <a class="reference external" href="test_list_start_to_finish_2.html">unit we created earlier</a>.
+This is covered in the <a class="reference external" href="test_list_start_to_finish_6.html">next step of this
+tutorial</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

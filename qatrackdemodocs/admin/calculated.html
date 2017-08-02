@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tests with Calculated Results &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Tests with Calculated Results</a></li>
+<li><a class="reference internal" href="#composite-tests">Composite Tests</a><ul>
+<li><a class="reference internal" href="#the-composite-calculation-environment">The composite calculation environment</a></li>
+<li><a class="reference internal" href="#composite-tests-made-up-of-other-composite-tests">Composite tests made up of other composite tests</a></li>
+<li><a class="reference internal" href="#a-note-about-division-for-people-familiar-with-python">A note about division for people familiar with Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#string-composite-tests">String Composite Tests</a></li>
+<li><a class="reference internal" href="#upload-tests">Upload Tests</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Tests with Calculated Results</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/admin/calculated.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tests-with-calculated-results">
+<h1>Tests with Calculated Results<a class="headerlink" href="#tests-with-calculated-results" title="Permalink to this headline">¶</a></h1>
+<p>There are currently three test types that allow you to calculate test
+results using snippets of Python code. These tests include <em>Composite</em>,
+<em>String Composite</em> &amp; <em>Upload</em>.</p>
+</div>
+<div class="section" id="composite-tests">
+<h1>Composite Tests<a class="headerlink" href="#composite-tests" title="Permalink to this headline">¶</a></h1>
+<p>Composite tests allow you to do calculations to produce a numberical
+test result based on other test values ( e.g. to calculate a dose based
+on a raw electrometer reading and temperature &amp; pressure ). When you
+select <em>Composite</em> for the test <em>Type</em> field, a <em>Calculation Procedure</em>
+box will be displayed.</p>
+<p>In this box you must enter a snippet of Python code where you must set
+the value of this tests macro name. Two examples are shown below, first,
+a one liner to calculate a temperature-pressure correction factor:</p>
+<p><em>Note that in QATrack+ versions prior to 0.2.7 the last line of code had
+to be a line that set a``result`` variable to the final calculated
+result. This is no longer the recommended way to use composite tests
+although it is still supported for backwards compatability.</em></p>
+<div class="figure" id="id1">
+<img alt="Temperature Pressure Correction Calculation" src="../_images/ftp_procedure.png" />
+<p class="caption"><span class="caption-text">Temperature Pressure Correction Calculation</span></p>
+</div>
+<p>and second a slightly more complicated multi-line snippet that collects
+a group of readings and calculates the average value of them.</p>
+<div class="figure" id="id2">
+<img alt="Average Reading Procedure" src="../_images/avg_reading_procedure.png" />
+<p class="caption"><span class="caption-text">Average Reading Procedure</span></p>
+</div>
+<p>Note that in both the previous examples the snippets depend on the
+values of other tests. In the first, <code class="docutils literal"><span class="pre">temp_solid_water</span></code>,
+<code class="docutils literal"><span class="pre">raw_pressure</span></code> and <code class="docutils literal"><span class="pre">temp_corr</span></code> are the <strong>macro names</strong> corresponding
+to <em>Temperature</em>, <em>Pressure</em> and <em>Pressure Correction</em> tests. Likewise
+in the second snippet, the average reading result depends on ten other
+tests (Readings 1 through 10 with macro names <code class="docutils literal"><span class="pre">r1,</span> <span class="pre">r2...r10</span></code>).</p>
+<p>While the previous two examples are fairly simple, all the control
+structures of the Python programming language are available including
+loops, if-else statements, list comprehensions etc.</p>
+<div class="section" id="the-composite-calculation-environment">
+<h2>The composite calculation environment<a class="headerlink" href="#the-composite-calculation-environment" title="Permalink to this headline">¶</a></h2>
+<p>When your script (calculation procedure) is executed, it has access to</p>
+<ol class="arabic simple">
+<li>the current value of all the tests in the current test list being
+performed</li>
+<li>the <a class="reference external" href="http://docs.python.org/2/library/math.html">Python math
+module</a>, along with
+<a class="reference external" href="http://www.numpy.org/">NumPy</a> and
+<a class="reference external" href="http://www.scipy.org/">SciPy</a>.</li>
+<li>A META variable which is a dictionary of some potentially useful
+information about the test list currently being performed including:</li>
+</ol>
+<ul class="simple">
+<li>test_list_name - Name of current test list</li>
+<li>unit_number - Unit number</li>
+<li>cycle_day - Current cycle day being performed (Always 1 for
+non-cycle test lists)</li>
+<li>work_completed - Python datetime object with current work_completed
+value</li>
+<li>work_started - Python datetime object with current work_started
+value</li>
+<li>username - Username of person performing test</li>
+</ul>
+<p>The snippet below shows a composite calculation which takes advantage of
+the SciPy stats library to perform a linear regression and return the
+intercept as the result.</p>
+<div class="figure" id="id3">
+<img alt="Example procedure using Scipy" src="../_images/scipy_procedure.png" />
+<p class="caption"><span class="caption-text">Example procedure using Scipy</span></p>
+</div>
+<p>NumPy and SciPy provide access to a huge number of robust and fast
+mathematical functions and it is highly recommended you look through
+their documentation to see what is available.</p>
+<p>An example calculation procedure using the META variable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">unit_number</span> <span class="o">=</span> <span class="n">META</span><span class="p">[</span><span class="s2">&quot;unit_number&quot;</span><span class="p">]</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">META</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;bob&#39;</span> <span class="ow">and</span> <span class="n">unit_number</span> <span class="o">==</span> <span class="mi">42</span><span class="p">:</span>
+    <span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="composite-tests-made-up-of-other-composite-tests">
+<h2>Composite tests made up of other composite tests<a class="headerlink" href="#composite-tests-made-up-of-other-composite-tests" title="Permalink to this headline">¶</a></h2>
+<p>QATrack+ has a primitive <a class="reference external" href="http://en.wikipedia.org/wiki/Topological_sorting">dependency
+resolution</a> system
+and it is therefore safe to create composite values that depend on other
+composite values as they will be calculated in the correct order.</p>
+</div>
+<div class="section" id="a-note-about-division-for-people-familiar-with-python">
+<h2>A note about division for people familiar with Python<a class="headerlink" href="#a-note-about-division-for-people-familiar-with-python" title="Permalink to this headline">¶</a></h2>
+<p>In Python versions 2.x the calculation <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">1/2</span></code> will result in <code class="docutils literal"><span class="pre">a</span></code>
+being set to the value <code class="docutils literal"><span class="pre">0</span></code> and not 0.5 like many people would expect.
+This is because Python2.x uses <a class="reference external" href="http://en.wikipedia.org/wiki/Integer_division#Division_of_integers">integer
+division</a>
+by default. This behaviour can be overridden so that
+<code class="docutils literal"><span class="pre">(1/2</span> <span class="pre">==</span> <span class="pre">0.5)</span> <span class="pre">==</span> <span class="pre">True</span></code> in Python by adding
+<code class="docutils literal"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">division</span></code> to the top of your Python script.</p>
+<p><code class="docutils literal"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">division</span></code> <strong>is automatically added to every
+composite calculation procedure. If you specifically require integer
+division you must explicitly use the floor division operator, two
+forward slashes (//)</strong></p>
+<p>This was done to cut down on confusion caused by people unfamiliar with
+the way Python handles division as well as provide compatability with
+the 3.x versions of Python in the future.</p>
+</div>
+</div>
+<div class="section" id="string-composite-tests">
+<h1>String Composite Tests<a class="headerlink" href="#string-composite-tests" title="Permalink to this headline">¶</a></h1>
+<p>The String Composite test type are the same as the Composite test type
+described above with the exception that the calculated value should be a
+string rather than a number. An example Composite String test is shown
+below.</p>
+<div class="figure" id="id4">
+<img alt="Example String Composite procedure" src="../_images/string_composite_procedure.png" />
+<p class="caption"><span class="caption-text">Example String Composite procedure</span></p>
+</div>
+</div>
+<div class="section" id="upload-tests">
+<h1>Upload Tests<a class="headerlink" href="#upload-tests" title="Permalink to this headline">¶</a></h1>
+<p>Upload test types allow the user to attach arbitrary files (text,
+images, spreadsheets etc) which can then be analyzed with a Python
+snippet similar to the composite tests above. The uploaded file object
+is made available in the calculation context with the variable name
+<code class="docutils literal"><span class="pre">FILE</span></code> (more information on file objects is available <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#file-objects">in the Python
+documentation</a>.</p>
+<p>The calculation procedure can return any JSON serializable object
+(number, string, list, dict etc) and then (optionally) other composite
+tests can make use of the returned results. An example of this is given
+below.</p>
+<p>Imagine we have a text file with the following contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">01</span><span class="o">/</span><span class="mi">01</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">25.1</span>
+<span class="mi">01</span><span class="o">/</span><span class="mi">02</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">23.2</span>
+<span class="mi">01</span><span class="o">/</span><span class="mi">03</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">25.2</span>
+<span class="mi">01</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">24.0</span>
+<span class="mi">01</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">24.0</span>
+<span class="mi">01</span><span class="o">/</span><span class="mi">06</span><span class="o">/</span><span class="mi">2013</span><span class="p">,</span> <span class="mf">25.5</span>
+</pre></div>
+</div>
+<p>Where the first column is some dates and the second column is
+temperature. For our test list we want to upload this file and calculate
+and save the average (Average Temperature) , max (Maximum Temperature)
+and min temperatures (Minimum Temperature).</p>
+<p>First we define our upload test and procedure for analyzing the file. We
+will call our Upload test <code class="docutils literal"><span class="pre">Temperatures</span></code> and give it a macro name of
+<code class="docutils literal"><span class="pre">temp_stats</span></code>.</p>
+<p>The calculation procedure we will use is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">FILE</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span>            <span class="c1"># ignore any line without temperature data</span>
+        <span class="n">date</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="c1"># split up the line into date and temperature columns</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>   <span class="c1"># strip whitespace and convert to float</span>
+        <span class="n">temperatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>    <span class="c1"># add temp to our list</span>
+
+<span class="c1"># set our macro_name to a dictionary containing the values</span>
+<span class="c1"># we are interested in</span>
+<span class="n">temp_stats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">temperatures</span><span class="p">),</span>
+    <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">temperatures</span><span class="p">),</span>
+    <span class="s2">&quot;avg&quot;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="figure" id="id5">
+<img alt="Example upload test type" src="../_images/upload_test_type.png" />
+<p class="caption"><span class="caption-text">Example upload test type</span></p>
+</div>
+<p>We can then define three composite tests to store our calculated
+results. The calculation procedure required for Average Temp is simply
+<code class="docutils literal"><span class="pre">avg_temp</span> <span class="pre">=</span> <span class="pre">temp_stats['avg']</span></code> and the complete test definition is
+shown below:</p>
+<div class="figure" id="id6">
+<img alt="Average temperature test" src="../_images/average_temp.png" />
+<p class="caption"><span class="caption-text">Average temperature test</span></p>
+</div>
+<p>An example test list made of these 4 tests is shown below as it is being
+performed:</p>
+<div class="figure" id="id7">
+<img alt="Example upload test in action" src="../_images/example_upload_perform.png" />
+<p class="caption"><span class="caption-text">Example upload test in action</span></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

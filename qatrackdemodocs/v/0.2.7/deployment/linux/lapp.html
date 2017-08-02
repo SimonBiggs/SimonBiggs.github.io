@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying QATrack+ with Linux Apache &amp; PostgreSQL &mdash; qatrackplus 0.3.0-dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="qatrackplus 0.3.0-dev documentation" href="../../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> qatrackplus
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Deploying QATrack+ with Linux Apache &amp; PostgreSQL</a><ul>
+<li><a class="reference internal" href="#installing-git">1. Installing git</a></li>
+<li><a class="reference internal" href="#checking-out-the-qatrack-source-code">2. Checking out the QATrack+ source code</a></li>
+<li><a class="reference internal" href="#setting-up-our-python-environment">3. Setting up our python environment</a></li>
+<li><a class="reference internal" href="#making-sure-everything-is-working-so-far">4. Making sure everything is working so far</a></li>
+<li><a class="reference internal" href="#installing-apache-mod-wsgi">5. Installing Apache &amp; mod_wsgi</a></li>
+<li><a class="reference internal" href="#setting-up-a-database">6. Setting up a database</a><ul>
+<li><a class="reference internal" href="#postgresql">PostgreSQL</a></li>
+<li><a class="reference internal" href="#mysql">MySQL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#final-config-of-qatrack">7. Final config of QATrack+</a></li>
+<li><a class="reference internal" href="#final-word">8. Final word</a></li>
+<li><a class="reference internal" href="#references">9. References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">qatrackplus</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Deploying QATrack+ with Linux Apache &amp; PostgreSQL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/v/0.2.7/deployment/linux/lapp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-qatrack-with-linux-apache-postgresql">
+<h1>Deploying QATrack+ with Linux Apache &amp; PostgreSQL<a class="headerlink" href="#deploying-qatrack-with-linux-apache-postgresql" title="Permalink to this headline">¶</a></h1>
+<p>This guide is going to walk you through installing QATrack+ on a Linux
+server with Apache as the web server and PostgreSQL as the database.</p>
+<p>The steps we will be undertaking are:</p>
+<ol class="arabic simple">
+<li>Installing and configuring git</li>
+<li>Checkout the latest release of the QATrack+ source code from
+bitbucket.</li>
+<li>Setting up our Python environment (including virtualenv)</li>
+<li>Making sure everything is working up to this point</li>
+<li>Installing Apache web server and mod_wsgi and then configuring it to
+serve our QATrack+ site.</li>
+<li>Installing the PostgreSQL (or MySQL) database server and setting up a
+database for QATrack+</li>
+<li>Final configuration of QATrack+</li>
+</ol>
+<p>I will be using Ubuntu 12.04 LTS for this guide but steps should be
+similar on other versions of Ubuntu or other Linux systems.</p>
+<p>This guide assumes you have at least a basic level of familiarity with
+Linux and the command line.</p>
+<div class="section" id="installing-git">
+<h2>1. Installing git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h2>
+<p>Git is the version control software that QATrack+ uses. To install git
+on Ubuntu run the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ sudo apt-get install git
+</pre></div>
+</div>
+<p>Next setup your git installation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;randlet&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">rataylor</span><span class="nd">@toh</span><span class="o">.</span><span class="n">on</span><span class="o">.</span><span class="n">ca</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-out-the-qatrack-source-code">
+<h2>2. Checking out the QATrack+ source code<a class="headerlink" href="#checking-out-the-qatrack-source-code" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have git installed we can proceed to grab the latest version
+of QATrack+. To checkout the code enter the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ mkdir ~/web
+(qatrack)randlet@ubuntu:~$ cd ~/web
+(qatrack)randlet@ubuntu:~/web$ git clone https://randlet@bitbucket.org/tohccmedphys/qatrackplus.git
+Cloning into &#39;qatrackplus&#39;...
+remote: Counting objects: 6897, done.
+remote: Compressing objects: 100% (2042/2042), done.
+remote: Total 6897 (delta 4895), reused 6605 (delta 4705)
+Receiving objects: 100% (6897/6897), 2.07 MiB, done.
+Resolving deltas: 100% (4895/4895), done.
+(qatrack)randlet@ubuntu:~/web$
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-our-python-environment">
+<h2>3. Setting up our python environment<a class="headerlink" href="#setting-up-our-python-environment" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is going to make use of
+<a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a> which allows you
+to easily manage multiple Python environments on a single server. This
+is not strictly required but is considered a best practice in the Python
+world.</p>
+<p>To install virtualenv:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ sudo apt-get install python-setuptools
+randlet@ubuntu:~$ sudo easy_install pip
+randlet@ubuntu:~$ sudo pip install virtualenv==1.9
+</pre></div>
+</div>
+<p>Now that we have virtualenv installed we will create a new Python
+environment for QATrack+.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ mkdir ~/venvs
+randlet@ubuntu:~$ virtualenv ~/venvs/qatrack
+</pre></div>
+</div>
+<p>To activate our new environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ source ~/venvs/qatrack/bin/activate
+(qatrack)randlet@ubuntu:~$ which python
+/home/randlet/venvs/qatrack/bin/python
+(qatrack)randlet@ubuntu:~$
+</pre></div>
+</div>
+<p>Change back to the location where we checked out the source code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+randlet@ubuntu:~$ cd ~/web/qatrackplus
+</pre></div>
+</div>
+<p>In that directory there is a directory with text files
+(requirements/base.txt, requirements/optional.txt) that list the
+required Python packages for QATrack+. A little prep work is required to
+get them to install correctly. Enter the following commands to install
+the preliminary libraries:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install build-essential gfortran
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install python-dev
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install libatlas-dev libatlas-base-dev liblapack-dev
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install libpng12-dev libfreetype6 libfreetype6-dev
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get build-dep python-matplotlib
+</pre></div>
+</div>
+<p>After you install all the required libs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">optional</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-sure-everything-is-working-so-far">
+<h2>4. Making sure everything is working so far<a class="headerlink" href="#making-sure-everything-is-working-so-far" title="Permalink to this headline">¶</a></h2>
+<p>Before we move on to installing a proper web server and database we will
+pause to make sure everything is working correctly at this point.</p>
+<p>From the main qatrack directory enter the following commands</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ mkdir db
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+</pre></div>
+</div>
+<p>When running syncdb you will be asked if you want to create a superuser.
+Answer yes and then enter a username and password.</p>
+<p>Once that has finished running enter the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+</pre></div>
+</div>
+<p>You should now have temporary sqlite database that can be used to verify
+our setup has been going well. Next we will start the builtin (for
+testing purposes) webserver and see if we can access our site/</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver
+Validating  models...
+
+0 errors found
+Django version 1.4, using settings &#39;qatrack.settings&#39;
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+</pre></div>
+</div>
+<p>If you now visit 127.0.0.1:8000 in a browser you should be redirected to
+a QATrack+ login page.</p>
+<p>After you have confirmed you can view the site, quit the server by
+hitting CTRL-C.</p>
+<blockquote>
+<div><p>Note: depending on your setup, you may need to modify your firewall
+and use runserver something like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver MYSERVERNAME:8000
+</pre></div>
+</div>
+<p>for example, I am using an Amazon EC2 instance for this tutorial, so
+I had to open port 8000 in the firewall and use the following
+runserver command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py runserver ec2-54-242-252-245.compute-1.amazonaws.com:8000
+Validating models...
+
+0 errors found
+Django version 1.4, using settings &#39;qatrack.settings&#39;
+Development server is running at http://ec2-54-242-252-245.compute-1.amazonaws.com:8000/
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="installing-apache-mod-wsgi">
+<h2>5. Installing Apache &amp; mod_wsgi<a class="headerlink" href="#installing-apache-mod-wsgi" title="Permalink to this headline">¶</a></h2>
+<p>The next step to take is to install and configure the Apache web server.
+Apache and mod_wsgi can be installed with the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo apt-get install apache2 libapache2-mod-wsgi
+</pre></div>
+</div>
+<p>Next we can setup Apache to serve our Django site...edit
+/etc/apache2/httpd.conf so it looks like the following (making sure the
+paths are correct for your setup).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+WSGIScriptAlias / /home/randlet/web/qatrackplus/qatrack/wsgi.py
+WSGIPythonPath /
+WSGIApplicationGroup %{GLOBAL}
+WSGIPythonHome /home/randlet/venvs/qatrack
+
+&lt;Directory /home/randlet/web/qatrackplus&gt;
+Order deny,allow
+Allow from all
+&lt;/Directory&gt;
+
+alias /static /home/randlet/web/qatrackplus/qatrack/static
+alias /media /home/randlet/web/qatrackplus/qatrack/media
+
+If you want to host QATrack+ somewhere other than the root of your
+server (e.g. you want to host the QATrack+ application at
+http://myserver/qatrackplus/), you will need to include the
+following lines in your qatrack/local\_settings.py file
+
+::
+
+    LOGIN_REDIRECT_URL = &quot;/qatrackplus/qa/unit/&quot;
+    LOGIN_URL = &quot;/qatrackplus/accounts/login/&quot;
+
+and set up a couple more rules in your Apache config. A (slightly
+modified) example provided by Darcy Mason is included below.
+
+::
+
+    RewriteEngine On
+
+    # First let anything starting with qadb already pass through
+    RewriteRule ^/qatrackplus(.*)$ /qatrackplus/$1 [PT,L]
+
+    # Similarly, anything with /static prefix should pass through unchanged
+
+    RewriteRule ^/static(.*)$ /home/randlet/web/qatrackplus/qatrack/static$1 [PT]
+    RewriteRule ^/media(.*)$ /home/randlet/web/qatrackplus/qatrack/media$1 [PT]
+
+    # Anything else needs a url prefixed with /qatrackplus/
+    RewriteRule ^/qa(.*)$ /qatrackplus/qa$1 [PT]
+
+
+    #Then the /qatrackplus url is pointed to Django through mod-wsgi:
+
+    WSGIScriptAlias /qatrackplus /home/randlet/web/qatrackplus/qatrack/wsgi.py
+
+    WSGIPythonPath /qatrackplus/
+
+    WSGIApplicationGroup %{GLOBAL}
+    WSGIPythonHome /home/randlet/venvs/qatrack
+
+    &lt;Directory /home/randlet/web/qatrackplus/qatrack&gt;
+
+    &lt;Files wsgi.py&gt;
+
+    Order deny,allow
+
+    Allow from all
+
+    &lt;/Files&gt;
+
+    &lt;/Directory&gt;
+
+
+    alias /static /home/randlet/web/qatrackplus/qatrack/static
+</pre></div>
+</div>
+<p><em>Note I am certainly no Apache expert so I am probably ignoring many
+Apache/mod_wsgi best practices here ;) If someone wants to make
+improvements that would be great!</em></p>
+<p>Now edit the file ~/web/qatrackplus/qatrack/wsgi.py so it looks like the
+following (again making sure the paths are appropriate for your setup)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">WSGI config for qatrack project.</span>
+
+<span class="sd">This module contains the WSGI application used by Django&#39;s development server</span>
+<span class="sd">and any production WSGI deployments. It should expose a module-level variable</span>
+<span class="sd">named ``application``. Django&#39;s ``runserver`` and ``runfcgi`` commands discover</span>
+<span class="sd">this application via the ``WSGI_APPLICATION`` setting.</span>
+
+<span class="sd">Usually you will have the standard Django WSGI application here, but it also</span>
+<span class="sd">might make sense to replace the whole Django WSGI application with a custom one</span>
+<span class="sd">that later delegates to the Django one. For example, you could introduce WSGI</span>
+<span class="sd">middleware here, or combine a Django application with an application of another</span>
+<span class="sd">framework.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/home/randlet/web/qatrackplus&#39;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;DJANGO_SETTINGS_MODULE&quot;</span><span class="p">,</span> <span class="s2">&quot;qatrack.settings&quot;</span><span class="p">)</span>
+
+<span class="c1"># This application object is used by any WSGI server configured to use this</span>
+<span class="c1"># file. This includes Django&#39;s development server, if the WSGI_APPLICATION</span>
+<span class="c1"># setting points here.</span>
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="k">import</span> <span class="n">get_wsgi_application</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span>
+
+<span class="c1"># Apply WSGI middleware here.</span>
+<span class="c1"># from helloworld.wsgi import HelloWorldApplication</span>
+<span class="c1"># application = HelloWorldApplication(application)</span>
+</pre></div>
+</div>
+<p>Now restart apache:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo service apache2 restart
+ * Restarting web server apache2
+ ... waiting ..........   ...done.
+</pre></div>
+</div>
+<p>If you visit your site again in the browser you should see the QATrack+
+login page (it&#8217;s okay if you see a yellow OperationalError page as
+well...it just means the path to the temporary database is not correct
+but Apache is working correctly.)</p>
+<p>If you get an internal server error or the site doesn&#8217;t appear to load,
+check the Apache error log files for more information (default location
+is /var/log/apache2/error.log).</p>
+</div>
+<div class="section" id="setting-up-a-database">
+<h2>6. Setting up a database<a class="headerlink" href="#setting-up-a-database" title="Permalink to this headline">¶</a></h2>
+<p>If Apache is working correctly at this point, we can move on and set up
+a database. The official Django recommendation is PostgreSQL but MySQL
+will work fine as well. Choose whichever one you are more comfortable
+with.</p>
+<div class="section" id="postgresql">
+<h3>PostgreSQL<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h3>
+<p>Install PostgreSQL and the Python adapter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
+</pre></div>
+</div>
+<p>Now we can create and configure a user and database for QATrack+:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ sudo -u postgres psql template1
+psql (9.1.7)
+Type &quot;help&quot; for help.
+
+template1=# ALTER USER postgres with encrypted password &#39;your_pg_password&#39;;
+ALTER ROLE
+template1=# CREATE DATABASE qatrackdb;
+CREATE DATABASE
+template1=# CREATE USER qatrack with PASSWORD &#39;qatrackpass&#39;;
+CREATE ROLE
+template1=# GRANT ALL PRIVILEGES ON DATABASE qatrackdb to qatrack;
+GRANT
+template1=\q#
+</pre></div>
+</div>
+<p>Now edit /etc/postgresql/9.1/main/pg_hba.conf and scroll down to the
+bottom and change the two instances of <code class="docutils literal"><span class="pre">peer</span></code> to <cite>.html5`</cite> so it looks
+like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+
+<span class="c1"># Database administrative login by Unix domain socket</span>
+<span class="n">local</span>   <span class="nb">all</span>             <span class="n">postgres</span>                               <span class="o">.</span><span class="n">html5</span>
+
+<span class="c1"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+
+<span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="n">local</span>   <span class="nb">all</span>             <span class="nb">all</span>                                    <span class="o">.</span><span class="n">html5</span>
+<span class="c1"># IPv4 local connections:</span>
+<span class="n">host</span>    <span class="nb">all</span>             <span class="nb">all</span>             <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span>           <span class="o">.</span><span class="n">html5</span>
+<span class="c1"># IPv6 local connections:</span>
+<span class="n">host</span>    <span class="nb">all</span>             <span class="nb">all</span>             <span class="p">::</span><span class="mi">1</span><span class="o">/</span><span class="mi">128</span>                <span class="o">.</span><span class="n">html5</span>
+</pre></div>
+</div>
+<p>and restart the pg server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">restart</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+<p>Install MySQL and the Python adapter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mysql</span><span class="o">-</span><span class="n">server</span> <span class="n">libmysqlclient</span><span class="o">-</span><span class="n">dev</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">mysql</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+<p>Now we can create and configure a user and database for QATrack+:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+</div>
+<p>and then enter the following commands in the MySQL shell:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!bash</span>
+<span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">qatrackdb</span><span class="p">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="n">qatrackdb</span><span class="o">.*</span> <span class="n">TO</span> <span class="s1">&#39;qatrack&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;qatrackpass&#39;</span><span class="p">;</span>
+<span class="n">quit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="final-config-of-qatrack">
+<h2>7. Final config of QATrack+<a class="headerlink" href="#final-config-of-qatrack" title="Permalink to this headline">¶</a></h2>
+<p>Next (we&#8217;re almost done, I promise!) we need to tell QATrack+ how to
+connect to our database.</p>
+<p>Create a file called local_settings.py in ~/web/qatrackplus/qatrack/
+and put the following Python code in it (choose the correct engine -
+postgreqal_psycopg2 or mysql):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TEMPLATE_DEBUG</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span> <span class="c1"># Add &#39;postgresql_psycopg2&#39;, &#39;mysql&#39;, &#39;sqlite3&#39; or &#39;oracle&#39;.</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackdb&#39;</span><span class="p">,</span>                      <span class="c1"># Or path to database file if using sqlite3.</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrack&#39;</span><span class="p">,</span>                      <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;qatrackpass&#39;</span><span class="p">,</span>                  <span class="c1"># Not used with sqlite3.</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for localhost. Not used with sqlite3.</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>                      <span class="c1"># Set to empty string for default. Not used with sqlite3.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And then create the tables in your database via sycndb/migrate</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py syncdb
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py migrate
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py loaddata fixtures/defaults/*/*
+</pre></div>
+</div>
+<p>We also need to collect all our static files in a single location for
+Apache to serve (answer &#8216;yes&#8217; when asked)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!bash
+
+(qatrack)randlet@ubuntu:~/web/qatrackplus$ python manage.py collectstatic
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-word">
+<h2>8. Final word<a class="headerlink" href="#final-word" title="Permalink to this headline">¶</a></h2>
+<p>There are a lot of steps getting everything set up so don&#8217;t be
+discouraged if everything doesn&#8217;t go completely smoothly! If you run
+into trouble, please get in touch with me on the <a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/qatrack">QATrack+ mailing
+list</a> and
+I can help you out.</p>
+<ol class="upperalpha simple" start="18">
+<li>Taylor - Feb 2012</li>
+</ol>
+</div>
+<div class="section" id="references">
+<h2>9. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://bailey.st/blog/2012/05/02/ubuntu-django-postgresql-and-nginx-a-rock-solid-web-stack/">http://bailey.st/blog/2012/05/02/ubuntu-django-postgresql-and-nginx-a-rock-solid-web-stack/</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Randle Taylor.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
